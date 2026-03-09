@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tidesy Manual</title>
+    <link rel="stylesheet" href="manual.css">
+</head>
+<body>
+
+<!-- ========== NAV BAR ========== -->
+<nav class="nav-bar">
+    <div class="nav-brand">Tidesy Manual</div>
+    <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu">&#9776;</button>
+    <div class="nav-menu">
+        <a href="#quick-setup">Quick Setup</a>
+        <a href="#detailed-manual">Manual</a>
+        <a href="#toc">Contents</a>
+        <a href="techref.html">Tech Ref</a>
+        <a href="#" onclick="toggleSearch(); return false;">Search</a>
+    </div>
+</nav>
+
+<!-- Search Box -->
+<div id="search-box">
+    <input type="text" id="searchInput" placeholder="Search the manual..." onkeyup="searchContent()">
+</div>
+
+<!-- ========== MAIN CONTAINER ========== -->
+<div class="container">
+
+<!-- ================================================================
+     PART 1: QUICK SETUP GUIDE
+     ================================================================ -->
+<div class="part-header" id="quick-setup">
+    <img src="images/Logo.png" alt="Tidesy logo" class="part-header-logo">
+    <div>
+        <h1>Quick Setup Guide</h1>
+        <p>Get your Tidesy up and running in about 10 minutes</p>
+    </div>
+</div>
+
+<!-- Disclaimer -->
+<div class="disclaimer-banner">
+    <strong>Disclaimer</strong>
+    Tidesy tide predictions are for informational and recreational purposes only. Do not use for navigation or safety-critical decisions. Always verify tide data with official NOAA sources. Tidesy Smart Devices LLC is not responsible for inaccuracies in tide predictions, weather data, or alert information.
+</div>
+
+<!-- STEP 1 -->
+<div class="section-header">
+    <h2>Step 1: Unbox &amp; Assemble</h2>
+    <p>~2 minutes</p>
+</div>
+<div class="section" id="step1">
+    <ul>
+        <li>Unpack your Tidesy device and the included stand.</li>
+        <li>Insert the stand into the slot on the back of the device. Two angle positions are available &mdash; 10&deg; (more upright) and 15&deg; (tilted back). The angle markings are printed in blue on the stand.</li>
+        <li><strong>Wall mounting:</strong> Tidesy can be wall-mounted using flush, plastic hardware to avoid shorting components on the back of the PCB. Do not use metal screws directly against the circuit board.</li>
+    </ul>
+
+    <h4>Port Locations by Model</h4>
+    <table>
+        <tr>
+            <th>Model</th>
+            <th>USB-C</th>
+            <th>microSD</th>
+            <th>Reset</th>
+            <th>LED</th>
+        </tr>
+        <tr>
+            <td><span class="badge badge-l">TidesyL</span></td>
+            <td>Bottom edge</td>
+            <td>Bottom edge</td>
+            <td>Back, near USB</td>
+            <td>RGB (GPIO 38)</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-m">TidesyM</span></td>
+            <td>Bottom edge</td>
+            <td>Bottom edge</td>
+            <td>Back, near USB</td>
+            <td>RGB (GPIO 38)</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-s">TidesyS</span></td>
+            <td>Back / side</td>
+            <td>Side slot</td>
+            <td>Back</td>
+            <td>3 LEDs (R/G/B) or RGB</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-sp">TidesyS+</span></td>
+            <td>Bottom edge</td>
+            <td>Side slot</td>
+            <td>Back</td>
+            <td>RGB (GPIO 38)</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-ink">TidesyINK</span></td>
+            <td>Bottom edge</td>
+            <td>Side slot</td>
+            <td>Back</td>
+            <td>None</td>
+        </tr>
+    </table>
+
+    <div class="device-back">
+        <div class="db-title">Back of Device</div>
+        <div class="db-grid">
+            <div class="db-item"><span class="db-num">1</span> <span class="db-icon">&#x1F50C;</span> USB-C power port</div>
+            <div class="db-item"><span class="db-num">2</span> <span class="db-icon">&#x1F4BE;</span> microSD card slot</div>
+            <div class="db-item"><span class="db-num">3</span> <span class="db-icon">&#x25CF;</span> Reset button (recessed)</div>
+            <div class="db-item"><span class="db-num">4</span> <span class="db-icon">&#x25AF;</span> Stand insertion slot</div>
+        </div>
+    </div>
+    <div class="callout-list">
+        <div class="callout-item"><span class="callout-num">1</span> USB-C power port (5V 2A recommended)</div>
+        <div class="callout-item"><span class="callout-num">2</span> microSD card slot (for screenshots &amp; firmware updates)</div>
+        <div class="callout-item"><span class="callout-num">3</span> Reset button (recessed, use paperclip)</div>
+        <div class="callout-item"><span class="callout-num">4</span> Stand insertion slot (10&deg; / 15&deg;)</div>
+    </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="section-header">
+    <h2>Step 2: Power On &amp; Connect</h2>
+    <p>~1 minute</p>
+</div>
+<div class="section" id="step2">
+    <ol>
+        <li>Plug in the USB-C cable to a 5V 2A power source (phone charger, USB port, or power bank).</li>
+        <li>The boot splash screen will appear on the display within a few seconds.</li>
+        <li>On your phone or computer, open WiFi settings and look for the network named <strong>TidesySetup</strong>.</li>
+        <li>Connect to <strong>TidesySetup</strong> using the password: <code>tide1234</code></li>
+        <li>Open a web browser and go to <code>192.168.4.1</code></li>
+    </ol>
+
+    <div class="phone-gallery">
+        <figure>
+            <div class="phone-frame"><img src="images/setup-1.png" alt="Tidesy Setup wizard showing WiFi configuration"></div>
+            <figcaption>Connect to TidesySetup and open the setup wizard</figcaption>
+        </figure>
+    </div>
+
+    <div class="tip-box">
+        <strong>Tip:</strong> If TidesySetup does not appear, power cycle the device (unplug and re-plug USB-C). Make sure your phone/computer is searching for 2.4 GHz networks &mdash; 5 GHz will not show the hotspot.
+    </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="section-header">
+    <h2>Step 3: Setup Wizard</h2>
+    <p>~5 minutes</p>
+</div>
+<div class="section" id="step3">
+    <p>The setup wizard walks you through three steps:</p>
+
+    <div class="steps">
+        <div class="step done" data-n="1">WiFi</div>
+        <div class="step active" data-n="2">Stations</div>
+        <div class="step" data-n="3">Settings</div>
+    </div>
+
+    <h3>WiFi Configuration</h3>
+    <ul>
+        <li>Select your home WiFi network from the dropdown (2.4 GHz only).</li>
+        <li>Enter your WiFi password.</li>
+        <li>Tap <strong>Verify</strong> &mdash; Tidesy will test the connection and show your device&rsquo;s IP address on success.</li>
+    </ul>
+
+    <h3>Station Selection</h3>
+    <ul>
+        <li>The station directory downloads automatically on first use (~60 seconds, one-time).</li>
+        <li>Search for your station by name or NOAA station ID.</li>
+        <li>Select up to 3 tide stations.</li>
+    </ul>
+
+    <h3>Display &amp; Alert Settings</h3>
+    <ul>
+        <li>Choose display format: <strong>Detail</strong> (graph), <strong>Large</strong> (big numbers), or <strong>Both</strong> (auto-cycle).</li>
+        <li>Set brightness, night mode hours, and alert preferences.</li>
+        <li>Optionally adjust tide level warnings and preferred range.</li>
+    </ul>
+
+    <p>Tap <strong>Save Configuration</strong> when done. The device will restart and connect to your WiFi.</p>
+
+    <div class="phone-gallery">
+        <figure>
+            <div class="phone-frame"><img src="images/setup-2.png" alt="WiFi verified and NOAA station download in progress"></div>
+            <figcaption>WiFi verified, downloading NOAA stations</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/setup-3.png" alt="Station selection with nearby suggestions"></div>
+            <figcaption>Nearby station suggestions with distances</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/setup-9.png" alt="Vestaboard setup and Save Configuration button"></div>
+            <figcaption>Vestaboard setup and Save button</figcaption>
+        </figure>
+    </div>
+</div>
+
+<!-- STEP 4 -->
+<div class="section-header">
+    <h2>Step 4: First Run Checklist</h2>
+</div>
+<div class="section" id="step4">
+    <ul class="checklist">
+        <li>WiFi connected (device shows IP address on boot)</li>
+        <li>Tide data loading (first fetch takes ~10 seconds)</li>
+        <li>Display showing tide graph or large numbers</li>
+        <li>Web dashboard accessible at <code>http://tidesy.local</code></li>
+    </ul>
+</div>
+
+<!-- Quick Troubleshooting -->
+<div class="section-header section-header-green">
+    <h2>Quick Troubleshooting</h2>
+</div>
+<div class="section">
+    <table>
+        <tr>
+            <th>Problem</th>
+            <th>Solution</th>
+        </tr>
+        <tr>
+            <td>Can't find TidesySetup network</td>
+            <td>Power cycle the device. Make sure your phone/computer is on 2.4 GHz, not 5 GHz only.</td>
+        </tr>
+        <tr>
+            <td>Setup page won't load</td>
+            <td>Try navigating directly to <code>192.168.4.1</code> in your browser.</td>
+        </tr>
+        <tr>
+            <td>Station download is slow</td>
+            <td>The first download is ~60 seconds. If it stalls, cancel and retry with the Refresh button.</td>
+        </tr>
+        <tr>
+            <td>WiFi verification fails</td>
+            <td>Double-check your WiFi password. Ensure the network is 2.4 GHz.</td>
+        </tr>
+    </table>
+</div>
+
+
+<!-- ================================================================
+     TABLE OF CONTENTS
+     ================================================================ -->
+<div class="part-header" id="toc">
+    <img src="images/Logo.png" alt="Tidesy logo" class="part-header-logo">
+    <div>
+        <h1>Table of Contents</h1>
+        <p>Detailed reference for every Tidesy feature</p>
+    </div>
+</div>
+
+<div class="section toc-section">
+    <div class="toc-grid">
+        <a class="toc-item" href="#sec-about"><span class="toc-num">1</span><span class="toc-label">About Tidesy</span></a>
+        <a class="toc-item" href="#sec-tides"><span class="toc-num">2</span><span class="toc-label">Understanding Tides</span></a>
+        <a class="toc-item" href="#sec-models"><span class="toc-num">3</span><span class="toc-label">Tidesy Models</span></a>
+        <a class="toc-item" href="#sec-wizard"><span class="toc-num">4</span><span class="toc-label">Setup Wizard (Detailed)</span></a>
+        <a class="toc-item" href="#sec-views"><span class="toc-num">5</span><span class="toc-label">Device Views</span></a>
+        <a class="toc-item" href="#sec-alerts"><span class="toc-num">6</span><span class="toc-label">Weather Alerts (NWS)</span></a>
+        <a class="toc-item" href="#sec-dashboard"><span class="toc-num">7</span><span class="toc-label">Web Dashboard</span></a>
+        <a class="toc-item" href="#sec-vestaboard"><span class="toc-num">8</span><span class="toc-label">Vestaboard Integration</span></a>
+        <a class="toc-item" href="#sec-night"><span class="toc-num">9</span><span class="toc-label">Night Mode &amp; Brightness</span></a>
+        <a class="toc-item" href="#sec-wifi"><span class="toc-num">10</span><span class="toc-label">Multi-WiFi &amp; Network</span></a>
+        <a class="toc-item" href="#sec-firmware"><span class="toc-num">11</span><span class="toc-label">Firmware Updates</span></a>
+        <a class="toc-item" href="#sec-ink"><span class="toc-num">12</span><span class="toc-label">TidesyINK Special Features</span></a>
+        <a class="toc-item" href="#sec-led"><span class="toc-num">13</span><span class="toc-label">LED Status Indicators</span></a>
+        <a class="toc-item" href="#sec-touch"><span class="toc-num">14</span><span class="toc-label">Touch Controls</span></a>
+        <a class="toc-item" href="#sec-troubleshoot"><span class="toc-num">15</span><span class="toc-label">Troubleshooting</span></a>
+        <a class="toc-item" href="#sec-reset"><span class="toc-num">16</span><span class="toc-label">Factory Reset &amp; Recovery</span></a>
+        <a class="toc-item" href="#sec-privacy"><span class="toc-num">17</span><span class="toc-label">Privacy &amp; Data</span></a>
+        <a class="toc-item" href="#sec-glossary"><span class="toc-num">18</span><span class="toc-label">Glossary</span></a>
+        <a class="toc-item" href="#sec-quickref"><span class="toc-num">19</span><span class="toc-label">Quick Reference Card</span></a>
+        <a class="toc-item" href="techref.html"><span class="toc-num">+</span><span class="toc-label">Technical Reference</span></a>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     PART 2: DETAILED MANUAL
+     ================================================================ -->
+<div class="part-header" id="detailed-manual">
+    <img src="images/Logo.png" alt="Tidesy logo" class="part-header-logo">
+    <div>
+        <h1>Detailed Manual</h1>
+        <p>Complete reference for all Tidesy features and settings</p>
+    </div>
+</div>
+
+
+<!-- ==================== 1. ABOUT TIDESY ==================== -->
+<div class="section-header" id="sec-about">
+    <h2>1. About Tidesy</h2>
+</div>
+<div class="section manual-section">
+    <h3>The Story</h3>
+    <p><em>[PLACEHOLDER: Background story from tidesy.com &mdash; user to provide content from the Shopify site.]</em></p>
+
+    <h3>What Tidesy Does</h3>
+    <p>Tidesy is a dedicated smart display that brings real-time coastal data to your desk, wall, or countertop:</p>
+    <ul>
+        <li><strong>Tide Predictions</strong> &mdash; 24-hour tide curves and high/low values from NOAA harmonic station data, updated every 6 minutes.</li>
+        <li><strong>Current Weather</strong> &mdash; Temperature and wind conditions from MET Norway&rsquo;s open weather API.</li>
+        <li><strong>NWS Weather Alerts</strong> &mdash; Active weather alerts (coastal flood, high surf, storm warnings, etc.) from the National Weather Service.</li>
+        <li><strong>Multi-Station Monitoring</strong> &mdash; Track up to 3 tide stations simultaneously, cycling automatically.</li>
+        <li><strong>Web Dashboard</strong> &mdash; Full-featured web interface accessible from any device on your local network.</li>
+        <li><strong>Vestaboard Integration</strong> &mdash; Display tide data on a Vestaboard Flagship split-flap display.</li>
+    </ul>
+
+    <h3>Who It&rsquo;s For</h3>
+    <p>Boaters, fishers, beachgoers, surfers, coastal property owners, dock and marina operators &mdash; anyone who lives, works, or plays near the water and wants a glanceable, always-on tide display.</p>
+</div>
+
+
+<!-- ==================== 2. UNDERSTANDING TIDES ==================== -->
+<div class="section-header" id="sec-tides">
+    <h2>2. Understanding Tides</h2>
+</div>
+<div class="section manual-section">
+    <h3>What Are Tides</h3>
+    <p>Tides are the regular rise and fall of sea level caused by the gravitational pull of the Moon and Sun on Earth&rsquo;s oceans. Most coastal locations experience <strong>semidiurnal</strong> tides (two highs and two lows per day), though some areas see <strong>diurnal</strong> (one high, one low) or <strong>mixed</strong> patterns.</p>
+
+    <h3>Tide Datum</h3>
+    <p>A <strong>datum</strong> is the reference plane from which tide heights are measured. Tidesy uses <strong>MLLW (Mean Lower Low Water)</strong> by default &mdash; the average height of the lower of the two daily low tides over a 19-year period. This means:</p>
+    <ul>
+        <li><strong>Positive values</strong> = water level is above the datum (above the average low-low)</li>
+        <li><strong>Negative values</strong> = water level is below the datum (unusually low tide)</li>
+    </ul>
+    <p>All tide heights on Tidesy are displayed in <strong>feet above/below MLLW</strong> unless you change the datum in settings.</p>
+
+    <h3>NOAA Harmonic Stations</h3>
+    <p>NOAA operates a network of approximately 3,000 permanent tide stations around the U.S. coastline. Each station uses <strong>harmonic analysis</strong> &mdash; mathematical models based on decades of water level observations &mdash; to predict future tide levels. Tidesy downloads predictions directly from these stations.</p>
+
+    <h3>Reading Tide Values</h3>
+    <p>On the Tidesy display and web dashboard:</p>
+    <ul>
+        <li><strong>+3.2 ft</strong> means the water is 3.2 feet above MLLW (a moderately high tide)</li>
+        <li><strong>-0.5 ft</strong> means the water is 0.5 feet below MLLW (a very low tide)</li>
+        <li>Typical tidal ranges vary from 1&ndash;2 ft (Gulf Coast) to 8&ndash;12 ft (New England, Pacific Northwest)</li>
+    </ul>
+
+    <h3>Glossary of Tide Terms</h3>
+    <dl class="glossary-list">
+        <div class="glossary-term">
+            <dt>MLLW (Mean Lower Low Water)</dt>
+            <dd>The average of the lower of the two daily low tides, computed over a 19-year tidal epoch. The standard vertical datum for U.S. nautical charts.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>MSL (Mean Sea Level)</dt>
+            <dd>The average sea level over a 19-year period, used as a general reference.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Datum</dt>
+            <dd>A fixed reference point or surface from which tide heights are measured.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Slack Water</dt>
+            <dd>The brief period between tidal flows when the current is near zero &mdash; occurs at the turn between flood and ebb.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Flood Tide</dt>
+            <dd>The incoming tide; the period when water level is rising.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Ebb Tide</dt>
+            <dd>The outgoing tide; the period when water level is falling.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Spring Tide</dt>
+            <dd>Tides with the greatest range, occurring near new and full moons when the Sun and Moon align.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Neap Tide</dt>
+            <dd>Tides with the smallest range, occurring near the first and third quarter moons.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Harmonic Constituent</dt>
+            <dd>A mathematical component used to model tidal patterns; each constituent represents the influence of a specific astronomical cycle.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Semidiurnal</dt>
+            <dd>A tidal pattern with two high tides and two low tides of roughly equal height each day.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Diurnal</dt>
+            <dd>A tidal pattern with one high tide and one low tide per day.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Mixed Tide</dt>
+            <dd>A tidal pattern with two highs and two lows per day, but with significant inequality in their heights.</dd>
+        </div>
+    </dl>
+</div>
+
+
+<!-- ==================== 3. TIDESY MODELS ==================== -->
+<div class="section-header" id="sec-models">
+    <h2>3. Tidesy Models</h2>
+</div>
+<div class="section manual-section">
+    <h3>Comparison Table</h3>
+    <table class="model-table">
+        <tr>
+            <th>Feature</th>
+            <th>TidesyL</th>
+            <th>TidesyM</th>
+            <th>TidesyS</th>
+            <th>TidesyS+</th>
+            <th>TidesyINK</th>
+        </tr>
+        <tr>
+            <td>Screen Size</td>
+            <td>7"</td>
+            <td>5"</td>
+            <td>2.8"</td>
+            <td>3.5"</td>
+            <td>4.2"</td>
+        </tr>
+        <tr>
+            <td>Resolution</td>
+            <td>800&times;480</td>
+            <td>800&times;480</td>
+            <td>320&times;240</td>
+            <td>480&times;320</td>
+            <td>400&times;300</td>
+        </tr>
+        <tr>
+            <td>Display Type</td>
+            <td>Color LCD</td>
+            <td>Color LCD</td>
+            <td>Color LCD</td>
+            <td>Color LCD</td>
+            <td>E-Paper B&amp;W</td>
+        </tr>
+        <tr>
+            <td>Touch</td>
+            <td>GT911 Capacitive</td>
+            <td>GT911 Capacitive</td>
+            <td>None</td>
+            <td>None</td>
+            <td>5 Buttons</td>
+        </tr>
+        <tr>
+            <td>Chip</td>
+            <td>ESP32-S3</td>
+            <td>ESP32-S3</td>
+            <td>ESP32</td>
+            <td>ESP32</td>
+            <td>ESP32-S3</td>
+        </tr>
+        <tr>
+            <td>Graph Interaction</td>
+            <td class="yes">Yes</td>
+            <td class="yes">Yes</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+        </tr>
+        <tr>
+            <td>Bar Chart Overlay</td>
+            <td class="yes">Yes</td>
+            <td class="yes">Yes</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+        </tr>
+        <tr>
+            <td>Color Customization</td>
+            <td class="yes">Yes</td>
+            <td class="yes">Yes</td>
+            <td class="yes">Yes</td>
+            <td class="yes">Yes</td>
+            <td class="no">No (B&amp;W)</td>
+        </tr>
+        <tr>
+            <td>Battery Capable</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="no">No</td>
+            <td class="yes">Yes</td>
+        </tr>
+        <tr>
+            <td>LED Indicator</td>
+            <td>RGB</td>
+            <td>RGB</td>
+            <td>3 LEDs / RGB</td>
+            <td>RGB</td>
+            <td>None</td>
+        </tr>
+    </table>
+
+    <h3>TidesyL (7") <span class="badge badge-l">Flagship</span></h3>
+    <p>The largest Tidesy model with a 7-inch 800&times;480 color LCD and GT911 capacitive touchscreen. Tap the tide graph to see the tide value at any point in time. Tap the large number view to toggle a bar chart overlay. Ideal for a desk, shelf, or wall-mounted display.</p>
+
+    <img src="images/crow7-detail-without-alerts.png" alt="TidesyL detail view showing tide graph" style="max-width:100%; border-radius:8px; margin:16px 0; border:1px solid var(--border);">
+    <div class="callout-list">
+        <div class="callout-item"><span class="callout-num">1</span> Station name header with weather info</div>
+        <div class="callout-item"><span class="callout-num">2</span> Tide curve with color-coded positive/negative regions</div>
+        <div class="callout-item"><span class="callout-num">3</span> Current time marker (yellow vertical line) with Now box</div>
+        <div class="callout-item"><span class="callout-num">4</span> Preferred tide range shown in orange</div>
+        <div class="callout-item"><span class="callout-num">5</span> Station info badge (station number and datum)</div>
+    </div>
+
+    <h3>TidesyM (5") <span class="badge badge-m">Mid-size</span></h3>
+    <p>Same 800&times;480 resolution and GT911 capacitive touch as TidesyL, in a more compact 5-inch form factor. Identical software features including graph interaction and bar chart overlay.</p>
+
+    <img src="images/crow7-large-view-falling.png" alt="TidesyM large view showing tide numbers" style="max-width:100%; border-radius:8px; margin:16px 0; border:1px solid var(--border);">
+    <div class="callout-list">
+        <div class="callout-item"><span class="callout-num">1</span> Station name header</div>
+        <div class="callout-item"><span class="callout-num">2</span> Four tide values (High/Low) with times, color-coded blue (high) and red (low)</div>
+        <div class="callout-item"><span class="callout-num">3</span> Rising/falling indicator with rate and bar chart</div>
+        <div class="callout-item"><span class="callout-num">4</span> Weather conditions (temp and wind)</div>
+    </div>
+
+    <h3>TidesyS (2.8") <span class="badge badge-s">Compact</span></h3>
+    <p>A compact 2.8-inch 320&times;240 color display. Great for a desktop or nightstand. No touch interaction on the display &mdash; use the web dashboard for full control.</p>
+
+    <p>The display shows the same detail and large views as the 7" and 5" models, scaled to 320&times;240. All tide data, weather, and graph features are available.</p>
+
+    <h3>TidesyS+ (3.5") <span class="badge badge-sp">Enhanced Compact</span></h3>
+    <p>An enhanced compact model with a 3.5-inch 480&times;320 display. Wider screen provides more room for tide data. Same features as TidesyS with a larger viewing area.</p>
+
+    <h3>TidesyINK (4.2" E-Paper) <span class="badge badge-ink">Battery-Capable</span></h3>
+    <p>A 4.2-inch 400&times;300 monochrome e-paper display. Sunlight-readable with no backlight. Can run on battery power with deep sleep between 6-minute refresh cycles. Physical button navigation instead of touchscreen.</p>
+
+    <h4>Button Controls</h4>
+    <table>
+        <tr><th>Button</th><th>Function</th></tr>
+        <tr><td><kbd>UP</kbd></td><td>Next station</td></tr>
+        <tr><td><kbd>DOWN</kbd></td><td>Previous station</td></tr>
+        <tr><td><kbd>OK</kbd></td><td>Toggle between Detail and Large view</td></tr>
+        <tr><td><kbd>HOME</kbd></td><td>Force refresh (fetch new data now)</td></tr>
+        <tr><td><kbd>EXIT</kbd></td><td>Enter deep sleep (battery saver)</td></tr>
+    </table>
+
+    <h4>Power Modes</h4>
+    <table>
+        <tr><th>Mode</th><th>WiFi</th><th>Refresh</th><th>Best For</th></tr>
+        <tr><td><strong>High</strong></td><td>Always on</td><td>Continuous</td><td>Plugged-in use</td></tr>
+        <tr><td><strong>Balanced</strong></td><td>On/off per cycle</td><td>Every 6 min</td><td>General use</td></tr>
+        <tr><td><strong>Low</strong></td><td>Minimal</td><td>Deep sleep between</td><td>Battery operation</td></tr>
+    </table>
+
+    <div class="note-box">
+        <strong>E-paper notes:</strong> Renders in black and white only &mdash; no color customization. No animations; display updates on a 6-minute cycle. Slight ghosting between refreshes is normal for e-paper technology.
+    </div>
+</div>
+
+
+<!-- ==================== 4. SETUP WIZARD (DETAILED) ==================== -->
+<div class="section-header" id="sec-wizard">
+    <h2>4. Setup Wizard (Detailed)</h2>
+</div>
+<div class="section manual-section">
+    <h3>Connecting to the Hotspot</h3>
+    <p>When Tidesy has no saved WiFi configuration (first boot or after factory reset), it creates a WiFi hotspot:</p>
+    <ul>
+        <li><strong>Network name:</strong> <code>TidesySetup</code></li>
+        <li><strong>Password:</strong> <code>tide1234</code></li>
+        <li><strong>Setup URL:</strong> <code>http://192.168.4.1</code></li>
+    </ul>
+
+    <h3>WiFi Configuration</h3>
+    <p>Tidesy supports <strong>2.4 GHz WiFi only</strong>. The ESP32 chip does not have a 5 GHz radio &mdash; this is a hardware limitation, not a software one. Most routers broadcast both bands; make sure you select the 2.4 GHz network.</p>
+    <div class="note-box">
+        <strong>WiFi First:</strong> All other settings (stations, display, location, alerts) are locked until WiFi is verified. This applies both on first setup and when re-entering the wizard after a network change. Verify your WiFi connection to unlock the rest of the form.
+    </div>
+    <ul>
+        <li><strong>Network dropdown:</strong> Lists all detected 2.4 GHz networks, sorted by signal strength.</li>
+        <li><strong>Password field:</strong> Enter your WiFi password.</li>
+        <li><strong>Verify button:</strong> Tests the WiFi connection and displays the device&rsquo;s IP address on success. Once verified, all other settings sections become editable.</li>
+        <li><strong>Web Server toggle:</strong> Enable or disable the local web dashboard (<code>tidesy.local</code>). When disabled, the device runs standalone without web access.</li>
+    </ul>
+
+    <div class="phone-gallery">
+        <figure>
+            <div class="phone-frame"><img src="images/setup-1.png" alt="Setup wizard WiFi configuration step"></div>
+            <figcaption>WiFi network selection and password entry</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/setup-2.png" alt="WiFi verified with station download progress"></div>
+            <figcaption>WiFi verified, NOAA station data downloading</figcaption>
+        </figure>
+    </div>
+
+    <h3>Station Selection</h3>
+    <p>Tidesy uses NOAA harmonic tide stations for predictions. On first setup, it downloads a directory of ~3,000 stations.</p>
+    <ul>
+        <li><strong>One-time download:</strong> Takes approximately 60 seconds. Runs in the background using FreeRTOS tasks. A progress banner shows the download status.</li>
+        <li><strong>Search:</strong> Type a station name or NOAA station ID in the search box. Results appear as you type.</li>
+        <li><strong>State filter:</strong> Narrow results by state using the dropdown.</li>
+        <li><strong>Suggested stations:</strong> If your location is set (via IP detection or manual entry), nearby stations are shown with distances in miles.</li>
+        <li><strong>Up to 3 stations:</strong> Click a search result to assign it to a slot. You can also type a station ID directly.</li>
+        <li><strong>Tide datum:</strong> Default is MLLW. Most users should leave this unchanged.</li>
+    </ul>
+
+    <div class="phone-gallery">
+        <figure>
+            <div class="phone-frame"><img src="images/setup-3.png" alt="Station suggestions based on location"></div>
+            <figcaption>Nearby station suggestions with distances</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/setup-4.png" alt="Filter by State dropdown open"></div>
+            <figcaption>Filter stations by state</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/setup-5.png" alt="Station search results filtered by state"></div>
+            <figcaption>Search results filtered by state (WA)</figcaption>
+        </figure>
+    </div>
+
+    <h3>Display Settings</h3>
+    <ul>
+        <li><strong>Format:</strong> Detail (24-hour tide graph), Large (big tide numbers), or Both (auto-cycles between the two).</li>
+        <li><strong>Day brightness:</strong> 1&ndash;100% slider. Controls backlight intensity during daytime hours.</li>
+        <li><strong>Night brightness:</strong> 0&ndash;100% slider. Set to 0% to turn the screen completely off at night.</li>
+        <li><strong>Night start:</strong> PM hour (0&ndash;12). When night brightness begins.</li>
+        <li><strong>Night end:</strong> AM hour (0&ndash;12). When day brightness resumes.</li>
+    </ul>
+
+    <h3>Alert Settings</h3>
+    <ul>
+        <li><strong>Show Alerts toggle:</strong> Enable or disable NWS weather alert display on the device.</li>
+        <li><strong>Alert display duration:</strong> 10&ndash;60 second slider. How long each alert is shown before cycling to the next.</li>
+    </ul>
+
+    <h3>Tide Level Settings</h3>
+    <ul>
+        <li><strong>Warning level:</strong> &minus;10 to +30 ft (0 = disabled). When the tide reaches this height, a colored horizontal band appears on the graph. Useful for dock clearance, flooding thresholds, or launching conditions.</li>
+        <li><strong>Preferred range (from/to):</strong> &minus;10 to +30 ft (0 = disabled). A colored band shows your ideal tide range on the graph. Useful for fishing, surfing, or boat ramp access windows.</li>
+    </ul>
+
+    <div class="phone-gallery">
+        <figure>
+            <div class="phone-frame"><img src="images/setup-6.png" alt="My Location map and display settings"></div>
+            <figcaption>My Location map and display format</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/setup-7.png" alt="Display brightness, alerts, and color settings"></div>
+            <figcaption>Brightness, alerts, and color pickers</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/setup-8.png" alt="Colors, tide levels, and Vestaboard settings"></div>
+            <figcaption>Colors, tide levels, and Vestaboard</figcaption>
+        </figure>
+    </div>
+
+    <h3>Color Settings</h3>
+    <p class="text-muted"><span class="badge badge-ink">TidesyINK</span> does not have color settings (monochrome display).</p>
+    <p>Six color pickers let you customize the display palette:</p>
+    <ul>
+        <li><strong>Graph positive / negative:</strong> Fill colors for the tide curve above and below the zero line.</li>
+        <li><strong>Numbers positive / negative:</strong> Text colors for positive and negative tide values in Large view.</li>
+        <li><strong>Warning color:</strong> Color of the warning level band on the graph.</li>
+        <li><strong>Preferred color:</strong> Color of the preferred range band on the graph.</li>
+    </ul>
+
+    <h3>My Location</h3>
+    <p>Your location is used for weather data, weather alerts, and suggested station distances. Three ways to set it:</p>
+    <ul>
+        <li><strong>Interactive map:</strong> Click/tap on the Leaflet/OpenStreetMap map to place a pin. Drag the marker to fine-tune your position. The map pre-caches a large tile area so you can scroll and zoom in rural areas without losing the map.</li>
+        <li><strong>Manual entry:</strong> Type latitude and longitude values directly. Both fields accept negative values (south latitude, west longitude).</li>
+        <li><strong>Detect from IP:</strong> Button that uses ip-api.com to estimate your location from your internet connection.</li>
+    </ul>
+
+    <h4>Per-SSID Location Memory</h4>
+    <p>Tidesy remembers the location you set for each WiFi network (up to 5 SSIDs). When you move the device to a different WiFi network and re-enter setup, it automatically recalls the location you previously picked for that network instead of reverting to the IP-detected location. If you connect to a new network for the first time, Tidesy uses IP geolocation as the starting point and saves your chosen location when you save the form. Use the <strong>Detect from IP</strong> button if you want to override the saved location with a fresh IP estimate.</p>
+
+    <h3>Vestaboard Settings</h3>
+    <p>If a Vestaboard Flagship is detected on your network, you can configure it in the wizard:</p>
+    <ul>
+        <li><strong>Update interval:</strong> Single dropdown with 5 options:
+            <ul>
+                <li><strong>Change with device</strong> &mdash; VB mirrors whatever the Tidesy display shows, updating instantly when the view or station changes.</li>
+                <li><strong>20m / 30m / 1h / 2h</strong> &mdash; Independent cycle through all stations and views at the selected interval.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="phone-gallery">
+        <figure>
+            <div class="phone-frame"><img src="images/setup-9.png" alt="Vestaboard configuration and Save button"></div>
+            <figcaption>Vestaboard API key, update interval, bar colors, and Save</figcaption>
+        </figure>
+    </div>
+</div>
+
+
+<!-- ==================== 5. DEVICE VIEWS ==================== -->
+<div class="section-header" id="sec-views">
+    <h2>5. Device Views</h2>
+</div>
+<div class="section manual-section">
+    <h3>Detail View (24-Hour Tide Graph)</h3>
+    <p>The detail view shows a 24-hour tide curve as a filled graph:</p>
+    <ul>
+        <li><strong>Station name header:</strong> White text on dark gradient bar at the top.</li>
+        <li><strong>Y-axis:</strong> Tide height range (min to max for the day) with labeled tick marks.</li>
+        <li><strong>X-axis:</strong> 24 hours, divided by 4 quarter-line markers (6-hour intervals).</li>
+        <li><strong>Data points:</strong> 240 values at 6-minute intervals, interpolated into a smooth curve.</li>
+        <li><strong>Positive tides:</strong> Filled with the positive graph color (default: orange/blue depending on model).</li>
+        <li><strong>Negative tides:</strong> Filled with the negative graph color (default: pink/red).</li>
+        <li><strong>Current time marker:</strong> Yellow vertical line showing the current position in the 24-hour period.</li>
+        <li><strong>Live data point:</strong> Animated yellow circle at the current tide level with a 4-second pulse cycle.</li>
+        <li><strong>&ldquo;Now&rdquo; box:</strong> Two-line info box near the live data point showing the current tide value (e.g., &ldquo;Now: 3.8ft&rdquo;) and the rise/sink rate (e.g., &ldquo;+1.2ft/h&rdquo;). Text is always yellow on a black background. The box outline turns the preferred or warning color when the tide is in those zones, and blinks with a 4-second cycle to draw attention.</li>
+        <li><strong>Foot-level grid lines:</strong> Light dashed horizontal lines at each whole-foot level behind the tide curve for easier reading.</li>
+        <li><strong>Warning level band:</strong> Colored horizontal zone across the graph (if configured).</li>
+        <li><strong>Preferred range band:</strong> Colored horizontal zone showing your ideal tide range (if configured).</li>
+        <li><strong>Conditions:</strong> Temperature and wind displayed in the bottom-right area.</li>
+        <li><strong>Next H/L:</strong> Next high and low tide values and times displayed at the top.</li>
+        <li><strong>Status badges:</strong> Small status indicators appear near the countdown timer:
+            <ul>
+                <li><strong>DST</strong> (white on red) &mdash; shown on days when a daylight saving time transition occurs. The tide graph uses a red line segment and dimmed fill to mark the affected hour.</li>
+                <li><strong>SCR</strong> (white on dark green) &mdash; shown when screenshots to SD card are active (see <a href="techref.html">Technical Reference</a>).</li>
+                <li><strong>!</strong> or <strong>M</strong> &mdash; alert severity indicator.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/crow7-detail-without-alerts.png" alt="Detail view on TidesyL showing 24-hour tide graph">
+            <span class="callout-pin" style="top:4%;left:25%">1</span>
+            <span class="callout-pin" style="top:7%;left:60%">2</span>
+            <span class="callout-pin" style="top:30%;left:5%">3</span>
+            <span class="callout-pin" style="top:25%;left:40%">4</span>
+            <span class="callout-pin" style="top:62%;left:55%">5</span>
+            <span class="callout-pin" style="top:55%;left:50%">6</span>
+            <span class="callout-pin" style="top:92%;left:25%">7</span>
+            <span class="callout-pin" style="top:15%;left:80%">8</span>
+            <span class="callout-pin" style="top:4%;left:82%">9</span>
+            <span class="callout-pin" style="top:4%;left:95%">10</span>
+            <span class="callout-pin" style="top:8%;left:10%">11</span>
+        </div>
+        <div class="callout-list">
+            <div class="callout-item"><span class="callout-num">1</span> Station name header</div>
+            <div class="callout-item"><span class="callout-num">2</span> Weather conditions (temperature, wind speed and direction)</div>
+            <div class="callout-item"><span class="callout-num">3</span> Y-axis tide height labels and station info badge</div>
+            <div class="callout-item"><span class="callout-num">4</span> Tide curve with positive fill (blue) and negative fill (red)</div>
+            <div class="callout-item"><span class="callout-num">5</span> Current time marker (yellow vertical line)</div>
+            <div class="callout-item"><span class="callout-num">6</span> &ldquo;Now&rdquo; box &mdash; current tide value and rise/sink rate</div>
+            <div class="callout-item"><span class="callout-num">7</span> X-axis (24 hours with quarter markers)</div>
+            <div class="callout-item"><span class="callout-num">8</span> Warning level dashed red line (8.28ft)</div>
+            <div class="callout-item"><span class="callout-num">9</span> <span class="badge-illustration badge-dst">DST</span> badge &mdash; daylight saving time transition day</div>
+            <div class="callout-item"><span class="callout-num">10</span> Countdown timer (minutes until next refresh)</div>
+            <div class="callout-item"><span class="callout-num">11</span> Rising/falling arrow indicator</div>
+        </div>
+    </div>
+
+    <h3>Large View (Big Numbers)</h3>
+    <p>The large view displays the day&rsquo;s four tide values in large, easy-to-read digits:</p>
+    <ul>
+        <li><strong>4 tide values:</strong> High/Low/High/Low in large text with times in 12-hour AM/PM format.</li>
+        <li><strong>Rising/falling indicator:</strong> Animated triangle pointing up (rising) or down (falling) with a 4-second fade cycle.</li>
+        <li><strong>Tide rate badge:</strong> Shows the current rate of change (e.g., "+2.3 ft/h").</li>
+        <li><strong>Weather area:</strong> Temperature, wind speed, and wind direction at the bottom.</li>
+        <li><strong>Current time:</strong> Displayed in the bottom area.</li>
+        <li><strong>Bar chart overlay:</strong> <span class="badge badge-l">TidesyL</span> <span class="badge badge-m">TidesyM</span> only &mdash; tap the screen to toggle a bar chart showing tide levels across the day.</li>
+    </ul>
+
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/large-view-with-bar-in-preferred.png" alt="Large view on TidesyL showing tide values and bar chart">
+            <span class="callout-pin" style="top:3%;left:25%">1</span>
+            <span class="callout-pin" style="top:35%;left:20%">2</span>
+            <span class="callout-pin" style="top:28%;left:62%">3</span>
+            <span class="callout-pin" style="top:23%;left:68%">4</span>
+            <span class="callout-pin" style="top:55%;left:50%">5</span>
+            <span class="callout-pin" style="top:40%;left:80%">6</span>
+            <span class="callout-pin" style="top:92%;left:75%">7</span>
+            <span class="callout-pin" style="top:3%;left:95%">8</span>
+        </div>
+        <div class="callout-list">
+            <div class="callout-item"><span class="callout-num">1</span> Station name header</div>
+            <div class="callout-item"><span class="callout-num">2</span> Four tide values with times (blue = high, red = low)</div>
+            <div class="callout-item"><span class="callout-num">3</span> Rising triangle indicator with tide rate (+1.1ft/h)</div>
+            <div class="callout-item"><span class="callout-num">4</span> Tide datum label (MLLW)</div>
+            <div class="callout-item"><span class="callout-num">5</span> Center bar graph with warning (red dashed) and preferred (orange dashed) levels</div>
+            <div class="callout-item"><span class="callout-num">6</span> Current tide value box (orange border = in preferred range)</div>
+            <div class="callout-item"><span class="callout-num">7</span> Temperature and wind conditions</div>
+            <div class="callout-item"><span class="callout-num">8</span> Countdown timer</div>
+        </div>
+    </div>
+
+    <p>Here is the large view during a falling tide &mdash; note the downward red triangle and negative rate badge:</p>
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/crow7-large-view-falling.png" alt="Large view showing falling tide with downward triangle">
+        </div>
+    </div>
+
+    <h3>View Cycling</h3>
+    <p>When the display format is set to <strong>Both</strong>, Tidesy auto-cycles between the Detail and Large views. The cycle happens each time the data refreshes (every 6 minutes).</p>
+
+    <h3>Station Cycling</h3>
+    <p>If you have configured 2 or 3 tide stations, Tidesy rotates through them automatically. Each station is displayed for one refresh cycle (6 minutes) before advancing to the next.</p>
+
+    <h3>6-Minute Refresh</h3>
+    <p>All tide predictions, weather data, and alert information refresh automatically every 6 minutes. This matches the NOAA tide prediction interval (6-minute data points) and ensures the display stays current.</p>
+
+    <h3>Daylight Saving Time Handling</h3>
+    <p>On DST transition days, NOAA returns a different number of predictions (230 in spring, 250 in fall instead of the usual 240). Tidesy automatically detects this by parsing prediction timestamps and adjusts the graph accordingly:</p>
+    <ul>
+        <li><strong>Spring forward:</strong> The missing hour (typically 2&ndash;3 AM) is shown on the graph as a red line with a dimmed fill, indicating interpolated data.</li>
+        <li><strong>Fall back:</strong> Duplicate predictions for the repeated hour are skipped, with a red line segment marking the transition point.</li>
+    </ul>
+    <p>A <strong>DST</strong> badge (white text on red background) appears on the detail view during DST transition days.</p>
+
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/detail-view-with-dst-flag-and-spring-forward.png" alt="Detail view showing DST spring-forward with dimmed fill in gap area">
+        </div>
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Detail view on a spring-forward day. Notice the <span class="badge-illustration badge-dst">DST</span> badge in the top right, and the red line with dimmed fill between 2&ndash;3 AM where the missing hour is interpolated.</p>
+    </div>
+
+    <h3>Status Badges &amp; Countdown Timer</h3>
+    <p>The top-right corner of the display shows status badges and a countdown timer:</p>
+
+    <div class="screenshot-placeholder">
+        <p><strong>Example: DST day with active alert</strong></p>
+        <img src="images/badges-combined-alert.png" alt="DST and alert badges with countdown timer" style="max-width:420px;border-radius:6px;border:1px solid #333;">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:6px;"><span class="badge-illustration badge-dst">DST</span> badge + <span class="badge-illustration badge-alert-severe">!</span> alert indicator + countdown timer</p>
+    </div>
+
+    <div class="screenshot-placeholder">
+        <p><strong>Example: Screenshots active on DST day</strong></p>
+        <img src="images/badges-combined-scr-dst.png" alt="SCR and DST badges with countdown timer" style="max-width:460px;border-radius:6px;border:1px solid #333;">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:6px;"><span class="badge-illustration badge-scr">SCR</span> screenshot badge + <span class="badge-illustration badge-dst">DST</span> badge + countdown timer</p>
+    </div>
+
+    <table>
+        <tr><th>Badge</th><th>Meaning</th></tr>
+        <tr>
+            <td><span class="badge-illustration badge-dst">DST</span></td>
+            <td>Daylight saving time transition day detected. The tide graph marks the affected hour with a red line and dimmed fill. Detail view only.</td>
+        </tr>
+        <tr>
+            <td><span class="badge-illustration badge-scr">SCR</span></td>
+            <td>Screenshots to SD card are active. Automatically removed if the SD card is ejected. See <a href="techref.html#sec-screenshots">Technical Reference</a> for details.</td>
+        </tr>
+        <tr>
+            <td><span class="badge-illustration badge-alert-severe">!</span></td>
+            <td>Active weather alert at severity Severe or Extreme.</td>
+        </tr>
+        <tr>
+            <td><span class="badge-illustration badge-alert-minor">M</span></td>
+            <td>Active weather alert at severity Minor or Moderate.</td>
+        </tr>
+        <tr>
+            <td><span class="badge-illustration badge-countdown">5:21&gt;&gt;</span></td>
+            <td>Countdown timer showing minutes and seconds until the next data refresh. The <code>&gt;&gt;</code> arrows animate to indicate the device is running.</td>
+        </tr>
+    </table>
+
+    <p>Here is the detail view with an active alert &mdash; note the <span class="badge-illustration badge-alert-severe">!</span> badge and the yellow alert banner across the top:</p>
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/detail-view-with-alert.png" alt="Detail view with active weather alert showing ! badge">
+        </div>
+    </div>
+
+    <h3>TidesyINK-Specific Display</h3>
+    <ul>
+        <li><strong>Monochrome only:</strong> Black and white rendering &mdash; no color customization available.</li>
+        <li><strong>Font:</strong> FreeSans family at various sizes (8pt, 9pt, 12pt, 18pt).</li>
+        <li><strong>No animations:</strong> E-paper cannot animate. The live data point and rising/falling indicator are static.</li>
+        <li><strong>Button-driven navigation:</strong> Use physical buttons instead of touch (see <a href="#sec-ink">Section 13</a>).</li>
+        <li><strong>6-minute deep sleep cycle:</strong> In Low power mode, the device sleeps between refreshes to conserve battery.</li>
+    </ul>
+</div>
+
+
+<!-- ==================== 6. WEATHER ALERTS (NWS) ==================== -->
+<div class="section-header" id="sec-alerts">
+    <h2>6. Weather Alerts (NWS)</h2>
+</div>
+<div class="section manual-section">
+    <h3>What Are NWS Alerts</h3>
+    <p>The National Weather Service (NWS) issues active weather alerts for locations across the United States. Tidesy checks for alerts at each station&rsquo;s coordinates and displays them on the device and web dashboard.</p>
+
+    <h3>Data Source</h3>
+    <p>Alerts are fetched from <code>api.weather.gov/alerts/active</code> using each station&rsquo;s latitude and longitude. The NWS API is free, public, and requires no authentication.</p>
+
+    <h3>Severity Levels</h3>
+    <table>
+        <tr>
+            <th>Severity</th>
+            <th>Color</th>
+            <th>Meaning</th>
+        </tr>
+        <tr>
+            <td><span class="sev-badge sev-badge-minor">Minor</span></td>
+            <td>Gray/Brown</td>
+            <td>Low-impact advisories &mdash; minor weather events or informational statements.</td>
+        </tr>
+        <tr>
+            <td><span class="sev-badge sev-badge-moderate">Moderate</span></td>
+            <td>Yellow</td>
+            <td>Significant weather events &mdash; conditions that may cause inconvenience or minor danger.</td>
+        </tr>
+        <tr>
+            <td><span class="sev-badge sev-badge-severe">Severe</span></td>
+            <td>Orange</td>
+            <td>Dangerous conditions &mdash; significant threat to life or property.</td>
+        </tr>
+        <tr>
+            <td><span class="sev-badge sev-badge-extreme">Extreme</span></td>
+            <td>Red</td>
+            <td>Life-threatening situations &mdash; immediate action may be necessary.</td>
+        </tr>
+    </table>
+
+    <h3>Alert Display on Device</h3>
+    <ul>
+        <li><strong>Cycling banner:</strong> When alerts are active, a colored banner appears at the top of the display showing the severity level, event name, and count (e.g., "1 of 3").</li>
+        <li><strong>Color-coded:</strong> The banner color matches the severity level (red, orange, yellow, or brown/gray).</li>
+        <li><strong>Cycle timing:</strong> Each alert is shown for the configured alert delay (10&ndash;60 seconds) before advancing to the next.</li>
+        <li><strong>Full-screen alert view:</strong> Shows station name, event heading, severity/area/effective/expires metadata displayed as severity-colored pill badges, and a description parsed into WHAT/WHERE/WHEN/IMPACTS sections (also shown as colored pills).</li>
+    </ul>
+
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/crow7-alert-view.png" alt="Full-screen alert display showing Small Craft Advisory">
+            <span class="callout-pin" style="top:4%;left:35%">1</span>
+            <span class="callout-pin" style="top:2%;left:95%">2</span>
+            <span class="callout-pin" style="top:10%;left:30%">3</span>
+            <span class="callout-pin" style="top:14%;left:10%">4</span>
+            <span class="callout-pin" style="top:14%;left:30%">5</span>
+            <span class="callout-pin" style="top:18%;left:10%">6</span>
+            <span class="callout-pin" style="top:18%;left:55%">7</span>
+            <span class="callout-pin" style="top:32%;left:8%">8</span>
+            <span class="callout-pin" style="top:44%;left:8%">9</span>
+        </div>
+        <div class="callout-list">
+            <div class="callout-item"><span class="callout-num">1</span> Station name header</div>
+            <div class="callout-item"><span class="callout-num">2</span> Alert counter (1/1 &mdash; one alert total)</div>
+            <div class="callout-item"><span class="callout-num">3</span> Event name (Small Craft Advisory)</div>
+            <div class="callout-item"><span class="callout-num">4</span> Severity and Area pill badges</div>
+            <div class="callout-item"><span class="callout-num">5</span> Affected area (Columbia River Bar)</div>
+            <div class="callout-item"><span class="callout-num">6</span> Effective and Expires times with relative annotations</div>
+            <div class="callout-item"><span class="callout-num">7</span> Issuance summary line</div>
+            <div class="callout-item"><span class="callout-num">8</span> WHAT/WHERE/WHEN section headers with descriptions</div>
+            <div class="callout-item"><span class="callout-num">9</span> IMPACTS section with additional details</div>
+        </div>
+    </div>
+
+    <h3>Alert Display on Web Dashboard</h3>
+    <p>The web dashboard shows alerts as styled cards with color-coded left borders matching the severity level. Tap or click an alert event name to see a popup with the NWS definition explaining what that alert type means.</p>
+
+    <div class="alert-card sev-severe-card" style="max-width: 600px;">
+        <div class="alert-event-bar">
+            <span class="alert-event-name">High Surf Warning</span>
+            <span class="sev-badge sev-badge-severe">SEVERE</span>
+        </div>
+        <div class="alert-meta">
+            <span class="alert-meta-lbl">AREA</span> <span>San Mateo County Coast</span>
+            <span class="alert-meta-lbl">EFFECTIVE</span> <span>2 hours ago</span>
+            <span class="alert-meta-lbl">EXPIRES</span> <span>Tomorrow 6:00 AM</span>
+        </div>
+    </div>
+
+    <h3>Common Alert Types</h3>
+    <p>Alerts most relevant to Tidesy users include:</p>
+    <ul>
+        <li>Coastal Flood Advisory / Warning</li>
+        <li>High Surf Advisory / Warning</li>
+        <li>Rip Current Statement</li>
+        <li>Small Craft Advisory</li>
+        <li>Tsunami Watch / Warning</li>
+        <li>Winter Storm Warning</li>
+        <li>Hurricane Watch / Warning</li>
+        <li>Beach Hazards Statement</li>
+        <li>Dense Fog Advisory</li>
+        <li>Gale Warning</li>
+    </ul>
+</div>
+
+
+<!-- ==================== 7. WEB DASHBOARD ==================== -->
+<div class="section-header" id="sec-dashboard">
+    <h2>7. Web Dashboard</h2>
+</div>
+<div class="section manual-section">
+    <h3>Accessing the Dashboard</h3>
+    <p>Open a web browser on any device connected to the same WiFi network and navigate to:</p>
+    <ul>
+        <li><code>http://tidesy.local</code> (requires mDNS/Bonjour support), or</li>
+        <li><code>http://&lt;device-IP&gt;</code> (the IP address shown during setup, e.g., <code>http://192.168.1.42</code>)</li>
+    </ul>
+
+    <h3>Dashboard Features</h3>
+    <ul>
+        <li><strong>Station cards:</strong> Each configured station has a card showing current tide data, next high/low, and weather. The NOAA station ID in the header is a link to the station&rsquo;s page on the NOAA Tides &amp; Currents website.</li>
+        <li><strong>Live update countdown:</strong> Timer shows when the next data refresh will occur.</li>
+        <li><strong>Interactive map:</strong> Leaflet/OpenStreetMap map with station markers (blue) and home location marker (green house icon). Click a station name to focus the map.</li>
+        <li><strong>Tide curve graphs:</strong> Chart.js-rendered 24-hour tide curves for each station with interactive tooltips.</li>
+        <li><strong>Alert summary cards:</strong> Active NWS alerts displayed as color-coded cards (see <a href="#sec-alerts">Section 6</a>). Tap an alert event name to see a popup with the NWS definition of that alert type.</li>
+        <li><strong>Dark/light mode toggle:</strong> Switch between dark and light themes. Preference is saved.</li>
+        <li><strong>Home marker toggle:</strong> Show or hide your home location marker on the map.</li>
+        <li><strong>Responsive design:</strong> Optimized for phone, tablet, and desktop browsers.</li>
+    </ul>
+
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/web-view-top.png" alt="Web dashboard showing alert summary, tide chart, and station data">
+            <span class="callout-pin" style="top:3%;left:10%">1</span>
+            <span class="callout-pin" style="top:3%;left:65%">2</span>
+            <span class="callout-pin" style="top:13%;left:50%">3</span>
+            <span class="callout-pin" style="top:40%;left:25%">4</span>
+            <span class="callout-pin" style="top:30%;left:55%">5</span>
+            <span class="callout-pin" style="top:3%;left:80%">6</span>
+        </div>
+        <div class="callout-list">
+            <div class="callout-item"><span class="callout-num">1</span> Page header with Tidesy logo and navigation buttons</div>
+            <div class="callout-item"><span class="callout-num">2</span> Station selector dropdown and action buttons (Station Map, At a Glance, Dark, Config)</div>
+            <div class="callout-item"><span class="callout-num">3</span> Weather Alert Summary table with severity badges and View links</div>
+            <div class="callout-item"><span class="callout-num">4</span> Station card with Chart.js tide curves for all stations (warning/preferred zones shaded)</div>
+            <div class="callout-item"><span class="callout-num">5</span> Weather data, countdown timer, and NOAA station ID link</div>
+            <div class="callout-item"><span class="callout-num">6</span> Update Available button (when new firmware is available)</div>
+        </div>
+    </div>
+
+    <p>Scrolling down reveals alert detail cards and the tide data table:</p>
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/web-view-with-alerts.png" alt="Web dashboard alert cards and tide data table">
+        </div>
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Alert card with AREA/EFFECTIVE/EXPIRES metadata, WHAT/WHERE/WHEN/IMPACTS sections, and a color-coded tide data table below.</p>
+    </div>
+
+    <p>Hover or tap a data point on the chart to see the exact time and tide value:</p>
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/web-view-graph-with-callout.png" alt="Interactive chart tooltip showing time and tide value">
+        </div>
+    </div>
+
+    <p>The station selector dropdown lets you jump to a specific station&rsquo;s data, and the &ldquo;At a Glance&rdquo; popup shows all stations at once:</p>
+    <div class="screenshot-placeholder" style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div class="screenshot-annotated" style="flex:1;min-width:280px;">
+            <img src="images/web-view-station-selector.png" alt="Station selector dropdown on web dashboard">
+        </div>
+        <div class="screenshot-annotated" style="flex:1;min-width:280px;">
+            <img src="images/web-view-at-a-glance.png" alt="Tides at a Glance popup showing all stations">
+        </div>
+    </div>
+
+    <h3>Dark Mode</h3>
+    <p>Toggle dark mode using the button in the page header. The preference is saved in your browser and persists across visits. Dark mode adjusts backgrounds, text colors, card styles, and map tile contrast.</p>
+
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/web-view-dark-mode.png" alt="Web dashboard in dark mode">
+        </div>
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Dark mode with alert summary, tide chart, and alert detail cards.</p>
+    </div>
+
+    <h3>Map</h3>
+    <p>The interactive map shows:</p>
+    <ul>
+        <li><strong>Station markers</strong> (blue pins) &mdash; click a station name in the data area to center the map on it.</li>
+        <li><strong>Home marker</strong> (green house icon) &mdash; your configured home location. Can be toggled on/off.</li>
+        <li>Map auto-zooms to fit all markers when the page loads.</li>
+    </ul>
+
+    <h3>mDNS</h3>
+    <p>The address <code>tidesy.local</code> uses mDNS (multicast DNS) to resolve to your device&rsquo;s IP address. This works on most modern devices:</p>
+    <ul>
+        <li><strong>macOS / iOS:</strong> Built-in (Bonjour)</li>
+        <li><strong>Windows 10+:</strong> Built-in</li>
+        <li><strong>Android:</strong> Supported on most recent versions</li>
+        <li><strong>Linux:</strong> Requires Avahi (usually pre-installed on desktop distributions)</li>
+    </ul>
+    <p>If <code>tidesy.local</code> doesn&rsquo;t resolve, use the device&rsquo;s IP address directly.</p>
+
+    <h3>Mobile Dashboard</h3>
+    <p>The web dashboard is fully responsive and optimized for phone screens. The navigation collapses to a hamburger menu, and all features are touch-friendly.</p>
+
+    <div class="phone-gallery">
+        <figure>
+            <div class="phone-frame"><img src="images/mobile-top-of-page.png" alt="Mobile dashboard overview"></div>
+            <figcaption>Dashboard with alert summary and tide chart</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/mobile-menu-expanded.png" alt="Mobile hamburger menu expanded"></div>
+            <figcaption>Navigation menu expanded</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/mobile-at-a-glance.png" alt="Tides at a Glance popup on mobile"></div>
+            <figcaption>Tides at a Glance with tide rates</figcaption>
+        </figure>
+    </div>
+
+    <div class="phone-gallery">
+        <figure>
+            <div class="phone-frame"><img src="images/mobile-graph-with-point-highlighted.png" alt="Chart tooltip on mobile"></div>
+            <figcaption>Chart tooltip on tap</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/mobile-alert-view.png" alt="Alert detail card on mobile"></div>
+            <figcaption>Alert detail with WHAT/WHERE/WHEN</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/mobile-tide-table.png" alt="Color-coded tide data table on mobile"></div>
+            <figcaption>Color-coded tide data table</figcaption>
+        </figure>
+    </div>
+
+    <div class="phone-gallery">
+        <figure>
+            <div class="phone-frame"><img src="images/mobile-map-all-stations.png" alt="All stations map popup on mobile"></div>
+            <figcaption>Station Map with all stations and home</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/mobile-individual-station-map.png" alt="Individual station map popup on mobile"></div>
+            <figcaption>Individual station with current tide</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/mobile-configuration.png" alt="Configuration popup on mobile"></div>
+            <figcaption>Device configuration view</figcaption>
+        </figure>
+    </div>
+
+    <div class="phone-gallery">
+        <figure>
+            <div class="phone-frame"><img src="images/mobile-dark-mode.png" alt="Dark mode on mobile"></div>
+            <figcaption>Dark mode</figcaption>
+        </figure>
+        <figure>
+            <div class="phone-frame"><img src="images/mobile-dark-mode-alert-view.png" alt="Dark mode alert view on mobile"></div>
+            <figcaption>Dark mode alert detail</figcaption>
+        </figure>
+    </div>
+</div>
+
+
+<!-- ==================== 8. VESTABOARD INTEGRATION ==================== -->
+<div class="section-header" id="sec-vestaboard">
+    <h2>8. Vestaboard Integration</h2>
+</div>
+<div class="section manual-section">
+    <h3>What Is Vestaboard</h3>
+    <p><a href="https://vestaboard.com" target="_blank" rel="noopener">Vestaboard</a> is a premium smart display that uses mechanical split-flap characters to show messages, art, and data. Each board has a 6-row &times; 22-column grid of split-flap tiles that can display letters, numbers, and colors. Tidesy connects to a Vestaboard on the same WiFi network to show live tide data in a beautiful mechanical format.</p>
+
+    <h3>Compatibility</h3>
+    <div class="note-box">
+        <strong>Important:</strong> Only the Vestaboard <strong>Flagship</strong> is supported. The Vestaboard <strong>Note</strong> is <strong>not supported</strong> (different API and hardware). Tidesy will detect and reject Note devices during network scan.
+    </div>
+
+    <h3>Setup</h3>
+    <ol>
+        <li><strong>Network scan:</strong> Tidesy scans the local WiFi network and discovers any Vestaboard Flagship devices.</li>
+        <li><strong>API key:</strong> Enter the local API key (22-character encoded key). Obtain this from the Vestaboard app under device settings &gt; Local API. You can paste a key from the clipboard using the clipboard button next to the input field.</li>
+        <li><strong>Interval:</strong> Select how often Tidesy updates the Vestaboard (see Update Modes below).</li>
+    </ol>
+
+    <h3>Update Modes</h3>
+    <table>
+        <tr>
+            <th>Mode</th>
+            <th>Behavior</th>
+        </tr>
+        <tr>
+            <td><strong>Change with device</strong></td>
+            <td>Mirrors the Tidesy display instantly. When the device switches stations or views, the Vestaboard updates immediately.</td>
+        </tr>
+        <tr>
+            <td><strong>20m / 30m / 1h / 2h</strong></td>
+            <td>Independent cycle through all stations and views. Each station shows: detail view (2 min), large view (2 min), and alerts (for the configured alert delay). Cycles to the next station after completing all views.</td>
+        </tr>
+    </table>
+
+    <h3>VB Colors</h3>
+    <p>Vestaboard tiles support 8 colors. You can configure which colors are used for:</p>
+    <ul>
+        <li>Positive tide values</li>
+        <li>Negative tide values</li>
+        <li>Zero mark</li>
+        <li>Warning level indicator</li>
+        <li>Preferred range indicator</li>
+    </ul>
+    <p>Available tile colors: <strong>Red, Orange, Yellow, Green, Blue, Violet, White, Black</strong>.</p>
+
+    <h3>Vestaboard Views</h3>
+    <p>Tidesy sends three different views to the Vestaboard, cycling through them automatically:</p>
+
+    <h4>Detail View</h4>
+    <p>Shows the day&rsquo;s tide schedule with high/low times and values. A color bar graph illustrates relative tide heights. The current tide level is highlighted in green.</p>
+    <div class="screenshot-placeholder">
+        <img src="images/vb-detail-view.png" alt="Vestaboard detail view showing tide schedule" style="max-width:100%;border-radius:8px;border:1px solid var(--border);">
+    </div>
+
+    <h4>Large View</h4>
+    <p>An at-a-glance summary showing the current tide level, rise/fall rate, next high and low, and the current date and time. A blue bar graph shows the current tide height.</p>
+    <div class="screenshot-placeholder">
+        <img src="images/vb-large-view.png" alt="Vestaboard large view showing current tide conditions" style="max-width:100%;border-radius:8px;border:1px solid var(--border);">
+    </div>
+
+    <h4>Alert View</h4>
+    <p>When weather alerts are active, the Vestaboard shows the alert count, severity breakdown, and event names with color-coded severity indicators (red = extreme, orange = severe, yellow = moderate).</p>
+    <div class="screenshot-placeholder">
+        <img src="images/vb-alert-view.png" alt="Vestaboard alert view showing weather alerts" style="max-width:100%;border-radius:8px;border:1px solid var(--border);">
+    </div>
+</div>
+
+
+<!-- ==================== 10. NIGHT MODE & BRIGHTNESS ==================== -->
+<div class="section-header" id="sec-night">
+    <h2>9. Night Mode &amp; Brightness</h2>
+</div>
+<div class="section manual-section">
+    <h3>Automatic Switching</h3>
+    <p>Tidesy automatically switches between day and night brightness based on the device&rsquo;s internal clock. The clock is set via NTP (internet time) and is DST-aware.</p>
+
+    <h3>Settings</h3>
+    <table>
+        <tr>
+            <th>Setting</th>
+            <th>Range</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Day Brightness</td>
+            <td>1&ndash;100%</td>
+            <td>Backlight intensity during daytime (from night end to night start).</td>
+        </tr>
+        <tr>
+            <td>Night Brightness</td>
+            <td>0&ndash;100%</td>
+            <td>Backlight intensity during nighttime. Set to 0% to turn the screen completely off.</td>
+        </tr>
+        <tr>
+            <td>Night Start</td>
+            <td>0&ndash;12 PM</td>
+            <td>The PM hour when night brightness activates.</td>
+        </tr>
+        <tr>
+            <td>Night End</td>
+            <td>0&ndash;12 AM</td>
+            <td>The AM hour when day brightness resumes.</td>
+        </tr>
+    </table>
+
+    <div class="tip-box">
+        <strong>Tip:</strong> Setting night brightness to 0% is useful for bedroom placement &mdash; the screen turns completely off during sleeping hours and comes back on in the morning.
+    </div>
+
+    <p><span class="badge badge-ink">TidesyINK</span> does not have brightness controls. E-paper displays are reflective (no backlight) and are readable in any lighting condition.</p>
+</div>
+
+
+<!-- ==================== 11. MULTI-WIFI & NETWORK ==================== -->
+<div class="section-header" id="sec-wifi">
+    <h2>10. Multi-WiFi &amp; Network</h2>
+</div>
+<div class="section manual-section">
+    <h3>2.4 GHz Only</h3>
+    <p>The ESP32 chip supports <strong>2.4 GHz WiFi only</strong>. 5 GHz networks are not visible to the device. This is a hardware limitation of the ESP32 radio module.</p>
+
+    <h3>WiFi Memory</h3>
+    <p>Tidesy stores up to <strong>30 known WiFi networks</strong>. WiFi passwords are encrypted using <strong>AES-128</strong> on the device&rsquo;s flash storage.</p>
+
+    <h3>Auto-Reconnect</h3>
+    <p>If the primary WiFi network becomes unavailable, Tidesy automatically scans for and connects to the strongest known network. Networks are prioritized by signal strength.</p>
+
+    <h3>Per-SSID Location Memory</h3>
+    <p>When you move Tidesy between WiFi networks (e.g., home and beach house), the device remembers the location you set for each network. Up to <strong>5 SSID-location pairs</strong> are stored. When you connect to a known network and re-enter setup, your previously saved location is automatically loaded instead of the IP-detected location. This means you don&rsquo;t need to re-pick your location on the map every time you switch between familiar networks. Saved SSID locations are cleared on factory reset.</p>
+
+    <h3>mDNS</h3>
+    <p>The device registers itself as <code>tidesy.local</code> on the network using mDNS (multicast DNS). This allows you to access the web dashboard and admin panel without knowing the device&rsquo;s IP address.</p>
+
+    <h3>Required Internet Access</h3>
+    <p>Tidesy requires internet access for the following services:</p>
+    <table>
+        <tr>
+            <th>Service</th>
+            <th>Domain</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td>NOAA Tides &amp; Currents</td>
+            <td>tidesandcurrents.noaa.gov</td>
+            <td>Tide predictions and station data</td>
+        </tr>
+        <tr>
+            <td>National Weather Service</td>
+            <td>api.weather.gov</td>
+            <td>Weather alerts</td>
+        </tr>
+        <tr>
+            <td>MET Norway</td>
+            <td>api.met.no</td>
+            <td>Current weather (temperature, wind)</td>
+        </tr>
+        <tr>
+            <td>IP Geolocation</td>
+            <td>ip-api.com</td>
+            <td>Location detection (optional, setup only)</td>
+        </tr>
+        <tr>
+            <td>Firmware Updates</td>
+            <td>Shopify CDN</td>
+            <td>OTA update manifest and firmware binaries</td>
+        </tr>
+    </table>
+</div>
+
+
+<!-- ==================== 12. FIRMWARE UPDATES ==================== -->
+<div class="section-header" id="sec-firmware">
+    <h2>11. Firmware Updates</h2>
+</div>
+<div class="section manual-section">
+    <h3>Automatic OTA Check</h3>
+    <p>Every time Tidesy boots, it checks a CDN manifest file for available firmware updates. This check happens silently in the background.</p>
+
+    <h3>Mandatory Updates</h3>
+    <p>Some updates are marked as mandatory (critical bug fixes or security patches). These are installed automatically and silently &mdash; the device will download, install, and restart without user interaction.</p>
+
+    <h3>Optional Updates</h3>
+    <p>Non-mandatory updates are shown in the admin panel. You can review the update notes and choose when to install.</p>
+
+    <h3>Update Process</h3>
+    <ol>
+        <li>Firmware binary is downloaded as a stream (not stored entirely in memory).</li>
+        <li>The device display shows a dedicated update screen with a green progress bar, percentage counter, and &ldquo;Do not turn off&rdquo; warning.</li>
+        <li>If updating from the web dashboard, a spinner overlay tracks progress in real time.</li>
+        <li>Device automatically restarts after a successful update.</li>
+        <li>A &ldquo;Successfully Updated&rdquo; banner appears on the web dashboard showing the new version number.</li>
+    </ol>
+
+    <div class="warning-banner">
+        <strong>Do not unplug the device during a firmware update.</strong> Wait for the update to complete and the device to restart (up to 2 minutes). If the device appears stuck, wait the full 2 minutes before power cycling.
+    </div>
+
+    <h3>Firmware Downgrade</h3>
+    <p>The admin panel includes a firmware version selector that lists previous versions. Select an older version and confirm to downgrade. This downloads and installs the selected version via OTA.</p>
+
+    <h3>SD Card Install</h3>
+    <p>You can also update firmware by placing a <code>.bin</code> file on a microSD card:</p>
+    <ol>
+        <li>Download the firmware file from the Tidesy website or admin panel.</li>
+        <li>Copy the <code>.bin</code> file to the root of a FAT32-formatted microSD card.</li>
+        <li>Insert the card into the device&rsquo;s microSD slot.</li>
+        <li>Restart the device &mdash; it will detect the firmware file and install it automatically.</li>
+    </ol>
+
+    <h3>Update Log</h3>
+    <p>All firmware updates are recorded in a log stored on the device. Each entry includes the date, version number, whether it was mandatory, and the source (OTA or SD card). View the log via the admin panel&rsquo;s "Update Log" button.</p>
+</div>
+
+
+<!-- ==================== 13. TIDESYINK SPECIAL FEATURES ==================== -->
+<div class="section-header" id="sec-ink">
+    <h2>12. TidesyINK Special Features</h2>
+</div>
+<div class="section manual-section">
+    <h3>Power Modes</h3>
+    <table>
+        <tr>
+            <th>Mode</th>
+            <th>WiFi Behavior</th>
+            <th>Refresh Cycle</th>
+            <th>Best For</th>
+        </tr>
+        <tr>
+            <td><strong>High</strong></td>
+            <td>Always on</td>
+            <td>Continuous (every 6 min)</td>
+            <td>Plugged-in, always-on use</td>
+        </tr>
+        <tr>
+            <td><strong>Balanced</strong></td>
+            <td>On during fetch, off between</td>
+            <td>Every 6 minutes</td>
+            <td>General use (default)</td>
+        </tr>
+        <tr>
+            <td><strong>Low</strong></td>
+            <td>Minimal (only during fetch)</td>
+            <td>Deep sleep between refreshes</td>
+            <td>Battery operation, max battery life</td>
+        </tr>
+    </table>
+
+    <h3>Button Navigation</h3>
+    <p>TidesyINK uses 5 physical buttons for navigation (no touchscreen):</p>
+    <table>
+        <tr><th>Button</th><th>Action</th></tr>
+        <tr><td><kbd>UP</kbd></td><td>Cycle to the next configured station</td></tr>
+        <tr><td><kbd>DOWN</kbd></td><td>Cycle to the previous station</td></tr>
+        <tr><td><kbd>OK</kbd></td><td>Toggle between Detail (graph) and Large (numbers) view</td></tr>
+        <tr><td><kbd>HOME</kbd></td><td>Force an immediate data refresh</td></tr>
+        <tr><td><kbd>EXIT</kbd></td><td>Enter deep sleep (press any button to wake)</td></tr>
+    </table>
+
+    <h3>Battery Monitoring</h3>
+    <p>When battery hardware is present, TidesyINK reads the battery voltage via an ADC pin. The voltage range is 3.0V (empty) to 4.2V (full). Battery level is displayed on the device and in the admin panel diagnostics.</p>
+
+    <h3>E-Paper Characteristics</h3>
+    <ul>
+        <li><strong>No backlight:</strong> Sunlight-readable, works in any lighting condition. Not visible in complete darkness.</li>
+        <li><strong>No color:</strong> All graphics are rendered in black and white.</li>
+        <li><strong>No animations:</strong> E-paper can only do full-screen refreshes. Partial updates may show ghosting.</li>
+        <li><strong>6-minute full refresh:</strong> The screen fully redraws every 6 minutes to clear ghosting artifacts.</li>
+        <li><strong>Slight ghosting:</strong> Faint traces of previous images between refreshes is normal for e-paper technology.</li>
+    </ul>
+</div>
+
+
+<!-- ==================== 14. LED STATUS INDICATORS ==================== -->
+<div class="section-header" id="sec-led">
+    <h2>13. LED Status Indicators</h2>
+</div>
+<div class="section manual-section">
+    <h3>LED Hardware by Model</h3>
+    <table>
+        <tr>
+            <th>Model</th>
+            <th>LED Type</th>
+            <th>Location</th>
+        </tr>
+        <tr>
+            <td><span class="badge badge-s">TidesyS (CYD)</span></td>
+            <td>3 separate LEDs (Red GPIO 4, Green GPIO 16, Blue GPIO 17)</td>
+            <td>Back of device</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-s">TidesyS (CROW28)</span>, <span class="badge badge-sp">TidesyS+</span>, <span class="badge badge-l">TidesyL</span>, <span class="badge badge-m">TidesyM</span></td>
+            <td>Single RGB LED (GPIO 38)</td>
+            <td>Back of device</td>
+        </tr>
+        <tr>
+            <td><span class="badge badge-ink">TidesyINK</span></td>
+            <td>No LED</td>
+            <td>N/A</td>
+        </tr>
+    </table>
+
+    <h3>Boot Sequence</h3>
+    <p>During startup, the LED indicates progress through the boot sequence. Color changes correspond to WiFi connection attempts and initial data fetches. Once fully booted and connected, the LED settles to a steady state.</p>
+</div>
+
+
+<!-- ==================== 15. TOUCH CONTROLS ==================== -->
+<div class="section-header" id="sec-touch">
+    <h2>14. Touch Controls</h2>
+</div>
+<div class="section manual-section">
+    <h3>TidesyL / TidesyM (GT911 Capacitive Touch)</h3>
+    <p>These models have capacitive touchscreens with two interactive modes:</p>
+    <table>
+        <tr>
+            <th>View</th>
+            <th>Touch Action</th>
+            <th>Result</th>
+        </tr>
+        <tr>
+            <td><strong>Detail View</strong></td>
+            <td>Tap on the tide graph</td>
+            <td>Shows a vertical marker with the exact tide value and time at the tapped position.</td>
+        </tr>
+        <tr>
+            <td><strong>Large View</strong></td>
+            <td>Tap anywhere on screen</td>
+            <td>Toggles a bar chart overlay showing tide levels across the day on/off.</td>
+        </tr>
+    </table>
+
+    <h3>Other Models</h3>
+    <p><span class="badge badge-s">TidesyS</span>, <span class="badge badge-sp">TidesyS+</span>, and <span class="badge badge-ink">TidesyINK</span> do not have active touch interaction on the display. Use the web dashboard for interactive features, or use physical buttons on TidesyINK.</p>
+</div>
+
+
+<!-- ==================== 16. TROUBLESHOOTING ==================== -->
+<div class="section-header" id="sec-troubleshoot">
+    <h2>15. Troubleshooting</h2>
+</div>
+<div class="section manual-section">
+
+    <h3>WiFi Issues</h3>
+    <table>
+        <tr><th>Problem</th><th>Solution</th></tr>
+        <tr>
+            <td>Can&rsquo;t find TidesySetup hotspot</td>
+            <td>Power cycle the device (unplug and re-plug). Make sure your phone/computer is searching for 2.4 GHz networks, not filtering to 5 GHz only.</td>
+        </tr>
+        <tr>
+            <td>Can&rsquo;t connect to home WiFi</td>
+            <td>Verify the network is 2.4 GHz. Double-check the password. Ensure the device is within WiFi range.</td>
+        </tr>
+        <tr>
+            <td>Intermittent disconnections</td>
+            <td>Check your router for stability. Reduce the distance between Tidesy and the router. Some routers have 2.4 GHz band steering that can interfere &mdash; try disabling it.</td>
+        </tr>
+        <tr>
+            <td>"WiFi not connected" on display</td>
+            <td>Verify your network is up and running. Try restarting both the router and the Tidesy device.</td>
+        </tr>
+    </table>
+
+    <h3>Display Issues</h3>
+    <table>
+        <tr><th>Problem</th><th>Solution</th></tr>
+        <tr>
+            <td>Blank screen</td>
+            <td>Check that the USB-C cable is securely connected and the power source provides at least 5V 2A. Try the reset button on the back of the device.</td>
+        </tr>
+        <tr>
+            <td>Frozen display</td>
+            <td>Press the reset button on the back of the device (use a paperclip for recessed buttons).</td>
+        </tr>
+        <tr>
+            <td>TidesyINK ghosting</td>
+            <td>Normal for e-paper. Ghosting clears on the next full refresh cycle (every 6 minutes).</td>
+        </tr>
+    </table>
+
+    <h3>Data Issues</h3>
+    <table>
+        <tr><th>Problem</th><th>Solution</th></tr>
+        <tr>
+            <td>"Fetching tide data" hangs</td>
+            <td>Check WiFi connection. NOAA API may be temporarily down &mdash; the device will retry on the next 6-minute cycle.</td>
+        </tr>
+        <tr>
+            <td>Asterisks (*) around station name</td>
+            <td>Indicates the tide data fetch failed for that station. The device will retry automatically on the next cycle.</td>
+        </tr>
+        <tr>
+            <td>"-x-" in weather area</td>
+            <td>Weather data fetch failed (MET Norway API issue). Will retry on next cycle.</td>
+        </tr>
+        <tr>
+            <td>No alerts showing</td>
+            <td>Verify "Show Alerts" is enabled in settings. Ensure your location is set. Check that your area is within NWS coverage (U.S. only).</td>
+        </tr>
+        <tr>
+            <td>Wrong tide values</td>
+            <td>Verify you selected the correct NOAA station. Check the tide datum setting (MLLW is the standard).</td>
+        </tr>
+    </table>
+
+    <h3>Web Dashboard Issues</h3>
+    <table>
+        <tr><th>Problem</th><th>Solution</th></tr>
+        <tr>
+            <td>Can&rsquo;t reach tidesy.local</td>
+            <td>Try the device&rsquo;s IP address directly. Check that your device supports mDNS/Bonjour. Verify the "Web Server" toggle is enabled.</td>
+        </tr>
+        <tr>
+            <td>Stale data</td>
+            <td>Check the countdown timer on the dashboard. Force a browser refresh (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd>).</td>
+        </tr>
+        <tr>
+            <td>Map not loading</td>
+            <td>The map requires internet access to load OpenStreetMap tiles. Check your internet connection.</td>
+        </tr>
+    </table>
+
+    <h3>Firmware Issues</h3>
+    <table>
+        <tr><th>Problem</th><th>Solution</th></tr>
+        <tr>
+            <td>OTA update stuck</td>
+            <td>Do not unplug the device. Wait up to 2 minutes for the update to complete. If still stuck, power cycle the device.</td>
+        </tr>
+        <tr>
+            <td>Device won&rsquo;t boot after update</td>
+            <td>Hold the reset button for 5 seconds. If the device enters setup mode, try the factory reset option via the admin panel once it&rsquo;s accessible.</td>
+        </tr>
+    </table>
+
+    <h3>Vestaboard Issues</h3>
+    <table>
+        <tr><th>Problem</th><th>Solution</th></tr>
+        <tr>
+            <td>VB not found during scan</td>
+            <td>Verify the Vestaboard and Tidesy are on the same WiFi network. Confirm the VB is a Flagship model (Note is not supported).</td>
+        </tr>
+        <tr>
+            <td>API key rejected</td>
+            <td>Re-enter the key carefully. Verify the key in the Vestaboard app under device settings &gt; Local API.</td>
+        </tr>
+        <tr>
+            <td>Stale VB data</td>
+            <td>Check the update interval setting. Verify Tidesy has a WiFi connection. Try restarting the Tidesy device.</td>
+        </tr>
+    </table>
+</div>
+
+
+<!-- ==================== 17. FACTORY RESET & RECOVERY ==================== -->
+<div class="section-header" id="sec-reset">
+    <h2>16. Factory Reset &amp; Recovery</h2>
+</div>
+<div class="section manual-section">
+    <h3>Web Factory Reset</h3>
+    <p>Navigate to <code>tidesy.local/admin</code> and click the red <strong>Factory Reset</strong> button. Confirm the action when prompted.</p>
+
+    <h3>What Gets Erased</h3>
+    <ul>
+        <li>All preferences: WiFi credentials, station selections, display settings, Vestaboard configuration, visit counter, night mode settings, colors, and location.</li>
+        <li>All per-SSID saved locations (up to 5 network-location pairs).</li>
+    </ul>
+
+    <h3>What&rsquo;s Preserved</h3>
+    <ul>
+        <li>Firmware (the device keeps its current firmware version).</li>
+        <li>LittleFS files: station directory (<code>stations.dat</code>), logo image, help page.</li>
+    </ul>
+
+    <h3>After Reset</h3>
+    <p>The device restarts and enters setup hotspot mode (<code>TidesySetup</code> / <code>tide1234</code>). You&rsquo;ll need to go through the full setup wizard again.</p>
+
+    <h3>Hardware Reset</h3>
+    <p>Pressing the physical reset button on the back of the device restarts the firmware but does <strong>not</strong> erase any settings. This is equivalent to unplugging and re-plugging the device. Use this for a frozen or unresponsive display.</p>
+</div>
+
+
+<!-- ==================== 17. PRIVACY & DATA ==================== -->
+
+<div class="section-header" id="sec-privacy">
+    <h2>17. Privacy &amp; Data</h2>
+</div>
+<div class="section manual-section">
+    <h3>No Cloud Account Required</h3>
+    <p>Tidesy operates fully locally. There is no cloud account, no login, no subscription, and no app required. The device connects directly to public APIs for data.</p>
+
+    <h3>No Personal Data Sent</h3>
+    <p>The only data Tidesy sends to external services are geographic coordinates (latitude/longitude) to fetch weather and tide data. No names, email addresses, or other personal information is transmitted.</p>
+
+    <h3>APIs Called</h3>
+    <p>All APIs used by Tidesy are public and require no authentication:</p>
+    <ul>
+        <li><strong>NOAA</strong> (tidesandcurrents.noaa.gov) &mdash; Tide predictions</li>
+        <li><strong>NWS</strong> (api.weather.gov) &mdash; Weather alerts</li>
+        <li><strong>MET Norway</strong> (api.met.no) &mdash; Current weather</li>
+        <li><strong>ip-api.com</strong> &mdash; IP-based geolocation (used once during setup, optional)</li>
+    </ul>
+
+    <h3>Local Storage</h3>
+    <p>All settings are stored on the device&rsquo;s flash memory using the ESP32 Preferences library. WiFi passwords are encrypted using <strong>AES-128</strong>.</p>
+
+    <h3>No Tracking</h3>
+    <p>Tidesy does not include any analytics, telemetry, or third-party tracking. The device does not phone home, report usage statistics, or share data with anyone.</p>
+</div>
+
+
+<!-- ==================== 20. GLOSSARY ==================== -->
+<div class="section-header" id="sec-glossary">
+    <h2>18. Glossary</h2>
+</div>
+<div class="section manual-section">
+
+    <h3>Tide Terms</h3>
+    <dl class="glossary-list">
+        <div class="glossary-term">
+            <dt>Datum</dt>
+            <dd>A fixed reference surface from which tide heights are measured.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>MLLW (Mean Lower Low Water)</dt>
+            <dd>The average of the lower low water height each tidal day over a 19-year epoch. The standard datum for U.S. nautical charts.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>MSL (Mean Sea Level)</dt>
+            <dd>The average height of the sea surface over a 19-year period.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>MHW (Mean High Water)</dt>
+            <dd>The average of all high water heights over a 19-year epoch.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Slack Water</dt>
+            <dd>A brief period when the tidal current is near zero, occurring at the turn between flood and ebb.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Flood Tide</dt>
+            <dd>The incoming (rising) tide.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Ebb Tide</dt>
+            <dd>The outgoing (falling) tide.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Spring Tide</dt>
+            <dd>Tides with the greatest tidal range, occurring around new and full moons.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Neap Tide</dt>
+            <dd>Tides with the smallest tidal range, occurring around the first and third quarter moons.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Harmonic Constituent</dt>
+            <dd>A mathematical component representing one astronomical influence on tides (e.g., M2 for the principal lunar semidiurnal tide).</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Semidiurnal</dt>
+            <dd>A tidal pattern with two nearly equal high tides and two nearly equal low tides per day.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Diurnal</dt>
+            <dd>A tidal pattern with one high tide and one low tide per day.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Mixed Tide</dt>
+            <dd>A tidal pattern with two highs and two lows per day of significantly different heights.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Tidal Range</dt>
+            <dd>The vertical difference between a high tide and the following low tide.</dd>
+        </div>
+    </dl>
+
+    <h3>Technical Terms</h3>
+    <dl class="glossary-list">
+        <div class="glossary-term">
+            <dt>OTA (Over-The-Air)</dt>
+            <dd>Firmware update delivered wirelessly over WiFi, without physical connection.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>mDNS (Multicast DNS)</dt>
+            <dd>Protocol that allows devices to be found by name (e.g., <code>tidesy.local</code>) on a local network.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>LittleFS</dt>
+            <dd>A lightweight filesystem for embedded devices, used to store files on the ESP32&rsquo;s flash memory.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>ESP32</dt>
+            <dd>A low-cost microcontroller with WiFi and Bluetooth, manufactured by Espressif. The brain of all Tidesy models.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>E-Paper</dt>
+            <dd>A display technology that reflects ambient light (like paper), requires no backlight, and retains the image without power.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>RGB565</dt>
+            <dd>A 16-bit color format (5 bits red, 6 bits green, 5 bits blue) used by embedded displays. Tidesy converts web hex colors to RGB565 internally.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>NWS (National Weather Service)</dt>
+            <dd>U.S. federal agency that provides weather forecasts, warnings, and alerts.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>NOAA (National Oceanic and Atmospheric Administration)</dt>
+            <dd>U.S. federal agency that operates the tide station network and provides tide predictions.</dd>
+        </div>
+    </dl>
+
+    <h3>Tidesy Terms</h3>
+    <dl class="glossary-list">
+        <div class="glossary-term">
+            <dt>Detail View</dt>
+            <dd>The 24-hour tide graph view showing the tide curve, time marker, and weather conditions.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Large View</dt>
+            <dd>The big-number view showing four tide values (High/Low/High/Low) with times and weather.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Warning Level</dt>
+            <dd>A configurable tide height threshold that triggers a colored band on the graph (e.g., for dock clearance).</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Preferred Range</dt>
+            <dd>A configurable tide height range shown as a colored band on the graph (e.g., ideal fishing or surfing window).</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Alert Delay</dt>
+            <dd>How many seconds each weather alert is displayed before cycling to the next (10&ndash;60 seconds).</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Night Mode</dt>
+            <dd>Automatic brightness reduction during configured nighttime hours.</dd>
+        </div>
+        <div class="glossary-term">
+            <dt>Power Mode</dt>
+            <dd>TidesyINK-specific setting that controls WiFi and sleep behavior (High / Balanced / Low).</dd>
+        </div>
+    </dl>
+</div>
+
+
+<!-- ==================== 21. QUICK REFERENCE CARD ==================== -->
+<div class="section-header" id="sec-quickref">
+    <h2>19. Quick Reference Card</h2>
+</div>
+<div class="section manual-section">
+    <div class="quick-ref-card">
+        <h3>Tidesy Quick Reference</h3>
+        <div class="quick-ref-grid">
+            <div class="quick-ref-item">
+                <strong>Setup WiFi</strong>
+                <span>TidesySetup / <code>tide1234</code></span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>Setup URL</strong>
+                <span><code>192.168.4.1</code></span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>Dashboard</strong>
+                <span><code>http://tidesy.local</code></span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>Admin Panel</strong>
+                <span><code>http://tidesy.local/admin</code></span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>Touch (L/M)</strong>
+                <span>Detail tap = time marker; Large tap = bar chart</span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>INK Buttons</strong>
+                <span>UP/DOWN = stations, OK = view, HOME = refresh, EXIT = sleep</span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>Factory Reset</strong>
+                <span>Admin &rarr; Factory Reset button</span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>Update</strong>
+                <span>Admin &rarr; Check for Update</span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>Night Mode</strong>
+                <span>Auto-switches at configured hours</span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>Data Refresh</strong>
+                <span>Every 6 minutes (automatic)</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ==================== FOOTER ==================== -->
+<div class="manual-footer">
+    <strong>Tidesy Smart Devices LLC</strong>
+    Tide data: NOAA &nbsp;|&nbsp; Weather: MET Norway &nbsp;|&nbsp; Alerts: NWS
+</div>
+
+</div><!-- /.container -->
+
+<script src="manual.js"></script>
+</body>
+</html>

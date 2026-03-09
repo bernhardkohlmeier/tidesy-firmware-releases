@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tidesy Technical Reference</title>
+    <link rel="stylesheet" href="manual.css">
+</head>
+<body>
+
+<!-- ========== NAV BAR ========== -->
+<nav class="nav-bar">
+    <div class="nav-brand">Tidesy Technical Reference</div>
+    <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu">&#9776;</button>
+    <div class="nav-menu">
+        <a href="#sec-admin">Admin Panel</a>
+        <a href="#sec-techref">Technical Reference</a>
+        <a href="#sec-screenshots">Screenshots</a>
+        <a href="#sec-dst">DST Handling</a>
+        <a href="manual.html">Back to Manual</a>
+        <a href="#" onclick="toggleSearch(); return false;">Search</a>
+    </div>
+</nav>
+
+<!-- Search Box -->
+<div id="search-box">
+    <input type="text" id="searchInput" placeholder="Search the technical reference..." onkeyup="searchContent()">
+</div>
+
+<!-- ========== MAIN CONTAINER ========== -->
+<div class="container">
+
+<div class="part-header">
+    <img src="images/Logo.png" alt="Tidesy logo" class="part-header-logo">
+    <div>
+        <h1>Technical Reference</h1>
+        <p>Admin panel and technical details for advanced users</p>
+    </div>
+</div>
+
+
+<!-- ==================== 1. ADMIN PANEL ==================== -->
+<div class="section-header" id="sec-admin">
+    <h2>1. Admin Panel</h2>
+</div>
+<div class="section manual-section">
+    <h3>Accessing the Admin Panel</h3>
+    <p>Navigate to <code>http://tidesy.local/admin</code> (or <code>http://&lt;device-IP&gt;/admin</code>) in your browser.</p>
+
+    <h3>Diagnostics</h3>
+    <p>The admin panel header shows key device information:</p>
+    <ul>
+        <li><strong>Version/Build:</strong> Firmware version and build number (e.g., "2.9.9 UNI b0000").</li>
+        <li><strong>Uptime:</strong> How long the device has been running since last restart.</li>
+        <li><strong>Heap Memory:</strong> Available free memory on the ESP32.</li>
+        <li><strong>WiFi Signal:</strong> Signal strength with a quality badge (Excellent/Good/Fair/Poor).</li>
+        <li><strong>IP/MAC:</strong> Device network addresses.</li>
+        <li><strong>LittleFS Storage:</strong> Flash filesystem usage.</li>
+        <li><strong>Station file status:</strong> Whether the station directory is loaded.</li>
+        <li><strong>SD Card status:</strong> Whether an SD card is inserted.</li>
+    </ul>
+    <p>Additional diagnostic tools:</p>
+    <ul>
+        <li><strong>Load Diagnostic:</strong> Button that fetches and displays the raw <code>/diagnostic</code> JSON response.</li>
+        <li><strong>Update Log:</strong> Button that shows the history of all firmware updates.</li>
+    </ul>
+
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/admin-main-page.png" alt="Admin panel main page showing system actions and diagnostics">
+            <span class="callout-pin" style="top:5%;left:55%">1</span>
+            <span class="callout-pin" style="top:22%;left:15%">2</span>
+            <span class="callout-pin" style="top:22%;left:65%">3</span>
+            <span class="callout-pin" style="top:55%;left:60%">4</span>
+            <span class="callout-pin" style="top:72%;left:45%">5</span>
+        </div>
+        <div class="callout-list">
+            <div class="callout-item"><span class="callout-num">1</span> Admin header with version, build number, and &ldquo;Back to Main Page&rdquo; link</div>
+            <div class="callout-item"><span class="callout-num">2</span> Device actions: Restart Device button</div>
+            <div class="callout-item"><span class="callout-num">3</span> Danger Zone: Reset Counter, Factory Reset</div>
+            <div class="callout-item"><span class="callout-num">4</span> Diagnostics: Load Diagnostic button</div>
+            <div class="callout-item"><span class="callout-num">5</span> Firmware: Update Log, Downgrade Firmware</div>
+        </div>
+    </div>
+
+    <h3>Settings Form</h3>
+    <p>The admin settings form provides access to all the same settings as the setup wizard, plus additional options. Changes are applied immediately when you tap Save.</p>
+    <ul>
+        <li><strong>WiFi:</strong> SSID and password (change your network without factory reset).</li>
+        <li><strong>Stations:</strong> Edit station IDs, clear stations, or recreate the station directory.</li>
+        <li><strong>Display:</strong> Format, brightness, night hours &mdash; same as wizard.</li>
+        <li><strong>Location:</strong> Interactive map picker for lat/lng.</li>
+        <li><strong>Alerts:</strong> Toggle and delay slider.</li>
+        <li><strong>Tide levels:</strong> Warning level and preferred range sliders.</li>
+        <li><strong>Colors:</strong> 6 color pickers (not available on TidesyINK).</li>
+        <li><strong>Vestaboard:</strong> Enable, IP, API key, interval, and VB tile colors.</li>
+        <li><strong>Power Mode:</strong> <span class="badge badge-ink">TidesyINK</span> only &mdash; High/Balanced/Low radio buttons.</li>
+    </ul>
+
+    <h3>Diagnostics Detail</h3>
+    <p>The Load Diagnostic button expands a detailed view of all system parameters:</p>
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/diagnostic-top.png" alt="Diagnostic detail showing system, WiFi, display, and station info">
+        </div>
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">System info (version, heap, PSRAM, LittleFS, SD card), WiFi status, display/time info, and station details with current tide values.</p>
+    </div>
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/diagnostic-bottom.png" alt="Diagnostic detail showing alerts, levels, Vestaboard, and geolocation">
+        </div>
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Alert settings, tide levels, Vestaboard status, geolocation, system health check, and the Edit Settings button.</p>
+    </div>
+
+    <h3>Edit Settings Form</h3>
+    <p>The Edit Settings overlay provides full access to all device configuration:</p>
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/edit-settings-top.png" alt="Edit Settings form showing WiFi, stations, display, and location settings">
+        </div>
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">WiFi, Stations (with Recreate stations.dat), Display mode and brightness sliders, System toggles, My Location with interactive map picker.</p>
+    </div>
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/edit-settings-bottom.png" alt="Edit Settings form showing alerts, tide levels, colors, and Vestaboard">
+        </div>
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Alert toggle and delay slider, Tide Level sliders, Color pickers, Vestaboard settings (IP, API key, interval, tile colors), and Save &amp; Restart button.</p>
+    </div>
+
+    <h3>Vestaboard Views</h3>
+    <p>When connected, Tidesy cycles through three views on the Vestaboard:</p>
+    <div class="screenshot-placeholder" style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+            <img src="images/vb-detail-view.png" alt="VB detail view" style="max-width:100%;border-radius:6px;border:1px solid #333;">
+            <p style="font-size:13px;color:#6b7a8d;margin-top:6px;"><strong>Detail</strong> &mdash; Tide schedule with H/L times, values, and color bar graph.</p>
+        </div>
+        <div style="flex:1;min-width:200px;">
+            <img src="images/vb-large-view.png" alt="VB large view" style="max-width:100%;border-radius:6px;border:1px solid #333;">
+            <p style="font-size:13px;color:#6b7a8d;margin-top:6px;"><strong>Large</strong> &mdash; Current tide, rise/fall rate, next H/L, and date.</p>
+        </div>
+        <div style="flex:1;min-width:200px;">
+            <img src="images/vb-alert-view.png" alt="VB alert view" style="max-width:100%;border-radius:6px;border:1px solid #333;">
+            <p style="font-size:13px;color:#6b7a8d;margin-top:6px;"><strong>Alerts</strong> &mdash; Active alerts with severity and event names.</p>
+        </div>
+    </div>
+
+    <h3>System Actions</h3>
+    <table>
+        <tr>
+            <th>Action</th>
+            <th>Button</th>
+            <th>What It Does</th>
+        </tr>
+        <tr>
+            <td>Restart Device</td>
+            <td><span class="btn btn-green" style="padding:4px 10px; font-size:12px;">Restart</span></td>
+            <td>Reboots the firmware. Settings are preserved.</td>
+        </tr>
+        <tr>
+            <td>Factory Reset</td>
+            <td><span class="btn btn-red" style="padding:4px 10px; font-size:12px;">Factory Reset</span></td>
+            <td>Erases all preferences including per-SSID saved locations. Device restarts into setup hotspot mode.</td>
+        </tr>
+        <tr>
+            <td>Check for Update</td>
+            <td><span class="btn btn-blue" style="padding:4px 10px; font-size:12px;">Check Update</span></td>
+            <td>Checks the CDN manifest for available firmware updates.</td>
+        </tr>
+        <tr>
+            <td>Install Update</td>
+            <td><span class="btn btn-blue" style="padding:4px 10px; font-size:12px;">Install</span></td>
+            <td>Downloads and installs a firmware update via OTA.</td>
+        </tr>
+        <tr>
+            <td>Downgrade Firmware</td>
+            <td>Version selector</td>
+            <td>Select and install an older firmware version from the CDN.</td>
+        </tr>
+    </table>
+</div>
+
+
+<!-- ==================== 2. TECHNICAL REFERENCE ==================== -->
+<div class="section-header" id="sec-techref">
+    <h2>2. Technical Reference</h2>
+</div>
+<div class="section manual-section">
+
+    <h3>Key Preferences</h3>
+    <table>
+        <tr>
+            <th>Key</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        <tr><td><code>ssid</code></td><td>String</td><td>""</td><td>WiFi network name</td></tr>
+        <tr><td><code>password</code></td><td>String</td><td>""</td><td>WiFi password (AES-128 encrypted)</td></tr>
+        <tr><td><code>station1</code></td><td>String</td><td>""</td><td>NOAA station ID (slot 1)</td></tr>
+        <tr><td><code>station2</code></td><td>String</td><td>""</td><td>NOAA station ID (slot 2)</td></tr>
+        <tr><td><code>station3</code></td><td>String</td><td>""</td><td>NOAA station ID (slot 3)</td></tr>
+        <tr><td><code>datum</code></td><td>String</td><td>"MLLW"</td><td>Tide datum reference</td></tr>
+        <tr><td><code>displaymode</code></td><td>String</td><td>"detail"</td><td>"detail", "large", or "both"</td></tr>
+        <tr><td><code>brightness</code></td><td>Int</td><td>80</td><td>Day brightness (1-100)</td></tr>
+        <tr><td><code>nightbright</code></td><td>Int</td><td>20</td><td>Night brightness (0-100)</td></tr>
+        <tr><td><code>nightstart</code></td><td>Int</td><td>10</td><td>Night start hour (PM, 0-12)</td></tr>
+        <tr><td><code>nightend</code></td><td>Int</td><td>6</td><td>Night end hour (AM, 0-12)</td></tr>
+        <tr><td><code>showalerts</code></td><td>Bool</td><td>true</td><td>Show NWS weather alerts</td></tr>
+        <tr><td><code>alertdelay</code></td><td>Int</td><td>30</td><td>Alert display duration (10-60 sec)</td></tr>
+        <tr><td><code>warnlevel</code></td><td>Float</td><td>0</td><td>Warning tide level (-10 to 30 ft)</td></tr>
+        <tr><td><code>preflevel1</code></td><td>Float</td><td>0</td><td>Preferred range start (-10 to 30 ft)</td></tr>
+        <tr><td><code>preflevel2</code></td><td>Float</td><td>0</td><td>Preferred range end (-10 to 30 ft)</td></tr>
+        <tr><td><code>latitude</code></td><td>Float</td><td>0</td><td>Home latitude</td></tr>
+        <tr><td><code>longitude</code></td><td>Float</td><td>0</td><td>Home longitude</td></tr>
+        <tr><td><code>webserver</code></td><td>Bool</td><td>true</td><td>Enable web dashboard</td></tr>
+        <tr><td><code>vbinterval</code></td><td>String</td><td>"change"</td><td>VB update interval</td></tr>
+        <tr><td><code>ss</code></td><td>String</td><td>"0"</td><td>Screenshot mode ("0" = off, "1" = on)</td></tr>
+        <tr><td><code>dmsgIds</code></td><td>String</td><td>""</td><td>Comma-separated dismissed cloud message IDs</td></tr>
+        <tr><td><code>sLoc0</code>&ndash;<code>sLoc4</code></td><td>String</td><td>""</td><td>Per-SSID location: saved SSID name (5 slots)</td></tr>
+        <tr><td><code>sLa0</code>&ndash;<code>sLa4</code></td><td>String</td><td>""</td><td>Per-SSID location: saved latitude (5 slots)</td></tr>
+        <tr><td><code>sLo0</code>&ndash;<code>sLo4</code></td><td>String</td><td>""</td><td>Per-SSID location: saved longitude (5 slots)</td></tr>
+    </table>
+
+    <h3>Web Endpoints</h3>
+    <table>
+        <tr>
+            <th>Path</th>
+            <th>Method</th>
+            <th>Purpose</th>
+        </tr>
+        <tr><td><code>/</code></td><td>GET</td><td>Main dashboard (tide data, weather, alerts, map)</td></tr>
+        <tr><td><code>/admin</code></td><td>GET</td><td>Admin panel (diagnostics, system actions)</td></tr>
+        <tr><td><code>/admin-settings-form</code></td><td>GET</td><td>Admin settings form HTML</td></tr>
+        <tr><td><code>/admin-save-settings</code></td><td>POST</td><td>Save admin settings</td></tr>
+        <tr><td><code>/diagnostic</code></td><td>GET</td><td>JSON diagnostic data</td></tr>
+        <tr><td><code>/fetch-stations</code></td><td>GET</td><td>Download/refresh station directory</td></tr>
+        <tr><td><code>/station-check</code></td><td>GET</td><td>Check if station directory exists</td></tr>
+        <tr><td><code>/search-stations</code></td><td>GET</td><td>Search station directory</td></tr>
+        <tr><td><code>/dismiss-update</code></td><td>GET</td><td>Dismiss post-update notification</td></tr>
+        <tr><td><code>/dismiss-message</code></td><td>GET</td><td>Dismiss a cloud message by ID (<code>?id=...</code>)</td></tr>
+        <tr><td><code>/ota-status</code></td><td>GET</td><td>OTA progress JSON (<code>status</code>, <code>progress</code>, <code>error</code>)</td></tr>
+        <tr><td><code>/restart</code></td><td>GET</td><td>Restart the device</td></tr>
+        <tr><td><code>/factory_reset</code></td><td>GET</td><td>Factory reset (with confirmation)</td></tr>
+        <tr><td><code>/update</code></td><td>GET</td><td>Firmware update page</td></tr>
+    </table>
+
+    <h3>Setup-Mode Endpoints</h3>
+    <p>These endpoints are only available when the device is in setup hotspot mode (<code>192.168.4.1</code>):</p>
+    <table>
+        <tr>
+            <th>Path</th>
+            <th>Method</th>
+            <th>Purpose</th>
+        </tr>
+        <tr><td><code>/saved-location</code></td><td>GET</td><td>Retrieve saved location for an SSID (<code>?ssid=...</code>)</td></tr>
+        <tr><td><code>/geolocate</code></td><td>GET</td><td>IP-based geolocation via ip-api.com</td></tr>
+        <tr><td><code>/verify-wifi</code></td><td>POST</td><td>Test WiFi credentials and return assigned IP</td></tr>
+        <tr><td><code>/save-config</code></td><td>POST</td><td>Save all setup wizard settings</td></tr>
+    </table>
+
+    <h3>Data Sources</h3>
+    <table>
+        <tr>
+            <th>Source</th>
+            <th>Data</th>
+            <th>URL Pattern</th>
+        </tr>
+        <tr>
+            <td>NOAA Tides &amp; Currents</td>
+            <td>Tide predictions (6-min intervals)</td>
+            <td><code>tidesandcurrents.noaa.gov/api/datagetter</code></td>
+        </tr>
+        <tr>
+            <td>National Weather Service</td>
+            <td>Active weather alerts</td>
+            <td><code>api.weather.gov/alerts/active</code></td>
+        </tr>
+        <tr>
+            <td>MET Norway</td>
+            <td>Temperature, wind speed/direction</td>
+            <td><code>api.met.no/weatherapi/locationforecast/2.0/compact</code></td>
+        </tr>
+        <tr>
+            <td>ip-api.com</td>
+            <td>IP-based geolocation</td>
+            <td><code>ip-api.com/json/</code></td>
+        </tr>
+    </table>
+
+    <h3>Station Data Format</h3>
+    <p>The station directory is stored in <code>/stations.dat</code> on the device&rsquo;s LittleFS filesystem. Each line contains one station:</p>
+    <pre><code>ID|Name|State|Latitude|Longitude</code></pre>
+    <p>Example:</p>
+    <pre><code>9414131|Half Moon Bay, CA|CA|37.5024|-122.4828
+9414290|San Francisco, CA|CA|37.8063|-122.4659</code></pre>
+
+    <h3>Diagnostic JSON Fields</h3>
+    <table>
+        <tr><th>Field</th><th>Description</th></tr>
+        <tr><td><code>version</code></td><td>Firmware version string</td></tr>
+        <tr><td><code>build</code></td><td>Build number (4-digit, zero-padded)</td></tr>
+        <tr><td><code>uptime</code></td><td>Seconds since last boot</td></tr>
+        <tr><td><code>heap</code></td><td>Free heap memory in bytes</td></tr>
+        <tr><td><code>rssi</code></td><td>WiFi signal strength in dBm</td></tr>
+        <tr><td><code>ip</code></td><td>Device IP address</td></tr>
+        <tr><td><code>mac</code></td><td>Device MAC address</td></tr>
+        <tr><td><code>ssid</code></td><td>Connected WiFi network name</td></tr>
+        <tr><td><code>littlefs_used</code></td><td>LittleFS bytes used</td></tr>
+        <tr><td><code>littlefs_total</code></td><td>LittleFS total capacity</td></tr>
+        <tr><td><code>sd_present</code></td><td>Whether an SD card is inserted</td></tr>
+        <tr><td><code>station_file</code></td><td>Whether stations.dat exists</td></tr>
+    </table>
+</div>
+
+
+<!-- ==================== 3. SCREENSHOTS ==================== -->
+<div class="section-header" id="sec-screenshots">
+    <h2>3. Screenshots</h2>
+</div>
+<div class="section manual-section">
+    <h3>Overview</h3>
+    <p>Tidesy can capture BMP screenshots of the display to an SD card. This is a developer/diagnostic feature available on models with display readback capability.</p>
+
+    <h3>Supported Models</h3>
+    <table>
+        <tr><th>Model</th><th>Method</th><th>Supported</th></tr>
+        <tr><td><span class="badge badge-l">TidesyL</span> / <span class="badge badge-m">TidesyM</span></td><td>PSRAM framebuffer readback (LovyanGFX)</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-s">TidesyS</span></td><td>ILI9341 SPI readback (SDO connected)</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-ink">TidesyINK</span></td><td>E-paper shadow buffer capture</td><td>Yes</td></tr>
+        <tr><td><span class="badge badge-sp">TidesyS+</span></td><td>ILI9488 SDO not connected</td><td>No (hardware limitation)</td></tr>
+    </table>
+
+    <h3>Enabling Screenshots</h3>
+    <p>Screenshots are enabled via the admin diagnostics panel. When an SD card is detected, <strong>Take Screenshots</strong> and <strong>Stop Screenshots</strong> buttons appear. Screenshots are captured automatically at each display refresh cycle.</p>
+
+    <h3>SCR Badge</h3>
+    <p>When screenshots are active, a <strong>SCR</strong> badge (white text on dark green background) appears on the display near the countdown timer. The badge is automatically hidden during the actual screenshot capture to avoid appearing in the saved image.</p>
+    <div class="screenshot-placeholder">
+        <img src="images/badges-combined-scr-dst.png" alt="SCR and DST badges with countdown timer" style="max-width:460px;border-radius:6px;border:1px solid #333;">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:6px;">The <span class="badge-illustration badge-scr">SCR</span> badge appears to the left of other status badges. Here shown alongside the <span class="badge-illustration badge-dst">DST</span> badge and countdown timer.</p>
+    </div>
+
+    <h3>SD Card Hot-Detection</h3>
+    <p>If an SD card is inserted while the device is running, opening or refreshing the diagnostics page will detect and initialize the card. The screenshot buttons will then become available.</p>
+
+    <h3>SD Card Ejection Detection</h3>
+    <p>If the SD card is removed while screenshots are active, the next screenshot write will fail. When this happens:</p>
+    <ul>
+        <li>Screenshot mode is automatically disabled.</li>
+        <li>The <code>ss</code> preference is set to <code>"0"</code>.</li>
+        <li>The SCR badge is removed from the display.</li>
+        <li>The screenshot buttons are hidden in the diagnostics panel.</li>
+    </ul>
+    <p>To resume, insert a new SD card and re-enable screenshots from the diagnostics panel.</p>
+
+    <h3>File Naming</h3>
+    <p>Screenshots are saved as BMP files with the naming pattern: <code>/{view}_{device}_{NNNN}.bmp</code></p>
+    <ul>
+        <li><strong>view:</strong> The current display view (e.g., <code>detail</code>, <code>large</code>, <code>alert</code>)</li>
+        <li><strong>device:</strong> The board type (<code>crow7</code>, <code>crow5</code>, <code>cyd</code>, <code>crep42</code>)</li>
+        <li><strong>NNNN:</strong> Monotonically increasing counter (zero-padded to 4 digits)</li>
+    </ul>
+</div>
+
+
+<!-- ==================== 4. DST HANDLING ==================== -->
+<div class="section-header" id="sec-dst">
+    <h2>4. DST Handling</h2>
+</div>
+<div class="section manual-section">
+    <h3>The Problem</h3>
+    <p>NOAA tide predictions use the <code>lst_ldt</code> time zone (local standard/daylight time). On DST transition days, the number of 6-minute predictions changes:</p>
+    <ul>
+        <li><strong>Normal day:</strong> 240 predictions (24 hours &times; 10 per hour)</li>
+        <li><strong>Spring forward:</strong> 230 predictions (the 2:00&ndash;2:59 AM hour doesn&rsquo;t exist)</li>
+        <li><strong>Fall back:</strong> 250 predictions (the 1:00&ndash;1:59 AM hour repeats)</li>
+    </ul>
+
+    <h3>Timestamp-Based Slot Mapping</h3>
+    <p>Instead of assigning predictions by array index (which causes misalignment), Tidesy parses each prediction&rsquo;s timestamp to compute the correct display slot:</p>
+    <pre><code>slot = hour &times; 10 + minute / 6</code></pre>
+    <p>This ensures predictions always map to the correct time position on the graph regardless of DST transitions.</p>
+
+    <h3>Spring Forward (Gap Detection)</h3>
+    <p>When a gap is detected (slot jumps by more than 1), the missing slots are filled with the last valid value. The graph renders these gap slots with a <strong>red line</strong> and a <strong>dimmed fill color</strong> (50% darkened version of the normal color).</p>
+
+    <h3>Fall Back (Duplicate Detection)</h3>
+    <p>When a timestamp maps to a slot at or before the previous slot, Tidesy detects a fall-back duplicate and skips those entries. A <strong>red line segment</strong> marks the transition point on the graph.</p>
+
+    <h3>DST Badge</h3>
+    <p>A <strong>DST</strong> badge (white text on red background) appears on the detail view during any day where a DST transition is detected. This badge is visible only in the detail view.</p>
+
+    <h3>TideData Struct Fields</h3>
+    <table>
+        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+        <tr><td><code>dstGapStart</code></td><td>int</td><td>First slot in the spring-forward gap (-1 = no gap)</td></tr>
+        <tr><td><code>dstGapEnd</code></td><td>int</td><td>First slot after the gap</td></tr>
+        <tr><td><code>dstStepSlot</code></td><td>int</td><td>Slot where the fall-back step occurs (-1 = no step)</td></tr>
+    </table>
+</div>
+
+
+<!-- ==================== FOOTER ==================== -->
+<div class="manual-footer">
+    <strong>Tidesy Smart Devices LLC</strong>
+    Tide data: NOAA &nbsp;|&nbsp; Weather: MET Norway &nbsp;|&nbsp; Alerts: NWS
+</div>
+
+</div><!-- /.container -->
+
+<script src="manual.js"></script>
+</body>
+</html>
