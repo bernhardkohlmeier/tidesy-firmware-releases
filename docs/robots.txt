@@ -1,0 +1,2 @@
+User-agent: *
+Disallow: /tr-9f4a2b7e.html
