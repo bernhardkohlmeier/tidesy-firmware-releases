@@ -178,6 +178,21 @@
             <td>Select and install an older firmware version from the CDN.</td>
         </tr>
     </table>
+
+    <h3>Firmware Downgrade</h3>
+    <p>The admin panel includes a firmware version selector that lists previous versions. Select an older version and confirm to downgrade. This downloads and installs the selected version via OTA.</p>
+
+    <h3>SD Card Install</h3>
+    <p>You can also update firmware by placing a <code>.bin</code> file on a microSD card:</p>
+    <ol>
+        <li>Download the firmware file from the Tidesy website.</li>
+        <li>Copy the <code>.bin</code> file to the root of a FAT32-formatted microSD card.</li>
+        <li>Insert the card into the device&rsquo;s microSD slot.</li>
+        <li>Restart the device &mdash; it will detect the firmware file and install it automatically.</li>
+    </ol>
+
+    <h3>Update Log</h3>
+    <p>All firmware updates are recorded in a log stored on the device. Each entry includes the date, version number, whether it was mandatory, and the source (OTA or SD card). View the log via the admin panel&rsquo;s &ldquo;Update Log&rdquo; button.</p>
 </div>
 
 

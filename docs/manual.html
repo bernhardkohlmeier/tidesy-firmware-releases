@@ -71,28 +71,28 @@
             <td>Bottom edge</td>
             <td>Bottom edge</td>
             <td>Back, near USB</td>
-            <td>RGB (GPIO 38)</td>
+            <td>None</td>
         </tr>
         <tr>
             <td><span class="badge badge-m">TidesyM</span></td>
             <td>Bottom edge</td>
             <td>Bottom edge</td>
             <td>Back, near USB</td>
-            <td>RGB (GPIO 38)</td>
+            <td>None</td>
         </tr>
         <tr>
             <td><span class="badge badge-s">TidesyS</span></td>
             <td>Back / side</td>
             <td>Side slot</td>
             <td>Back</td>
-            <td>3 LEDs (R/G/B) or RGB</td>
+            <td>RGB (CYD only)</td>
         </tr>
         <tr>
             <td><span class="badge badge-sp">TidesyS+</span></td>
             <td>Bottom edge</td>
             <td>Side slot</td>
             <td>Back</td>
-            <td>RGB (GPIO 38)</td>
+            <td>None</td>
         </tr>
         <tr>
             <td><span class="badge badge-ink">TidesyINK</span></td>
@@ -440,7 +440,7 @@
             <td>GT911 Capacitive</td>
             <td>None</td>
             <td>None</td>
-            <td>5 Buttons</td>
+            <td>None</td>
         </tr>
         <tr>
             <td>Chip</td>
@@ -524,17 +524,7 @@
     <p>An enhanced compact model with a 3.5-inch 480&times;320 display. Wider screen provides more room for tide data. Same features as TidesyS with a larger viewing area.</p>
 
     <h3>TidesyINK (4.2" E-Paper) <span class="badge badge-ink">Battery-Capable</span></h3>
-    <p>A 4.2-inch 400&times;300 monochrome e-paper display. Sunlight-readable with no backlight. Can run on battery power with deep sleep between 6-minute refresh cycles. Physical button navigation instead of touchscreen.</p>
-
-    <h4>Button Controls</h4>
-    <table>
-        <tr><th>Button</th><th>Function</th></tr>
-        <tr><td><kbd>UP</kbd></td><td>Next station</td></tr>
-        <tr><td><kbd>DOWN</kbd></td><td>Previous station</td></tr>
-        <tr><td><kbd>OK</kbd></td><td>Toggle between Detail and Large view</td></tr>
-        <tr><td><kbd>HOME</kbd></td><td>Force refresh (fetch new data now)</td></tr>
-        <tr><td><kbd>EXIT</kbd></td><td>Enter deep sleep (battery saver)</td></tr>
-    </table>
+    <p>A 4.2-inch 400&times;300 monochrome e-paper display. Sunlight-readable with no backlight. Can run on battery power with deep sleep between 6-minute refresh cycles.</p>
 
     <h4>Power Modes</h4>
     <table>
@@ -714,7 +704,6 @@
         <li><strong>Status badges:</strong> Small status indicators appear near the countdown timer:
             <ul>
                 <li><strong>DST</strong> (white on red) &mdash; shown on days when a daylight saving time transition occurs. The tide graph uses a red line segment and dimmed fill to mark the affected hour.</li>
-                <li><strong>SCR</strong> (white on dark green) &mdash; shown when screenshots to SD card are active (see <a href="tr-9f4a2b7e.html">Technical Reference</a>).</li>
                 <li><strong>!</strong> or <strong>M</strong> &mdash; alert severity indicator.</li>
             </ul>
         </li>
@@ -825,21 +814,11 @@
         <p style="font-size:13px;color:#6b7a8d;margin-top:6px;"><span class="badge-illustration badge-dst">DST</span> badge + <span class="badge-illustration badge-alert-severe">!</span> alert indicator + countdown timer</p>
     </div>
 
-    <div class="screenshot-placeholder">
-        <p><strong>Example: Screenshots active on DST day</strong></p>
-        <img src="images/badges-combined-scr-dst.png" alt="SCR and DST badges with countdown timer" style="max-width:460px;border-radius:6px;border:1px solid #333;">
-        <p style="font-size:13px;color:#6b7a8d;margin-top:6px;"><span class="badge-illustration badge-scr">SCR</span> screenshot badge + <span class="badge-illustration badge-dst">DST</span> badge + countdown timer</p>
-    </div>
-
     <table>
         <tr><th>Badge</th><th>Meaning</th></tr>
         <tr>
             <td><span class="badge-illustration badge-dst">DST</span></td>
             <td>Daylight saving time transition day detected. The tide graph marks the affected hour with a red line and dimmed fill. Detail view only.</td>
-        </tr>
-        <tr>
-            <td><span class="badge-illustration badge-scr">SCR</span></td>
-            <td>Screenshots to SD card are active. Automatically removed if the SD card is ejected. See <a href="tr-9f4a2b7e.html#sec-screenshots">Technical Reference</a> for details.</td>
         </tr>
         <tr>
             <td><span class="badge-illustration badge-alert-severe">!</span></td>
@@ -867,7 +846,6 @@
         <li><strong>Monochrome only:</strong> Black and white rendering &mdash; no color customization available.</li>
         <li><strong>Font:</strong> FreeSans family at various sizes (8pt, 9pt, 12pt, 18pt).</li>
         <li><strong>No animations:</strong> E-paper cannot animate. The live data point and rising/falling indicator are static.</li>
-        <li><strong>Button-driven navigation:</strong> Use physical buttons instead of touch (see <a href="#sec-ink">Section 13</a>).</li>
         <li><strong>6-minute deep sleep cycle:</strong> In Low power mode, the device sleeps between refreshes to conserve battery.</li>
     </ul>
 </div>
@@ -1270,7 +1248,7 @@
     <p>When you move Tidesy between WiFi networks (e.g., home and beach house), the device remembers the location you set for each network. Up to <strong>5 SSID-location pairs</strong> are stored. When you connect to a known network and re-enter setup, your previously saved location is automatically loaded instead of the IP-detected location. This means you don&rsquo;t need to re-pick your location on the map every time you switch between familiar networks. Saved SSID locations are cleared on factory reset.</p>
 
     <h3>mDNS</h3>
-    <p>The device registers itself as <code>tidesy.local</code> on the network using mDNS (multicast DNS). This allows you to access the web dashboard and admin panel without knowing the device&rsquo;s IP address.</p>
+    <p>The device registers itself as <code>tidesy.local</code> on the network using mDNS (multicast DNS). This allows you to access the web dashboard and settings page without knowing the device&rsquo;s IP address.</p>
 
     <h3>Required Internet Access</h3>
     <p>Tidesy requires internet access for the following services:</p>
@@ -1321,7 +1299,7 @@
     <p>Some updates are marked as mandatory (critical bug fixes or security patches). These are installed automatically and silently &mdash; the device will download, install, and restart without user interaction.</p>
 
     <h3>Optional Updates</h3>
-    <p>Non-mandatory updates are shown in the admin panel. You can review the update notes and choose when to install.</p>
+    <p>When a non-mandatory update is available, a notification appears on the device and web dashboard. You can review the update notes and choose when to install.</p>
 
     <h3>Update Process</h3>
     <ol>
@@ -1336,20 +1314,6 @@
         <strong>Do not unplug the device during a firmware update.</strong> Wait for the update to complete and the device to restart (up to 2 minutes). If the device appears stuck, wait the full 2 minutes before power cycling.
     </div>
 
-    <h3>Firmware Downgrade</h3>
-    <p>The admin panel includes a firmware version selector that lists previous versions. Select an older version and confirm to downgrade. This downloads and installs the selected version via OTA.</p>
-
-    <h3>SD Card Install</h3>
-    <p>You can also update firmware by placing a <code>.bin</code> file on a microSD card:</p>
-    <ol>
-        <li>Download the firmware file from the Tidesy website or admin panel.</li>
-        <li>Copy the <code>.bin</code> file to the root of a FAT32-formatted microSD card.</li>
-        <li>Insert the card into the device&rsquo;s microSD slot.</li>
-        <li>Restart the device &mdash; it will detect the firmware file and install it automatically.</li>
-    </ol>
-
-    <h3>Update Log</h3>
-    <p>All firmware updates are recorded in a log stored on the device. Each entry includes the date, version number, whether it was mandatory, and the source (OTA or SD card). View the log via the admin panel&rsquo;s "Update Log" button.</p>
 </div>
 
 
@@ -1386,19 +1350,8 @@
         </tr>
     </table>
 
-    <h3>Button Navigation</h3>
-    <p>TidesyINK uses 5 physical buttons for navigation (no touchscreen):</p>
-    <table>
-        <tr><th>Button</th><th>Action</th></tr>
-        <tr><td><kbd>UP</kbd></td><td>Cycle to the next configured station</td></tr>
-        <tr><td><kbd>DOWN</kbd></td><td>Cycle to the previous station</td></tr>
-        <tr><td><kbd>OK</kbd></td><td>Toggle between Detail (graph) and Large (numbers) view</td></tr>
-        <tr><td><kbd>HOME</kbd></td><td>Force an immediate data refresh</td></tr>
-        <tr><td><kbd>EXIT</kbd></td><td>Enter deep sleep (press any button to wake)</td></tr>
-    </table>
-
     <h3>Battery Monitoring</h3>
-    <p>When battery hardware is present, TidesyINK reads the battery voltage via an ADC pin. The voltage range is 3.0V (empty) to 4.2V (full). Battery level is displayed on the device and in the admin panel diagnostics.</p>
+    <p>When battery hardware is present, TidesyINK reads the battery voltage via an ADC pin. The voltage range is 3.0V (empty) to 4.2V (full). Battery level is displayed on the device.</p>
 
     <h3>E-Paper Characteristics</h3>
     <ul>
@@ -1416,31 +1369,9 @@
     <h2>13. LED Status Indicators</h2>
 </div>
 <div class="section manual-section">
-    <h3>LED Hardware by Model</h3>
-    <table>
-        <tr>
-            <th>Model</th>
-            <th>LED Type</th>
-            <th>Location</th>
-        </tr>
-        <tr>
-            <td><span class="badge badge-s">TidesyS (CYD)</span></td>
-            <td>3 separate LEDs (Red GPIO 4, Green GPIO 16, Blue GPIO 17)</td>
-            <td>Back of device</td>
-        </tr>
-        <tr>
-            <td><span class="badge badge-s">TidesyS (CROW28)</span>, <span class="badge badge-sp">TidesyS+</span>, <span class="badge badge-l">TidesyL</span>, <span class="badge badge-m">TidesyM</span></td>
-            <td>Single RGB LED (GPIO 38)</td>
-            <td>Back of device</td>
-        </tr>
-        <tr>
-            <td><span class="badge badge-ink">TidesyINK</span></td>
-            <td>No LED</td>
-            <td>N/A</td>
-        </tr>
-    </table>
+    <p>Only the <span class="badge badge-s">TidesyS (CYD)</span> model has a status LED on the back of the device. All other models (Crow-based boards and TidesyINK) do not have an LED.</p>
 
-    <h3>Boot Sequence</h3>
+    <h3>Boot Sequence (CYD Only)</h3>
     <p>During startup, the LED indicates progress through the boot sequence. Color changes correspond to WiFi connection attempts and initial data fetches. Once fully booted and connected, the LED settles to a steady state.</p>
 </div>
 
@@ -1471,7 +1402,7 @@
     </table>
 
     <h3>Other Models</h3>
-    <p><span class="badge badge-s">TidesyS</span>, <span class="badge badge-sp">TidesyS+</span>, and <span class="badge badge-ink">TidesyINK</span> do not have active touch interaction on the display. Use the web dashboard for interactive features, or use physical buttons on TidesyINK.</p>
+    <p><span class="badge badge-s">TidesyS</span>, <span class="badge badge-sp">TidesyS+</span>, and <span class="badge badge-ink">TidesyINK</span> do not have active touch interaction on the display. Use the web dashboard for interactive features.</p>
 </div>
 
 
@@ -1570,7 +1501,7 @@
         </tr>
         <tr>
             <td>Device won&rsquo;t boot after update</td>
-            <td>Hold the reset button for 5 seconds. If the device enters setup mode, try the factory reset option via the admin panel once it&rsquo;s accessible.</td>
+            <td>Hold the reset button for 5 seconds. If the device enters setup mode, try a factory reset once the device is accessible (see <a href="#sec-reset">Section 16</a>).</td>
         </tr>
     </table>
 
@@ -1599,7 +1530,7 @@
 </div>
 <div class="section manual-section">
     <h3>Web Factory Reset</h3>
-    <p>Navigate to <code>tidesy.local/admin</code> and click the red <strong>Factory Reset</strong> button. Confirm the action when prompted.</p>
+    <p>Open <code>tidesy.local/admin</code> in a browser and click the red <strong>Factory Reset</strong> button. Confirm the action when prompted.</p>
 
     <h3>What Gets Erased</h3>
     <ul>
@@ -1807,7 +1738,7 @@
                 <span><code>http://tidesy.local</code></span>
             </div>
             <div class="quick-ref-item">
-                <strong>Admin Panel</strong>
+                <strong>Settings Page</strong>
                 <span><code>http://tidesy.local/admin</code></span>
             </div>
             <div class="quick-ref-item">
@@ -1815,16 +1746,12 @@
                 <span>Detail tap = time marker; Large tap = bar chart</span>
             </div>
             <div class="quick-ref-item">
-                <strong>INK Buttons</strong>
-                <span>UP/DOWN = stations, OK = view, HOME = refresh, EXIT = sleep</span>
-            </div>
-            <div class="quick-ref-item">
                 <strong>Factory Reset</strong>
-                <span>Admin &rarr; Factory Reset button</span>
+                <span><code>tidesy.local/admin</code> &rarr; Factory Reset</span>
             </div>
             <div class="quick-ref-item">
                 <strong>Update</strong>
-                <span>Admin &rarr; Check for Update</span>
+                <span><code>tidesy.local/admin</code> &rarr; Check for Update</span>
             </div>
             <div class="quick-ref-item">
                 <strong>Night Mode</strong>
