@@ -85,7 +85,7 @@
             <td>Back / side</td>
             <td>Side slot</td>
             <td>Back</td>
-            <td>RGB (CYD only)</td>
+            <td>RGB</td>
         </tr>
         <tr>
             <td><span class="badge badge-sp">TidesyS+</span></td>
@@ -436,19 +436,11 @@
         </tr>
         <tr>
             <td>Touch</td>
-            <td>GT911 Capacitive</td>
-            <td>GT911 Capacitive</td>
+            <td>Yes (touchscreen)</td>
+            <td>Yes (touchscreen)</td>
             <td>None</td>
             <td>None</td>
             <td>None</td>
-        </tr>
-        <tr>
-            <td>Chip</td>
-            <td>ESP32-S3</td>
-            <td>ESP32-S3</td>
-            <td>ESP32</td>
-            <td>ESP32</td>
-            <td>ESP32-S3</td>
         </tr>
         <tr>
             <td>Graph Interaction</td>
@@ -493,7 +485,7 @@
     </table>
 
     <h3>TidesyL (7") <span class="badge badge-l">Flagship</span></h3>
-    <p>The largest Tidesy model with a 7-inch 800&times;480 color LCD and GT911 capacitive touchscreen. Tap the tide graph to see the tide value at any point in time. Tap the large number view to toggle a bar chart overlay. Ideal for a desk, shelf, or wall-mounted display.</p>
+    <p>The largest Tidesy model with a 7-inch 800&times;480 color LCD and touchscreen. Tap the tide graph to see the tide value at any point in time. Tap the large number view to toggle a bar chart overlay. Ideal for a desk, shelf, or wall-mounted display.</p>
 
     <img src="images/crow7-detail-without-alerts.png" alt="TidesyL detail view showing tide graph" style="max-width:100%; border-radius:8px; margin:16px 0; border:1px solid var(--border);">
     <div class="callout-list">
@@ -505,7 +497,7 @@
     </div>
 
     <h3>TidesyM (5") <span class="badge badge-m">Mid-size</span></h3>
-    <p>Same 800&times;480 resolution and GT911 capacitive touch as TidesyL, in a more compact 5-inch form factor. Identical software features including graph interaction and bar chart overlay.</p>
+    <p>Same 800&times;480 resolution and touchscreen as TidesyL, in a more compact 5-inch form factor. Identical software features including graph interaction and bar chart overlay.</p>
 
     <img src="images/crow7-large-view-falling.png" alt="TidesyM large view showing tide numbers" style="max-width:100%; border-radius:8px; margin:16px 0; border:1px solid var(--border);">
     <div class="callout-list">
@@ -524,14 +516,14 @@
     <p>An enhanced compact model with a 3.5-inch 480&times;320 display. Wider screen provides more room for tide data. Same features as TidesyS with a larger viewing area.</p>
 
     <h3>TidesyINK (4.2" E-Paper) <span class="badge badge-ink">Battery-Capable</span></h3>
-    <p>A 4.2-inch 400&times;300 monochrome e-paper display. Sunlight-readable with no backlight. Can run on battery power with deep sleep between 6-minute refresh cycles.</p>
+    <p>A 4.2-inch 400&times;300 monochrome e-paper display. Sunlight-readable with no backlight. Can run on battery power, sleeping between 6-minute refresh cycles.</p>
 
     <h4>Power Modes</h4>
     <table>
         <tr><th>Mode</th><th>WiFi</th><th>Refresh</th><th>Best For</th></tr>
         <tr><td><strong>High</strong></td><td>Always on</td><td>Continuous</td><td>Plugged-in use</td></tr>
         <tr><td><strong>Balanced</strong></td><td>On/off per cycle</td><td>Every 6 min</td><td>General use</td></tr>
-        <tr><td><strong>Low</strong></td><td>Minimal</td><td>Deep sleep between</td><td>Battery operation</td></tr>
+        <tr><td><strong>Low</strong></td><td>Minimal</td><td>Sleeps between</td><td>Battery operation</td></tr>
     </table>
 
     <div class="note-box">
@@ -554,7 +546,7 @@
     </ul>
 
     <h3>WiFi Configuration</h3>
-    <p>Tidesy supports <strong>2.4 GHz WiFi only</strong>. The ESP32 chip does not have a 5 GHz radio &mdash; this is a hardware limitation, not a software one. Most routers broadcast both bands; make sure you select the 2.4 GHz network.</p>
+    <p>Tidesy supports <strong>2.4 GHz WiFi only</strong>. 5 GHz networks are not supported. Most routers broadcast both bands; make sure you select the 2.4 GHz network.</p>
     <div class="note-box">
         <strong>WiFi First:</strong> All other settings (stations, display, location, alerts) are locked until WiFi is verified. This applies both on first setup and when re-entering the wizard after a network change. Verify your WiFi connection to unlock the rest of the form.
     </div>
@@ -579,7 +571,7 @@
     <h3>Station Selection</h3>
     <p>Tidesy uses NOAA harmonic tide stations for predictions. On first setup, it downloads a directory of ~3,000 stations.</p>
     <ul>
-        <li><strong>One-time download:</strong> Takes approximately 60 seconds. Runs in the background using FreeRTOS tasks. A progress banner shows the download status.</li>
+        <li><strong>One-time download:</strong> Takes approximately 60 seconds. Runs in the background. A progress banner shows the download status.</li>
         <li><strong>Search:</strong> Type a station name or NOAA station ID in the search box. Results appear as you type.</li>
         <li><strong>State filter:</strong> Narrow results by state using the dropdown.</li>
         <li><strong>Suggested stations:</strong> If your location is set (via IP detection or manual entry), nearby stations are shown with distances in miles.</li>
@@ -653,11 +645,11 @@
     <ul>
         <li><strong>Interactive map:</strong> Click/tap on the Leaflet/OpenStreetMap map to place a pin. Drag the marker to fine-tune your position. The map pre-caches a large tile area so you can scroll and zoom in rural areas without losing the map.</li>
         <li><strong>Manual entry:</strong> Type latitude and longitude values directly. Both fields accept negative values (south latitude, west longitude).</li>
-        <li><strong>Detect from IP:</strong> Button that uses ip-api.com to estimate your location from your internet connection.</li>
+        <li><strong>Detect from IP:</strong> Button that estimates your location from your internet connection.</li>
     </ul>
 
-    <h4>Per-SSID Location Memory</h4>
-    <p>Tidesy remembers the location you set for each WiFi network (up to 5 SSIDs). When you move the device to a different WiFi network and re-enter setup, it automatically recalls the location you previously picked for that network instead of reverting to the IP-detected location. If you connect to a new network for the first time, Tidesy uses IP geolocation as the starting point and saves your chosen location when you save the form. Use the <strong>Detect from IP</strong> button if you want to override the saved location with a fresh IP estimate.</p>
+    <h4>Per-Network Location Memory</h4>
+    <p>Tidesy remembers the location you set for each WiFi network. When you move the device to a different WiFi network and re-enter setup, it automatically recalls the location you previously picked for that network. If you connect to a new network for the first time, Tidesy detects your approximate location automatically and saves your chosen location when you save the form. Use the <strong>Detect from IP</strong> button if you want to refresh the detected location.</p>
 
     <h3>Vestaboard Settings</h3>
     <p>If a Vestaboard Flagship is detected on your network, you can configure it in the wizard:</p>
@@ -846,7 +838,7 @@
         <li><strong>Monochrome only:</strong> Black and white rendering &mdash; no color customization available.</li>
         <li><strong>Font:</strong> FreeSans family at various sizes (8pt, 9pt, 12pt, 18pt).</li>
         <li><strong>No animations:</strong> E-paper cannot animate. The live data point and rising/falling indicator are static.</li>
-        <li><strong>6-minute deep sleep cycle:</strong> In Low power mode, the device sleeps between refreshes to conserve battery.</li>
+        <li><strong>6-minute sleep cycle:</strong> In Low power mode, the device sleeps between refreshes to conserve battery.</li>
     </ul>
 </div>
 
@@ -965,7 +957,7 @@
     <h3>Accessing the Dashboard</h3>
     <p>Open a web browser on any device connected to the same WiFi network and navigate to:</p>
     <ul>
-        <li><code>http://tidesy.local</code> (requires mDNS/Bonjour support), or</li>
+        <li><code>http://tidesy.local</code>, or</li>
         <li><code>http://&lt;device-IP&gt;</code> (the IP address shown during setup, e.g., <code>http://192.168.1.42</code>)</li>
     </ul>
 
@@ -1044,15 +1036,8 @@
         <li>Map auto-zooms to fit all markers when the page loads.</li>
     </ul>
 
-    <h3>mDNS</h3>
-    <p>The address <code>tidesy.local</code> uses mDNS (multicast DNS) to resolve to your device&rsquo;s IP address. This works on most modern devices:</p>
-    <ul>
-        <li><strong>macOS / iOS:</strong> Built-in (Bonjour)</li>
-        <li><strong>Windows 10+:</strong> Built-in</li>
-        <li><strong>Android:</strong> Supported on most recent versions</li>
-        <li><strong>Linux:</strong> Requires Avahi (usually pre-installed on desktop distributions)</li>
-    </ul>
-    <p>If <code>tidesy.local</code> doesn&rsquo;t resolve, use the device&rsquo;s IP address directly.</p>
+    <h3>If tidesy.local Doesn&rsquo;t Work</h3>
+    <p>The address <code>tidesy.local</code> works on most modern devices (macOS, iOS, Windows 10+, and most recent Android versions). If it doesn&rsquo;t work on your device, use the device&rsquo;s IP address directly instead (the IP address is shown during setup).</p>
 
     <h3>Mobile Dashboard</h3>
     <p>The web dashboard is fully responsive and optimized for phone screens. The navigation collapses to a hamburger menu, and all features are touch-friendly.</p>
@@ -1191,7 +1176,7 @@
 </div>
 <div class="section manual-section">
     <h3>Automatic Switching</h3>
-    <p>Tidesy automatically switches between day and night brightness based on the device&rsquo;s internal clock. The clock is set via NTP (internet time) and is DST-aware.</p>
+    <p>Tidesy automatically switches between day and night brightness based on the device&rsquo;s internal clock. The clock is set automatically over the internet and adjusts for daylight saving time.</p>
 
     <h3>Settings</h3>
     <table>
@@ -1236,19 +1221,19 @@
 </div>
 <div class="section manual-section">
     <h3>2.4 GHz Only</h3>
-    <p>The ESP32 chip supports <strong>2.4 GHz WiFi only</strong>. 5 GHz networks are not visible to the device. This is a hardware limitation of the ESP32 radio module.</p>
+    <p>Tidesy supports <strong>2.4 GHz WiFi only</strong>. 5 GHz networks are not supported.</p>
 
     <h3>WiFi Memory</h3>
-    <p>Tidesy stores up to <strong>30 known WiFi networks</strong>. WiFi passwords are encrypted using <strong>AES-128</strong> on the device&rsquo;s flash storage.</p>
+    <p>Tidesy stores up to <strong>30 known WiFi networks</strong>. WiFi passwords are encrypted on the device.</p>
 
     <h3>Auto-Reconnect</h3>
     <p>If the primary WiFi network becomes unavailable, Tidesy automatically scans for and connects to the strongest known network. Networks are prioritized by signal strength.</p>
 
-    <h3>Per-SSID Location Memory</h3>
-    <p>When you move Tidesy between WiFi networks (e.g., home and beach house), the device remembers the location you set for each network. Up to <strong>5 SSID-location pairs</strong> are stored. When you connect to a known network and re-enter setup, your previously saved location is automatically loaded instead of the IP-detected location. This means you don&rsquo;t need to re-pick your location on the map every time you switch between familiar networks. Saved SSID locations are cleared on factory reset.</p>
+    <h3>Per-Network Location Memory</h3>
+    <p>When you move Tidesy between WiFi networks (e.g., home and beach house), the device remembers the location you set for each network. When you connect to a known network and re-enter setup, your previously saved location is automatically loaded. This means you don&rsquo;t need to re-pick your location on the map every time you switch between familiar networks. Saved locations are cleared on factory reset.</p>
 
-    <h3>mDNS</h3>
-    <p>The device registers itself as <code>tidesy.local</code> on the network using mDNS (multicast DNS). This allows you to access the web dashboard and settings page without knowing the device&rsquo;s IP address.</p>
+    <h3>tidesy.local</h3>
+    <p>The device registers itself as <code>tidesy.local</code> on the network, allowing you to access the web dashboard and settings page without knowing the device&rsquo;s IP address.</p>
 
     <h3>Required Internet Access</h3>
     <p>Tidesy requires internet access for the following services:</p>
@@ -1274,14 +1259,14 @@
             <td>Current weather (temperature, wind)</td>
         </tr>
         <tr>
-            <td>IP Geolocation</td>
+            <td>IP Location Service</td>
             <td>ip-api.com</td>
             <td>Location detection (optional, setup only)</td>
         </tr>
         <tr>
             <td>Firmware Updates</td>
-            <td>Shopify CDN</td>
-            <td>OTA update manifest and firmware binaries</td>
+            <td>Tidesy update servers</td>
+            <td>Firmware updates</td>
         </tr>
     </table>
 </div>
@@ -1292,8 +1277,8 @@
     <h2>11. Firmware Updates</h2>
 </div>
 <div class="section manual-section">
-    <h3>Automatic OTA Check</h3>
-    <p>Every time Tidesy boots, it checks a CDN manifest file for available firmware updates. This check happens silently in the background.</p>
+    <h3>Automatic Update Check</h3>
+    <p>Every time Tidesy boots, it checks for available firmware updates. This check happens silently in the background.</p>
 
     <h3>Mandatory Updates</h3>
     <p>Some updates are marked as mandatory (critical bug fixes or security patches). These are installed automatically and silently &mdash; the device will download, install, and restart without user interaction.</p>
@@ -1303,7 +1288,7 @@
 
     <h3>Update Process</h3>
     <ol>
-        <li>Firmware binary is downloaded as a stream (not stored entirely in memory).</li>
+        <li>The update is downloaded and installed automatically.</li>
         <li>The device display shows a dedicated update screen with a green progress bar, percentage counter, and &ldquo;Do not turn off&rdquo; warning.</li>
         <li>If updating from the web dashboard, a spinner overlay tracks progress in real time.</li>
         <li>Device automatically restarts after a successful update.</li>
@@ -1345,13 +1330,13 @@
         <tr>
             <td><strong>Low</strong></td>
             <td>Minimal (only during fetch)</td>
-            <td>Deep sleep between refreshes</td>
+            <td>Sleeps between refreshes</td>
             <td>Battery operation, max battery life</td>
         </tr>
     </table>
 
     <h3>Battery Monitoring</h3>
-    <p>When battery hardware is present, TidesyINK reads the battery voltage via an ADC pin. The voltage range is 3.0V (empty) to 4.2V (full). Battery level is displayed on the device.</p>
+    <p>TidesyINK monitors battery level and displays it on screen.</p>
 
     <h3>E-Paper Characteristics</h3>
     <ul>
@@ -1369,9 +1354,9 @@
     <h2>13. LED Status Indicators</h2>
 </div>
 <div class="section manual-section">
-    <p>Only the <span class="badge badge-s">TidesyS (CYD)</span> model has a status LED on the back of the device. All other models (Crow-based boards and TidesyINK) do not have an LED.</p>
+    <p>Only the <span class="badge badge-s">TidesyS</span> model has a status LED on the back of the device. Other models do not have an LED.</p>
 
-    <h3>Boot Sequence (CYD Only)</h3>
+    <h3>Boot Sequence (TidesyS Only)</h3>
     <p>During startup, the LED indicates progress through the boot sequence. Color changes correspond to WiFi connection attempts and initial data fetches. Once fully booted and connected, the LED settles to a steady state.</p>
 </div>
 
@@ -1381,7 +1366,7 @@
     <h2>14. Touch Controls</h2>
 </div>
 <div class="section manual-section">
-    <h3>TidesyL / TidesyM (GT911 Capacitive Touch)</h3>
+    <h3>TidesyL / TidesyM (Touchscreen)</h3>
     <p>These models have capacitive touchscreens with two interactive modes:</p>
     <table>
         <tr>
@@ -1480,7 +1465,7 @@
         <tr><th>Problem</th><th>Solution</th></tr>
         <tr>
             <td>Can&rsquo;t reach tidesy.local</td>
-            <td>Try the device&rsquo;s IP address directly. Check that your device supports mDNS/Bonjour. Verify the "Web Server" toggle is enabled.</td>
+            <td>Try the device&rsquo;s IP address directly (shown during setup). Verify the "Web Server" toggle is enabled.</td>
         </tr>
         <tr>
             <td>Stale data</td>
@@ -1545,7 +1530,7 @@
     <h3>What&rsquo;s Preserved</h3>
     <ul>
         <li>Firmware (the device keeps its current firmware version).</li>
-        <li>LittleFS files: station directory (<code>stations.dat</code>), logo image, help page.</li>
+        <li>Internal files (station directory, logo, help page).</li>
     </ul>
 
     <h3>After Reset</h3>
@@ -1574,11 +1559,11 @@
         <li><strong>NOAA</strong> (tidesandcurrents.noaa.gov) &mdash; Tide predictions</li>
         <li><strong>NWS</strong> (api.weather.gov) &mdash; Weather alerts</li>
         <li><strong>MET Norway</strong> (api.met.no) &mdash; Current weather</li>
-        <li><strong>ip-api.com</strong> &mdash; IP-based geolocation (used once during setup, optional)</li>
+        <li><strong>IP location service</strong> (ip-api.com) &mdash; Location detection (used once during setup, optional)</li>
     </ul>
 
     <h3>Local Storage</h3>
-    <p>All settings are stored on the device&rsquo;s flash memory using the ESP32 Preferences library. WiFi passwords are encrypted using <strong>AES-128</strong>.</p>
+    <p>All settings are stored securely on the device. WiFi passwords are encrypted.</p>
 
     <h3>No Tracking</h3>
     <p>Tidesy does not include any analytics, telemetry, or third-party tracking. The device does not phone home, report usage statistics, or share data with anyone.</p>
@@ -1658,24 +1643,8 @@
             <dd>Firmware update delivered wirelessly over WiFi, without physical connection.</dd>
         </div>
         <div class="glossary-term">
-            <dt>mDNS (Multicast DNS)</dt>
-            <dd>Protocol that allows devices to be found by name (e.g., <code>tidesy.local</code>) on a local network.</dd>
-        </div>
-        <div class="glossary-term">
-            <dt>LittleFS</dt>
-            <dd>A lightweight filesystem for embedded devices, used to store files on the ESP32&rsquo;s flash memory.</dd>
-        </div>
-        <div class="glossary-term">
-            <dt>ESP32</dt>
-            <dd>A low-cost microcontroller with WiFi and Bluetooth, manufactured by Espressif. The brain of all Tidesy models.</dd>
-        </div>
-        <div class="glossary-term">
             <dt>E-Paper</dt>
             <dd>A display technology that reflects ambient light (like paper), requires no backlight, and retains the image without power.</dd>
-        </div>
-        <div class="glossary-term">
-            <dt>RGB565</dt>
-            <dd>A 16-bit color format (5 bits red, 6 bits green, 5 bits blue) used by embedded displays. Tidesy converts web hex colors to RGB565 internally.</dd>
         </div>
         <div class="glossary-term">
             <dt>NWS (National Weather Service)</dt>
@@ -1770,6 +1739,7 @@
 <div class="manual-footer">
     <strong>Tidesy Smart Devices LLC</strong>
     Tide data: NOAA &nbsp;|&nbsp; Weather: MET Norway &nbsp;|&nbsp; Alerts: NWS
+    <br>Firmware 2.9.9 &nbsp;|&nbsp; Published March 11, 2026
 </div>
 
 </div><!-- /.container -->
