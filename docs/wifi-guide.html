@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tidesy WiFi Setup Guide</title>
+<style>
+  :root {
+    --accent: #0077cc;
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --border: #d0d7e0;
+    --fg: #1a2332;
+    --fg2: #6b7a8d;
+    --radius: 10px;
+    --ok: #155724;
+    --ok-bg: #d4edda;
+    --warn: #856404;
+    --warn-bg: #fff3cd;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: var(--bg); color: var(--fg);
+    margin: 0; padding: 24px; font-size: 16px; line-height: 1.65;
+    max-width: 720px; margin: 0 auto;
+  }
+  h1 { color: var(--accent); font-size: 1.6em; margin-bottom: 0.3em; }
+  h2 { color: var(--accent); font-size: 1.2em; margin-top: 1.8em; border-bottom: 2px solid var(--border); padding-bottom: 4px; }
+  h3 { font-size: 1.05em; margin-top: 1.4em; }
+  p, li { margin-bottom: 0.6em; }
+  ul, ol { padding-left: 1.4em; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px 20px; margin: 12px 0;
+  }
+  .tip {
+    background: var(--ok-bg); border-left: 4px solid var(--ok);
+    padding: 10px 14px; border-radius: 6px; margin: 12px 0;
+    font-size: 0.95em;
+  }
+  .warn {
+    background: var(--warn-bg); border-left: 4px solid var(--warn);
+    padding: 10px 14px; border-radius: 6px; margin: 12px 0;
+    font-size: 0.95em;
+  }
+  .steps { counter-reset: step; list-style: none; padding-left: 0; }
+  .steps li { counter-increment: step; padding-left: 36px; position: relative; margin-bottom: 10px; }
+  .steps li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: 0;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    font-weight: bold; font-size: 0.85em;
+    display: flex; align-items: center; justify-content: center;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-size: 0.95em; }
+  th { background: var(--bg); font-weight: 600; }
+  .brand-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .brand-tag {
+    background: var(--accent); color: #fff; padding: 4px 12px;
+    border-radius: 20px; font-size: 0.85em; font-weight: 600;
+  }
+  .footer { margin-top: 2em; padding-top: 1em; border-top: 1px solid var(--border); font-size: 0.85em; color: var(--fg2); }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .card { border: 1px solid #ccc; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Tidesy WiFi Setup Guide</h1>
+<p>Tidesy connects to your home WiFi to download tide data from NOAA. If Tidesy cannot find your network or fails to connect, this guide will help you get it working.</p>
+
+<h2>Why Can&rsquo;t Tidesy See My Network?</h2>
+
+<p>The most common reason is that your WiFi network is broadcasting on <strong>5 GHz only</strong>. Tidesy uses a <strong>2.4 GHz</strong> WiFi radio, which means it can only connect to 2.4 GHz networks.</p>
+
+<div class="card">
+  <h3>What Are 2.4 GHz and 5 GHz?</h3>
+  <p>Your WiFi router sends signals on radio frequencies, just like a radio station. Most modern routers use two frequencies:</p>
+  <table>
+    <tr><th></th><th>2.4 GHz</th><th>5 GHz</th></tr>
+    <tr><td><strong>Range</strong></td><td>Longer range, better through walls</td><td>Shorter range</td></tr>
+    <tr><td><strong>Speed</strong></td><td>Slower (plenty fast for Tidesy)</td><td>Faster</td></tr>
+    <tr><td><strong>Devices</strong></td><td>Smart home devices, Tidesy, older laptops</td><td>Phones, laptops, streaming</td></tr>
+  </table>
+  <p>Think of it like AM and FM radio &mdash; they&rsquo;re both radio, but they use different frequencies. Tidesy listens on the 2.4 GHz &ldquo;station,&rdquo; so your router needs to be broadcasting on that frequency.</p>
+</div>
+
+<div class="warn"><strong>Note:</strong> Many routers use the same network name for both 2.4 GHz and 5 GHz. Your phone might connect on 5 GHz automatically, but that doesn&rsquo;t mean 2.4 GHz is available. You may need to check your router settings.</div>
+
+<h2>Quick Fixes to Try First</h2>
+
+<ol class="steps">
+  <li><strong>Move Tidesy closer to your router</strong> during setup. You can move it to its permanent spot after it&rsquo;s connected.</li>
+  <li><strong>Restart your router.</strong> Unplug it for 30 seconds, then plug it back in. Wait 2 minutes for it to fully start.</li>
+  <li><strong>Restart Tidesy.</strong> Unplug the USB-C cable and plug it back in.</li>
+  <li><strong>Check your WiFi password.</strong> Passwords are case-sensitive. Make sure you&rsquo;re typing it exactly right.</li>
+</ol>
+
+<h2>Can&rsquo;t See the TidesySetup Network?</h2>
+
+<p>During first-time setup, Tidesy creates a temporary WiFi network called <strong>TidesySetup</strong>. If you don&rsquo;t see it in your phone&rsquo;s or computer&rsquo;s WiFi list, the issue is usually your device hiding or ignoring it &mdash; not Tidesy failing to broadcast. Here&rsquo;s how to fix it on each platform.</p>
+
+<div class="tip"><strong>Before troubleshooting:</strong> Wait 15&ndash;20 seconds after Tidesy finishes booting for the hotspot to appear. Stay within 30 feet (same room is best). If you connected to TidesySetup once and it disappeared, setup may have completed successfully &mdash; check if Tidesy is already showing tides.</div>
+
+<div class="card">
+  <h3>macOS (Mac)</h3>
+  <p>Newer versions of macOS (especially Sequoia and later) can hide WiFi networks that have no internet connection. Since TidesySetup only connects your Mac directly to the Tidesy device and does not provide internet, macOS may suppress it from the normal WiFi list.</p>
+  <ol>
+    <li><strong>Check &ldquo;Other Networks.&rdquo;</strong> Click the WiFi icon in the menu bar. Scroll down past your known networks &mdash; TidesySetup may appear under an <strong>&ldquo;Other Networks&rdquo;</strong> section at the bottom.</li>
+    <li><strong>Option-click the WiFi icon.</strong> Hold the <strong>Option</strong> key and click the WiFi icon in the menu bar. This shows an expanded list with all detected networks, including hidden and low-priority ones.</li>
+    <li><strong>Join manually.</strong> Click the WiFi icon &rarr; <strong>&ldquo;Other...&rdquo;</strong> or <strong>&ldquo;Other Network...&rdquo;</strong> at the bottom. Type <strong>TidesySetup</strong> as the network name and <strong>tide1234</strong> as the password. Set Security to <strong>WPA2</strong>.</li>
+    <li><strong>Use System Settings.</strong> Open <strong>System Settings &rarr; WiFi</strong>. The full list of nearby networks appears here, including ones the menu bar may hide. Look for TidesySetup and click to join.</li>
+  </ol>
+  <div class="warn"><strong>macOS may warn:</strong> &ldquo;This network has no internet connection.&rdquo; This is expected. Click <strong>&ldquo;Stay Connected&rdquo;</strong> or <strong>&ldquo;Use Anyway.&rdquo;</strong></div>
+</div>
+
+<div class="card">
+  <h3>iPhone &amp; iPad (iOS / iPadOS)</h3>
+  <p>iOS may hide or auto-disconnect from networks that have no internet access.</p>
+  <ol>
+    <li>Open <strong>Settings &rarr; WiFi</strong>.</li>
+    <li>Look under <strong>&ldquo;Other Networks&rdquo;</strong> below your saved networks. TidesySetup should appear there.</li>
+    <li>Tap <strong>TidesySetup</strong> and enter the password <strong>tide1234</strong>.</li>
+    <li>If iOS shows a <strong>&ldquo;No Internet Connection&rdquo;</strong> prompt, tap <strong>&ldquo;Use Without Internet&rdquo;</strong> or <strong>&ldquo;Stay Connected.&rdquo;</strong> Do not let iOS switch you back to your home network.</li>
+  </ol>
+  <div class="warn"><strong>If TidesySetup still doesn&rsquo;t appear:</strong> Toggle WiFi off and back on in Settings, then wait 10 seconds for the scan to complete. Avoid using Control Center to toggle &mdash; it only disconnects temporarily without rescanning.</div>
+</div>
+
+<div class="card">
+  <h3>Windows 10 &amp; 11</h3>
+  <p>Windows usually shows all nearby networks without filtering. If TidesySetup doesn&rsquo;t appear:</p>
+  <ol>
+    <li>Click the <strong>WiFi icon</strong> in the taskbar (bottom-right).</li>
+    <li>Click <strong>&ldquo;Show available networks&rdquo;</strong> or the arrow next to the WiFi toggle.</li>
+    <li>Wait a few seconds &mdash; the list refreshes automatically. TidesySetup may take a moment to appear.</li>
+    <li>If your PC keeps reconnecting to your home WiFi before you can finish setup, right-click your home network and choose <strong>&ldquo;Forget&rdquo;</strong> temporarily. You can rejoin it after Tidesy setup is complete.</li>
+  </ol>
+  <div class="tip"><strong>Tip:</strong> If you see TidesySetup but Windows says &ldquo;No Internet, secured&rdquo; after connecting, that is normal. Stay connected and open your browser to <strong>192.168.4.1</strong>.</div>
+</div>
+
+<div class="card">
+  <h3>Android</h3>
+  <p>Some Android phones have a feature called <strong>&ldquo;Smart Network Switch,&rdquo;</strong> <strong>&ldquo;Switch to mobile data,&rdquo;</strong> or <strong>&ldquo;Auto-switch to best network&rdquo;</strong> that automatically disconnects from WiFi networks that have no internet. This can disconnect you from TidesySetup before you finish the setup wizard.</p>
+  <ol>
+    <li>Open <strong>Settings &rarr; WiFi</strong> (or <strong>Settings &rarr; Connections &rarr; WiFi</strong> on Samsung).</li>
+    <li>Tap the three-dot menu or <strong>&ldquo;Advanced&rdquo;</strong> and look for:
+      <ul>
+        <li><strong>&ldquo;Switch to mobile data automatically&rdquo;</strong> &mdash; turn it <strong>off</strong></li>
+        <li><strong>&ldquo;Smart Network Switch&rdquo;</strong> &mdash; turn it <strong>off</strong></li>
+        <li><strong>&ldquo;Wi-Fi assistant&rdquo;</strong> or <strong>&ldquo;Adaptive Wi-Fi&rdquo;</strong> &mdash; turn it <strong>off</strong></li>
+      </ul>
+    </li>
+    <li>Connect to <strong>TidesySetup</strong> with password <strong>tide1234</strong>.</li>
+    <li>If a notification appears saying <strong>&ldquo;Internet may not be available&rdquo;</strong>, tap the notification and select <strong>&ldquo;Stay connected&rdquo;</strong> or <strong>&ldquo;Yes&rdquo;</strong>.</li>
+  </ol>
+  <div class="warn"><strong>After Tidesy setup is complete</strong>, you can turn these features back on. They only interfere during the initial setup when your phone is connected to the TidesySetup network (which intentionally has no internet).</div>
+</div>
+
+<div class="card">
+  <h3>Chromebook</h3>
+  <p>Chromebooks behave similarly to Android and may auto-switch away from networks without internet.</p>
+  <ol>
+    <li>Click the <strong>WiFi icon</strong> in the bottom-right shelf.</li>
+    <li>Click the WiFi section to expand the list of available networks.</li>
+    <li>Select <strong>TidesySetup</strong> and enter the password <strong>tide1234</strong>.</li>
+    <li>If Chrome OS warns about no internet, choose to <strong>stay connected</strong>.</li>
+    <li>Open Chrome and go to <strong>192.168.4.1</strong>.</li>
+  </ol>
+</div>
+
+<h2>How to Enable 2.4 GHz on Your Router</h2>
+
+<p>If the quick fixes didn&rsquo;t work, you likely need to make sure your router&rsquo;s 2.4 GHz band is turned on. Here&rsquo;s how:</p>
+
+<div class="card">
+  <h3>Step 1: Open Your Router&rsquo;s Settings</h3>
+  <p>On a phone or computer connected to your WiFi:</p>
+  <ol>
+    <li>Open a web browser (Chrome, Safari, Edge, etc.)</li>
+    <li>Type one of these addresses in the address bar and press Enter:
+      <ul>
+        <li><strong>192.168.1.1</strong> (most common)</li>
+        <li><strong>192.168.0.1</strong></li>
+        <li><strong>10.0.0.1</strong> (Xfinity/Comcast)</li>
+      </ul>
+    </li>
+    <li>Log in with your router&rsquo;s admin username and password. This is often printed on a sticker on the bottom or back of the router. It is <em>not</em> the same as your WiFi password.</li>
+  </ol>
+
+  <div class="tip"><strong>Tip:</strong> If you&rsquo;ve never changed the admin login, try <strong>admin</strong> / <strong>admin</strong> or <strong>admin</strong> / <strong>password</strong>. Check your router&rsquo;s label for the default credentials.</div>
+</div>
+
+<div class="card">
+  <h3>Step 2: Find the WiFi / Wireless Settings</h3>
+  <p>Look for a section called one of these:</p>
+  <ul>
+    <li><strong>Wireless</strong> or <strong>WiFi</strong></li>
+    <li><strong>Wireless Settings</strong></li>
+    <li><strong>WiFi Networks</strong></li>
+    <li><strong>Radio</strong> or <strong>Band Settings</strong></li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Step 3: Enable the 2.4 GHz Band</h3>
+  <p>Make sure the 2.4 GHz radio is <strong>turned on</strong>. Some routers show a toggle switch or checkbox for each band. Enable it if it&rsquo;s off.</p>
+  <p>If your router combines both bands under one network name (&ldquo;band steering&rdquo; or &ldquo;smart connect&rdquo;), that usually works fine. But if Tidesy still can&rsquo;t see it, try this:</p>
+  <ol>
+    <li>Turn off &ldquo;Smart Connect,&rdquo; &ldquo;Band Steering,&rdquo; or &ldquo;Auto Band&rdquo;</li>
+    <li>This will create two separate networks, for example:
+      <ul>
+        <li><strong>MyHome</strong> (2.4 GHz)</li>
+        <li><strong>MyHome-5G</strong> (5 GHz)</li>
+      </ul>
+    </li>
+    <li>Connect Tidesy to the 2.4 GHz network name</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h3>Step 4: Save and Restart</h3>
+  <p>Click <strong>Save</strong> or <strong>Apply</strong> in your router settings. The router may restart, which takes about a minute. After it&rsquo;s back, restart Tidesy and try the setup again.</p>
+</div>
+
+<h2>Router-Specific Instructions</h2>
+
+<p>Here are quick directions for the most common routers and internet providers:</p>
+
+<div class="brand-row">
+  <span class="brand-tag">Xfinity</span>
+  <span class="brand-tag">AT&amp;T</span>
+  <span class="brand-tag">Verizon</span>
+  <span class="brand-tag">Spectrum</span>
+  <span class="brand-tag">Google WiFi</span>
+  <span class="brand-tag">Eero</span>
+  <span class="brand-tag">Netgear</span>
+  <span class="brand-tag">TP-Link</span>
+  <span class="brand-tag">Linksys</span>
+  <span class="brand-tag">ASUS</span>
+</div>
+
+<table>
+  <tr><th>Router / Provider</th><th>How to Enable 2.4 GHz</th></tr>
+  <tr>
+    <td><strong>Xfinity xFi</strong></td>
+    <td>Open the Xfinity app &rarr; WiFi &rarr; View WiFi Equipment &rarr; Advanced Settings &rarr; 2.4 and 5 GHz. Make sure 2.4 GHz is enabled. If &ldquo;Band Steering&rdquo; is on and Tidesy can&rsquo;t connect, turn it off to create separate network names.</td>
+  </tr>
+  <tr>
+    <td><strong>AT&amp;T / U-verse</strong></td>
+    <td>Go to 192.168.1.254 &rarr; Home Network &rarr; WiFi &rarr; make sure 2.4 GHz radio is enabled.</td>
+  </tr>
+  <tr>
+    <td><strong>Verizon Fios</strong></td>
+    <td>Go to 192.168.1.1 or use the My Fios app &rarr; Internet &rarr; WiFi Settings &rarr; make sure 2.4 GHz is enabled. Disable &ldquo;Self-Organizing Network&rdquo; (SON) if Tidesy can&rsquo;t see the network.</td>
+  </tr>
+  <tr>
+    <td><strong>Spectrum</strong></td>
+    <td>Use the My Spectrum app &rarr; Services &rarr; WiFi &rarr; ensure the 2.4 GHz band is active.</td>
+  </tr>
+  <tr>
+    <td><strong>Google WiFi / Nest WiFi</strong></td>
+    <td>Google WiFi combines bands automatically. It should work with Tidesy out of the box. If not, move Tidesy closer to the router during setup. There is no option to separate the bands.</td>
+  </tr>
+  <tr>
+    <td><strong>Eero</strong></td>
+    <td>Eero combines bands automatically and does not allow separating them. It should work with Tidesy. If not, move Tidesy closer to an Eero unit during setup.</td>
+  </tr>
+  <tr>
+    <td><strong>Netgear Nighthawk</strong></td>
+    <td>Go to routerlogin.net &rarr; Wireless Setup &rarr; make sure the 2.4 GHz checkbox is enabled. If using &ldquo;Smart Connect,&rdquo; try turning it off.</td>
+  </tr>
+  <tr>
+    <td><strong>TP-Link</strong></td>
+    <td>Go to 192.168.0.1 or tplinkwifi.net &rarr; Wireless &rarr; Wireless Settings &rarr; make sure 2.4 GHz is enabled. If using &ldquo;Smart Connect,&rdquo; try disabling it.</td>
+  </tr>
+  <tr>
+    <td><strong>Linksys</strong></td>
+    <td>Go to 192.168.1.1 &rarr; WiFi Settings &rarr; make sure the 2.4 GHz band is enabled. Turn off &ldquo;Band Steering&rdquo; if needed.</td>
+  </tr>
+  <tr>
+    <td><strong>ASUS</strong></td>
+    <td>Go to router.asus.com &rarr; Wireless &rarr; General &rarr; select the 2.4 GHz tab &rarr; make sure &ldquo;Enable Radio&rdquo; is set to Yes. Disable &ldquo;Smart Connect&rdquo; if Tidesy can&rsquo;t see the network.</td>
+  </tr>
+</table>
+
+<h2>Still Having Trouble?</h2>
+
+<div class="card">
+  <h3>Checklist</h3>
+  <ul>
+    <li>Is your router&rsquo;s 2.4 GHz radio turned on?</li>
+    <li>Is Tidesy within range of your router (same room is best for setup)?</li>
+    <li>Are you entering the correct WiFi password (case-sensitive)?</li>
+    <li>Have you restarted both the router and Tidesy?</li>
+    <li>Is &ldquo;Band Steering&rdquo; or &ldquo;Smart Connect&rdquo; causing issues? Try disabling it.</li>
+    <li>Does your network name contain unusual characters? Try a simpler name temporarily.</li>
+    <li>Is your router using WPA2 or WPA3 security? Tidesy supports WPA2. If your router is set to WPA3-only, switch it to WPA2/WPA3 mixed mode.</li>
+  </ul>
+</div>
+
+<p>If none of the above works, please reply to this email with:</p>
+<ol>
+  <li>Your router brand and model (printed on the router label)</li>
+  <li>Your internet provider (Xfinity, AT&amp;T, Verizon, etc.)</li>
+  <li>What you see on the Tidesy screen</li>
+</ol>
+<p>We&rsquo;ll help you get connected.</p>
+
+<div class="footer">
+  <p>Tidesy WiFi Setup Guide &bull; <a href="https://tidesy.com">tidesy.com</a></p>
+</div>
+
+</body>
+</html>
