@@ -18,6 +18,7 @@
         <a href="#sec-techref">Technical Reference</a>
         <a href="#sec-screenshots">Screenshots</a>
         <a href="#sec-dst">DST Handling</a>
+        <a href="#sec-sdsetup">SD Card WiFi Setup</a>
         <a href="manual.html">Back to Manual</a>
         <a href="#" onclick="toggleSearch(); return false;">Search</a>
     </div>
@@ -415,6 +416,118 @@ on the same network.</td></tr>
         <tr><td><code>dstGapEnd</code></td><td>int</td><td>First slot after the gap</td></tr>
         <tr><td><code>dstStepSlot</code></td><td>int</td><td>Slot where the fall-back step occurs (-1 = no step)</td></tr>
     </table>
+</div>
+
+
+<!-- ==================== 5. SD CARD WIFI SETUP ==================== -->
+<div class="section-header" id="sec-sdsetup">
+    <h2>5. SD Card WiFi Setup</h2>
+</div>
+<div class="section manual-section">
+    <h3>Overview</h3>
+    <p>If the normal WiFi setup screen (AP mode) is not working for you, Tidesy supports a fallback method: place a simple text file on a micro SD card with your WiFi credentials. On first boot, the device reads the file, saves the credentials, and connects to your network automatically.</p>
+
+    <div class="tip-box">
+        <strong>Tip:</strong> This method is useful when the AP setup screen fails to load, when configuring multiple devices with the same network, or when you prefer not to use the on-screen setup.
+    </div>
+
+    <h3>Step 1: Create the Setup File</h3>
+    <p>Using any text editor (Notepad, TextEdit, etc.), create a file named exactly:</p>
+    <pre><code>tidesy_setup.txt</code></pre>
+    <p>Type your WiFi network name and password in this exact format:</p>
+    <pre><code>SSID=YourNetworkName
+Password=YourPassword</code></pre>
+
+    <div class="warning-banner">
+        <div>
+            <strong>Important:</strong> The file must be named <code>tidesy_setup.txt</code> (all lowercase). The <code>SSID=</code> and <code>Password=</code> keys are case-sensitive. Do not add quotes around the values. Make sure there are no extra spaces before or after the <code>=</code> sign.
+        </div>
+    </div>
+
+    <h4>Example</h4>
+    <p>For a network called &ldquo;MyHomeWiFi&rdquo; with password &ldquo;abc123&rdquo;:</p>
+    <pre><code>SSID=MyHomeWiFi
+Password=abc123</code></pre>
+
+    <h3>Step 2: Copy to SD Card</h3>
+    <ol>
+        <li>Insert a micro SD card into your computer (using an adapter if needed).</li>
+        <li>Copy <code>tidesy_setup.txt</code> to the <strong>root</strong> of the SD card &mdash; not inside any folder.</li>
+        <li>Safely eject the SD card from your computer.</li>
+    </ol>
+
+    <h3>Step 3: Insert and Boot</h3>
+    <ol>
+        <li>Insert the SD card into the Tidesy device&rsquo;s micro SD slot.</li>
+        <li>If the device has been used before, perform a <strong>Factory Reset</strong> from the admin panel (<code>http://tidesy.local/admin</code>) so it returns to first-boot state.</li>
+        <li>Power on (or restart) the device.</li>
+    </ol>
+    <p>During boot, the device will:</p>
+    <ul class="checklist">
+        <li>Detect the SD card and read <code>tidesy_setup.txt</code></li>
+        <li>Save your WiFi credentials to the device</li>
+        <li>Display &ldquo;SD setup completed&rdquo; on screen</li>
+        <li>Restart and connect to your WiFi network</li>
+        <li>Open the Edit Settings panel so you can configure your stations</li>
+    </ul>
+
+    <h3>Step 4: Configure Your Stations</h3>
+    <p>After the device connects to WiFi, the <strong>Edit Settings</strong> panel opens automatically on the dashboard. Use it to select your tide stations and adjust display preferences. You can also access settings later from the web dashboard at <code>http://tidesy.local</code>.</p>
+
+    <h3>After Setup</h3>
+    <p>Once the device is configured, the SD card file is no longer needed. The device only reads <code>tidesy_setup.txt</code> when no WiFi credentials are stored (first boot or after a factory reset). You can remove the SD card or leave it inserted &mdash; it will not be read again until the next factory reset.</p>
+
+    <div class="note-box">
+        <strong>Note:</strong> If the SD card is not inserted or the file is missing, the device falls back to the normal AP setup screen. This SD method is an alternative, not a replacement.
+    </div>
+
+    <h3>Troubleshooting</h3>
+    <table>
+        <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+        <tr>
+            <td>Device shows AP setup screen instead of &ldquo;SD setup completed&rdquo;</td>
+            <td>File not found on SD card</td>
+            <td>Verify the file is named <code>tidesy_setup.txt</code> and is in the root directory (not in a subfolder)</td>
+        </tr>
+        <tr>
+            <td>Device shows AP setup screen despite file being present</td>
+            <td>SSID or Password line is missing or malformed</td>
+            <td>Check that both <code>SSID=</code> and <code>Password=</code> lines exist with values after the <code>=</code></td>
+        </tr>
+        <tr>
+            <td>&ldquo;SD setup completed&rdquo; appears but device fails to connect</td>
+            <td>Incorrect SSID or password in the file</td>
+            <td>Double-check the network name and password; they are case-sensitive</td>
+        </tr>
+        <tr>
+            <td>Device boots normally and ignores the SD file</td>
+            <td>WiFi credentials already stored on device</td>
+            <td>Perform a Factory Reset from the admin panel first, then reboot with the SD card inserted</td>
+        </tr>
+    </table>
+
+    <h3>Quick Reference</h3>
+    <div class="quick-ref-card">
+        <h3>SD Card WiFi Setup</h3>
+        <div class="quick-ref-grid">
+            <div class="quick-ref-item">
+                <strong>File Name</strong>
+                <span><code>tidesy_setup.txt</code></span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>Location</strong>
+                <span>Root of SD card</span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>Format</strong>
+                <span><code>SSID=</code> and <code>Password=</code></span>
+            </div>
+            <div class="quick-ref-item">
+                <strong>When It Runs</strong>
+                <span>First boot only (no saved WiFi)</span>
+            </div>
+        </div>
+    </div>
 </div>
 
 

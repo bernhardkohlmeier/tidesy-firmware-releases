@@ -136,29 +136,23 @@
 
     <div class="phone-gallery">
         <figure>
-            <div class="phone-frame"><img src="images/setup-1.png" alt="Tidesy Setup wizard showing WiFi configuration"></div>
-            <figcaption>Connect to TidesySetup and open the setup wizard</figcaption>
+            <div class="phone-frame"><img src="images/setup-wifi-only.png" alt="WiFi-only setup wizard on phone"></div>
+            <figcaption>The setup wizard at 192.168.4.1 &mdash; WiFi only</figcaption>
         </figure>
     </div>
 
     <div class="tip-box">
-        <strong>Tip:</strong> If TidesySetup does not appear, power cycle the device (unplug and re-plug USB-C). Make sure your phone/computer is searching for 2.4 GHz networks &mdash; 5 GHz will not show the hotspot.
+        <strong>Tip:</strong> If TidesySetup does not appear, turn off WiFi on your phone, wait a few seconds, and turn it back on. If you still don&rsquo;t see it, unplug Tidesy, wait 15 seconds, and plug it back in. Make sure your phone/computer is searching for 2.4 GHz networks &mdash; 5 GHz will not show the hotspot.
     </div>
 </div>
 
 <!-- STEP 3 -->
 <div class="section-header">
-    <h2>Step 3: Setup Wizard</h2>
-    <p>~5 minutes</p>
+    <h2>Step 3: Configure WiFi</h2>
+    <p>~2 minutes</p>
 </div>
 <div class="section" id="step3">
-    <p>The setup wizard walks you through three steps:</p>
-
-    <div class="steps">
-        <div class="step done" data-n="1">WiFi</div>
-        <div class="step active" data-n="2">Stations</div>
-        <div class="step" data-n="3">Settings</div>
-    </div>
+    <p>The setup wizard focuses on getting your Tidesy connected to WiFi:</p>
 
     <h3>WiFi Configuration</h3>
     <ul>
@@ -167,35 +161,21 @@
         <li>Tap <strong>Verify</strong> &mdash; Tidesy will test the connection and show your device&rsquo;s IP address on success.</li>
     </ul>
 
-    <h3>Station Selection</h3>
+    <p>Tap <strong>Save Configuration</strong> when done. The device will restart and connect to your WiFi with sensible defaults (both views, alerts on, three Pacific Northwest demo stations).</p>
+
+    <div class="note-box">
+        <strong>Be patient during setup:</strong> When you first connect your phone to the TidesySetup hotspot, the setup page may take a moment to load. Your phone is running through WiFi handshake tasks in the background when connecting to a new network for the first time. Just wait &mdash; the page will appear.
+    </div>
+
+    <h3>After First Boot</h3>
     <ul>
-        <li>The station directory downloads automatically on first use (~60 seconds, one-time).</li>
-        <li>Search for your station by name or NOAA station ID.</li>
-        <li>Select up to 3 tide stations.</li>
+        <li>Once Tidesy connects to your WiFi, it auto-detects your timezone from your IP address.</li>
+        <li>The <strong>Edit Settings</strong> page opens automatically in your browser, where you can choose your tide stations, adjust display preferences, and customize all settings.</li>
+        <li>If the device briefly shows &ldquo;No internet&rdquo; while connecting, wait a few seconds &mdash; it will connect and proceed.</li>
     </ul>
 
-    <h3>Display &amp; Alert Settings</h3>
-    <ul>
-        <li>Choose display format: <strong>Detail</strong> (graph), <strong>Large</strong> (big numbers), or <strong>Both</strong> (auto-cycle).</li>
-        <li>Set brightness, night mode hours, and alert preferences.</li>
-        <li>Optionally adjust tide level warnings and preferred range.</li>
-    </ul>
-
-    <p>Tap <strong>Save Configuration</strong> when done. The device will restart and connect to your WiFi.</p>
-
-    <div class="phone-gallery">
-        <figure>
-            <div class="phone-frame"><img src="images/setup-2.png" alt="WiFi verified and NOAA station download in progress"></div>
-            <figcaption>WiFi verified, downloading NOAA stations</figcaption>
-        </figure>
-        <figure>
-            <div class="phone-frame"><img src="images/setup-3.png" alt="Station selection with nearby suggestions"></div>
-            <figcaption>Nearby station suggestions with distances</figcaption>
-        </figure>
-        <figure>
-            <div class="phone-frame"><img src="images/setup-9.png" alt="Vestaboard setup and Save Configuration button"></div>
-            <figcaption>Vestaboard setup and Save button</figcaption>
-        </figure>
+    <div class="tip-box">
+        <strong>Tip:</strong> You don&rsquo;t need to configure everything during initial setup. The defaults work out of the box &mdash; just get WiFi connected and then customize at your leisure through the Edit Settings page at <code>tidesy.local</code>.
     </div>
 </div>
 
@@ -224,15 +204,11 @@
         </tr>
         <tr>
             <td>Can't find TidesySetup network</td>
-            <td>Power cycle the device. Make sure your phone/computer is on 2.4 GHz, not 5 GHz only.</td>
+            <td>Turn off WiFi on your phone, wait a few seconds, and turn it back on. If it still doesn&rsquo;t appear, unplug Tidesy, wait 15 seconds, and plug it back in. Make sure your phone/computer is on 2.4 GHz, not 5 GHz only.</td>
         </tr>
         <tr>
             <td>Setup page won't load</td>
-            <td>Try navigating directly to <code>192.168.4.1</code> in your browser.</td>
-        </tr>
-        <tr>
-            <td>Station download is slow</td>
-            <td>The first download is ~60 seconds. If it stalls, cancel and retry with the Refresh button.</td>
+            <td>Be patient &mdash; your phone runs through WiFi handshake tasks when connecting to a new network for the first time. Wait up to 30 seconds. If it still doesn&rsquo;t load, try navigating directly to <code>192.168.4.1</code> in your browser.</td>
         </tr>
         <tr>
             <td>WiFi verification fails</td>
@@ -545,28 +521,31 @@
         <li><strong>Setup URL:</strong> <code>http://192.168.4.1</code></li>
     </ul>
 
-    <h3>WiFi Configuration</h3>
+    <h3>WiFi Configuration (Setup Hotspot)</h3>
     <p>Tidesy supports <strong>2.4 GHz WiFi only</strong>. 5 GHz networks are not supported. Most routers broadcast both bands; make sure you select the 2.4 GHz network.</p>
     <div class="note-box">
-        <strong>WiFi First:</strong> All other settings (stations, display, location, alerts) are locked until WiFi is verified. This applies both on first setup and when re-entering the wizard after a network change. Verify your WiFi connection to unlock the rest of the form.
+        <strong>WiFi-only setup:</strong> The setup hotspot wizard focuses solely on WiFi configuration. Once WiFi is saved, the device boots with sensible defaults and the <strong>Edit Settings</strong> page opens automatically on the web dashboard, where you can configure stations, display, location, alerts, and all other settings.
     </div>
     <ul>
         <li><strong>Network dropdown:</strong> Lists all detected 2.4 GHz networks, sorted by signal strength.</li>
         <li><strong>Password field:</strong> Enter your WiFi password.</li>
-        <li><strong>Verify button:</strong> Tests the WiFi connection and displays the device&rsquo;s IP address on success. Once verified, all other settings sections become editable.</li>
-        <li><strong>Web Server toggle:</strong> Enable or disable the local web dashboard (<code>tidesy.local</code>). When disabled, the device runs standalone without web access.</li>
+        <li><strong>Verify button:</strong> Tests the WiFi connection and displays the device&rsquo;s IP address on success.</li>
     </ul>
-
-    <div class="phone-gallery">
-        <figure>
-            <div class="phone-frame"><img src="images/setup-1.png" alt="Setup wizard WiFi configuration step"></div>
-            <figcaption>WiFi network selection and password entry</figcaption>
-        </figure>
-        <figure>
-            <div class="phone-frame"><img src="images/setup-2.png" alt="WiFi verified with station download progress"></div>
-            <figcaption>WiFi verified, NOAA station data downloading</figcaption>
-        </figure>
+    <div class="note-box">
+        <strong>Be patient:</strong> When your phone first connects to the TidesySetup hotspot, the setup page may take a moment to load. Your phone is running through WiFi handshake tasks in the background when connecting to a new network for the first time. Just wait &mdash; the page will appear. If TidesySetup doesn&rsquo;t show up at all, turn off WiFi on your phone, wait a few seconds, and turn it back on. If you&rsquo;re still stuck, unplug Tidesy, wait 15 seconds, and plug it back in.
     </div>
+
+    <h3>Automatic Timezone Detection</h3>
+    <p>After connecting to WiFi for the first time, Tidesy auto-detects your timezone from your IP address. The timezone is refreshed daily to handle daylight saving time transitions automatically. You do not need to set your timezone manually.</p>
+    <p>If you need to override the timezone temporarily (e.g., while traveling), use the <strong>TZ override</strong> option in the Config popup on the web dashboard. This override lasts for the current session only and resets on reboot.</p>
+
+    <div class="screenshot-placeholder">
+        <img src="images/config-tz-override.png" alt="Configuration popup with UTC offset timezone override" style="max-width:500px;border-radius:8px;border:1px solid var(--border);">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The Config popup showing the UTC offset override at the bottom.</p>
+    </div>
+
+    <h3>Edit Settings (Web Dashboard)</h3>
+    <p>After the first boot, the Edit Settings page at <code>tidesy.local</code> opens automatically. This is where you configure all device settings &mdash; stations, display, location, alerts, colors, Vestaboard, and more. You can return to Edit Settings at any time from the web dashboard.</p>
 
     <h3>Station Selection</h3>
     <p>Tidesy uses NOAA harmonic tide stations for predictions. On first setup, it downloads a directory of ~3,000 stations.</p>
@@ -574,24 +553,31 @@
         <li><strong>One-time download:</strong> Takes approximately 60 seconds. Runs in the background. A progress banner shows the download status.</li>
         <li><strong>Search:</strong> Type a station name or NOAA station ID in the search box. Results appear as you type.</li>
         <li><strong>State filter:</strong> Narrow results by state using the dropdown.</li>
-        <li><strong>Suggested stations:</strong> If your location is set (via IP detection or manual entry), nearby stations are shown with distances in miles.</li>
-        <li><strong>Up to 3 stations:</strong> Click a search result to assign it to a slot. You can also type a station ID directly.</li>
+        <li><strong>Near Me:</strong> Click the <strong>Near Me</strong> button to find the closest stations to your location, shown with distances in miles.</li>
+        <li><strong>Up to 3 stations:</strong> Click a search result to assign it to Station 1, 2, or 3 using the <strong>+1</strong>, <strong>+2</strong>, <strong>+3</strong> buttons.</li>
+        <li><strong>Refresh Stations:</strong> Click the <strong>Refresh Stations</strong> button to re-download the station directory from NOAA. Use this if stations appear outdated or if the initial download was interrupted.</li>
         <li><strong>Tide datum:</strong> Default is MLLW. Most users should leave this unchanged.</li>
     </ul>
 
-    <div class="phone-gallery">
-        <figure>
-            <div class="phone-frame"><img src="images/setup-3.png" alt="Station suggestions based on location"></div>
-            <figcaption>Nearby station suggestions with distances</figcaption>
-        </figure>
-        <figure>
-            <div class="phone-frame"><img src="images/setup-4.png" alt="Filter by State dropdown open"></div>
-            <figcaption>Filter stations by state</figcaption>
-        </figure>
-        <figure>
-            <div class="phone-frame"><img src="images/setup-5.png" alt="Station search results filtered by state"></div>
-            <figcaption>Search results filtered by state (WA)</figcaption>
-        </figure>
+    <div class="screenshot-placeholder">
+        <img src="images/edit-settings-stations.png" alt="Station picker with search, state filter, Near Me, and Refresh buttons" style="max-width:100%;border-radius:8px;border:1px solid var(--border);">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The station picker in Edit Settings with state filter, search, Near Me, and Refresh buttons.</p>
+    </div>
+
+    <div class="screenshot-placeholder" style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
+            <img src="images/edit-settings-near-me.png" alt="Near Me results showing closest stations with distances" style="max-width:100%;border-radius:8px;border:1px solid var(--border);">
+            <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Near Me results with distances and +1/+2/+3 assignment buttons.</p>
+        </div>
+        <div style="flex:1;min-width:280px;">
+            <img src="images/edit-settings-state-search.png" alt="State filter with search showing WA stations matching cap" style="max-width:100%;border-radius:8px;border:1px solid var(--border);">
+            <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">State filter (WA) combined with search (&ldquo;cap&rdquo;).</p>
+        </div>
+    </div>
+
+    <div class="screenshot-placeholder">
+        <img src="images/edit-settings-states-dropdown.png" alt="States dropdown open showing all US states" style="max-width:260px;border-radius:8px;border:1px solid var(--border);">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The state filter dropdown with all U.S. states and territories.</p>
     </div>
 
     <h3>Display Settings</h3>
@@ -615,21 +601,6 @@
         <li><strong>Preferred range (from/to):</strong> &minus;10 to +30 ft (0 = disabled). A colored band shows your ideal tide range on the graph. Useful for fishing, surfing, or boat ramp access windows.</li>
     </ul>
 
-    <div class="phone-gallery">
-        <figure>
-            <div class="phone-frame"><img src="images/setup-6.png" alt="My Location map and display settings"></div>
-            <figcaption>My Location map and display format</figcaption>
-        </figure>
-        <figure>
-            <div class="phone-frame"><img src="images/setup-7.png" alt="Display brightness, alerts, and color settings"></div>
-            <figcaption>Brightness, alerts, and color pickers</figcaption>
-        </figure>
-        <figure>
-            <div class="phone-frame"><img src="images/setup-8.png" alt="Colors, tide levels, and Vestaboard settings"></div>
-            <figcaption>Colors, tide levels, and Vestaboard</figcaption>
-        </figure>
-    </div>
-
     <h3>Color Settings</h3>
     <p class="text-muted"><span class="badge badge-ink">TidesyINK</span> does not have color settings (monochrome display).</p>
     <p>Six color pickers let you customize the display palette:</p>
@@ -652,21 +623,23 @@
     <p>Tidesy remembers the location you set for each WiFi network. When you move the device to a different WiFi network and re-enter setup, it automatically recalls the location you previously picked for that network. If you connect to a new network for the first time, Tidesy detects your approximate location automatically and saves your chosen location when you save the form. Use the <strong>Detect from IP</strong> button if you want to refresh the detected location.</p>
 
     <h3>Vestaboard Settings</h3>
-    <p>If a Vestaboard Flagship is detected on your network, you can configure it in the wizard:</p>
+    <p>Vestaboard configuration is available in the Edit Settings page on the web dashboard. If a Vestaboard Flagship is detected on your network, the Vestaboard section appears with the following options:</p>
     <ul>
+        <li><strong>Enable Vestaboard:</strong> Toggle to enable or disable the Vestaboard integration.</li>
+        <li><strong>IP address:</strong> Auto-detected during network scan. You can also enter it manually.</li>
+        <li><strong>Local API key:</strong> The 22-character encoded key from the Vestaboard app (device settings &gt; Local API). A clipboard paste button is provided.</li>
         <li><strong>Update interval:</strong> Single dropdown with 5 options:
             <ul>
                 <li><strong>Change with device</strong> &mdash; VB mirrors whatever the Tidesy display shows, updating instantly when the view or station changes.</li>
                 <li><strong>20m / 30m / 1h / 2h</strong> &mdash; Independent cycle through all stations and views at the selected interval.</li>
             </ul>
         </li>
+        <li><strong>Bar colors:</strong> Choose Vestaboard tile colors for positive tides, negative tides, zero mark, warning level, and preferred range.</li>
     </ul>
 
-    <div class="phone-gallery">
-        <figure>
-            <div class="phone-frame"><img src="images/setup-9.png" alt="Vestaboard configuration and Save button"></div>
-            <figcaption>Vestaboard API key, update interval, bar colors, and Save</figcaption>
-        </figure>
+    <div class="screenshot-placeholder">
+        <img src="images/edit-settings-bottom.png" alt="Edit Settings showing color pickers and Vestaboard configuration" style="max-width:400px;border-radius:8px;border:1px solid var(--border);">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Colors and Vestaboard sections in Edit Settings.</p>
     </div>
 </div>
 
@@ -1402,7 +1375,7 @@
         <tr><th>Problem</th><th>Solution</th></tr>
         <tr>
             <td>Can&rsquo;t find TidesySetup hotspot</td>
-            <td>Power cycle the device (unplug and re-plug). Make sure your phone/computer is searching for 2.4 GHz networks, not filtering to 5 GHz only.</td>
+            <td>Turn off WiFi on your phone, wait a few seconds, and turn it back on. If it still doesn&rsquo;t appear, unplug Tidesy, wait 15 seconds, and plug it back in. Make sure your phone/computer is searching for 2.4 GHz networks, not filtering to 5 GHz only.</td>
         </tr>
         <tr>
             <td>Can&rsquo;t connect to home WiFi</td>
@@ -1739,7 +1712,7 @@
 <div class="manual-footer">
     <strong>Tidesy Smart Devices LLC</strong>
     Tide data: NOAA &nbsp;|&nbsp; Weather: MET Norway &nbsp;|&nbsp; Alerts: NWS
-    <br>Firmware 3.0.1 &nbsp;|&nbsp; Published March 31, 2026
+    <br>Firmware 3.0.2 &nbsp;|&nbsp; Published April 2, 2026
 </div>
 
 </div><!-- /.container -->
