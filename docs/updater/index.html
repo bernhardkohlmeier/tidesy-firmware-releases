@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tidesy Firmware Updater</title>
+<script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+<style>
+  :root {
+    --accent: #0077cc;
+    --accent-dk: #005fa3;
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --border: #d0d7e0;
+    --fg: #1a2332;
+    --fg2: #6b7a8d;
+    --red: #c0392b;
+    --grn: #27ae60;
+    --radius: 10px;
+    --gradient: linear-gradient(135deg, #2a3f5f, #1e5f3a);
+    --warn: #856404;
+    --warn-bg: #fff3cd;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  header {
+    background: var(--gradient);
+    color: #fff;
+    text-align: center;
+    padding: 32px 16px 24px;
+  }
+  header h1 {
+    margin: 0 0 4px;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  header p {
+    margin: 0;
+    opacity: 0.85;
+    font-size: 15px;
+  }
+  .container {
+    max-width: 560px;
+    margin: 24px auto;
+    padding: 0 16px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card h2 {
+    margin: 0 0 16px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .steps li {
+    counter-increment: step;
+    padding: 8px 0 8px 40px;
+    position: relative;
+    font-size: 15px;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 28px;
+    height: 28px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 15px;
+    background: #fff;
+    color: var(--fg);
+    margin-bottom: 20px;
+  }
+  .install-row {
+    text-align: center;
+  }
+  esp-web-install-button {
+    display: inline-block;
+  }
+  esp-web-install-button button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  esp-web-install-button button:hover {
+    background: var(--accent-dk);
+  }
+  .warn-box {
+    background: var(--warn-bg);
+    color: var(--warn);
+    border: 1px solid #ffc107;
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .warn-box.show { display: block; }
+  .version-tag {
+    display: inline-block;
+    background: var(--grn);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .note {
+    font-size: 13px;
+    color: var(--fg2);
+    margin-top: 12px;
+  }
+  footer {
+    text-align: center;
+    padding: 24px 16px;
+    font-size: 13px;
+    color: var(--fg2);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* Hide the install button until a board is selected */
+  .install-row.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Tidesy Firmware Updater</h1>
+  <p>Update your Tidesy device directly from your browser via USB</p>
+</header>
+
+<div class="container">
+
+  <div class="warn-box" id="browserWarn">
+    Your browser does not support Web Serial. Please use <strong>Google Chrome</strong> or <strong>Microsoft Edge</strong> on a desktop computer.
+  </div>
+
+  <div class="card">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li>Plug your Tidesy device into this computer via USB</li>
+      <li>Select your board model below</li>
+      <li>Click <strong>Install</strong> and choose the serial port</li>
+      <li>Wait for the update to complete — your device will restart automatically</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Install firmware <span class="version-tag">v3.0.2</span></h2>
+
+    <label for="boardSelect">Board model</label>
+    <select id="boardSelect">
+      <option value="">— Select your board —</option>
+      <option value="crow5">Elecrow CrowPanel 5.0" (CROW5)</option>
+      <option value="crow7">Elecrow CrowPanel 7.0" (CROW7)</option>
+    </select>
+
+    <div class="install-row hidden" id="installRow">
+      <esp-web-install-button id="installBtn">
+        <button slot="activate">Install Tidesy</button>
+        <span slot="unsupported">Your browser does not support Web Serial.</span>
+        <span slot="not-allowed">Serial access was denied. Please grant permission and try again.</span>
+      </esp-web-install-button>
+    </div>
+
+    <p class="note">
+      This will erase your device and install a fresh copy of Tidesy v3.0.2.
+      Your WiFi credentials and settings will need to be reconfigured after the update.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Which board do I have?</h2>
+    <p style="font-size:14px; margin:0;">
+      Check the label on the back of your device, or look at the screen size:
+    </p>
+    <ul style="font-size:14px; margin:8px 0 0; padding-left:20px;">
+      <li><strong>CROW5</strong> — 5.0" screen (800×480)</li>
+      <li><strong>CROW7</strong> — 7.0" screen (800×480)</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <a href="../manual.html">Tidesy Manual</a> &middot;
+  <a href="https://tidesy.com">tidesy.com</a>
+</footer>
+
+<script>
+  // Browser compatibility check
+  if (!('serial' in navigator)) {
+    document.getElementById('browserWarn').classList.add('show');
+  }
+
+  const boardSelect = document.getElementById('boardSelect');
+  const installRow = document.getElementById('installRow');
+  const installBtn = document.getElementById('installBtn');
+
+  const manifests = {
+    crow5: 'firmware/manifest_crow5.json',
+    crow7: 'firmware/manifest_crow7.json'
+  };
+
+  boardSelect.addEventListener('change', function () {
+    const board = this.value;
+    if (board && manifests[board]) {
+      installBtn.setAttribute('manifest', manifests[board]);
+      installRow.classList.remove('hidden');
+    } else {
+      installBtn.removeAttribute('manifest');
+      installRow.classList.add('hidden');
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "Tidesy (CROW7)",
+  "version": "3.0.2",
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        {
+          "path": "TIDESY_merged_70_302.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}
