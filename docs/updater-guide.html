@@ -170,6 +170,12 @@
 <div class="apology-banner">
     <h3>We're sorry for the inconvenience</h3>
     <p>
+        <strong>Who needs to do this?</strong> Only Tidesy owners running <strong>version 3.0.1 or
+        lower</strong>. If your device is already on version 3.0.2 (or newer), you can stop reading
+        &mdash; your device will keep itself up to date automatically. You can check your version on the
+        device's <em>Configuration</em> screen.
+    </p>
+    <p>
         Tidesy is designed to update itself automatically over the internet. Unfortunately, our file
         hosting provider is holding on to an old copy of our update list and refuses to refresh it,
         which means your device cannot see the new version on its own.
@@ -217,7 +223,20 @@
             <p>Windows, Mac, or Chromebook. Doesn't need to be fancy.</p>
         </div>
         <div class="need-card">
-            <div class="icon">&#128268;</div>
+            <div class="icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-dk);">
+                    <!-- USB-A connector (left) -->
+                    <rect x="3" y="24" width="16" height="16" rx="1"/>
+                    <rect x="7" y="28" width="3" height="3" fill="currentColor"/>
+                    <rect x="12" y="28" width="3" height="3" fill="currentColor"/>
+                    <rect x="7" y="33" width="3" height="3" fill="currentColor"/>
+                    <rect x="12" y="33" width="3" height="3" fill="currentColor"/>
+                    <!-- Cable -->
+                    <path d="M19 32 C 28 32, 30 18, 40 22 C 50 26, 44 42, 49 38"/>
+                    <!-- USB-C connector (right) -->
+                    <rect x="49" y="28" width="12" height="8" rx="4"/>
+                </svg>
+            </div>
             <h4>A USB cable</h4>
             <p>The same kind you use to charge most phones and tablets &mdash; USB-C on the Tidesy end.</p>
         </div>
