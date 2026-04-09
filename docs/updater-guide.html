@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tidesy Web Updater Guide</title>
+    <link rel="stylesheet" href="manual.css">
+    <style>
+        /* Page-specific tweaks */
+        .updater-link {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff !important;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 17px;
+            margin: 8px 0;
+            box-shadow: 0 3px 10px rgba(0, 119, 204, 0.3);
+            transition: background 0.15s;
+        }
+        .updater-link:hover { background: var(--accent-dk); }
+
+        .browser-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 12px 0;
+        }
+        .browser-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 2px solid var(--grn);
+            color: var(--grn-dk);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .browser-pill.bad {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .step-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin: 16px 0;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+        .step-num {
+            flex-shrink: 0;
+            width: 42px;
+            height: 42px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .step-body { flex: 1; }
+        .step-body h3 {
+            margin: 4px 0 8px;
+            font-size: 18px;
+        }
+        .step-body p { margin: 6px 0; }
+
+        .what-you-need {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin: 16px 0;
+        }
+        .need-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: center;
+        }
+        .need-card .icon {
+            font-size: 36px;
+            margin-bottom: 6px;
+        }
+        .need-card h4 {
+            margin: 4px 0 6px;
+            color: var(--accent-dk);
+        }
+        .need-card p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--fg2);
+        }
+
+        .apology-banner {
+            background: linear-gradient(135deg, #fff3cd, #ffe8a1);
+            border-left: 5px solid #f0a500;
+            border-radius: 0 10px 10px 0;
+            padding: 18px 22px;
+            margin: 20px 0;
+            color: #4a3500;
+        }
+        .apology-banner h3 {
+            margin: 0 0 8px;
+            color: #b7420a;
+            font-size: 17px;
+        }
+        .apology-banner p { margin: 6px 0; }
+
+        .com-port-explanation {
+            background: #eef5fb;
+            border-radius: var(--radius);
+            padding: 18px 22px;
+            margin: 16px 0;
+            border-left: 4px solid var(--accent);
+        }
+        .com-port-explanation h4 {
+            margin: 0 0 8px;
+            color: var(--accent-dk);
+        }
+
+        .faq-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 10px 0;
+        }
+        .faq-item strong {
+            display: block;
+            color: var(--accent-dk);
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== NAV BAR ========== -->
+<nav class="nav-bar">
+    <div class="nav-brand">Tidesy Updater Guide</div>
+    <div class="nav-menu">
+        <a href="manual.html">Manual</a>
+        <a href="updater/">Open Updater</a>
+    </div>
+</nav>
+
+<div class="container" style="padding-top: 80px;">
+
+<!-- ========== HEADER ========== -->
+<div class="part-header">
+    <img src="images/Logo.png" alt="Tidesy logo" class="part-header-logo">
+    <div>
+        <h1>One-Time Web Update</h1>
+        <p>A simple guide to updating your Tidesy from your computer &mdash; just this once</p>
+    </div>
+</div>
+
+<!-- ========== APOLOGY BANNER ========== -->
+<div class="apology-banner">
+    <h3>We're sorry for the inconvenience</h3>
+    <p>
+        Tidesy is designed to update itself automatically over the internet. Unfortunately, our file
+        hosting provider is holding on to an old copy of our update list and refuses to refresh it,
+        which means your device cannot see the new version on its own.
+    </p>
+    <p>
+        To work around this, we've built a simple one-time update tool you can use from your computer.
+        Once your device is on <strong>version 3.0.2</strong>, automatic updates will work as designed,
+        and you'll never need to do this again.
+    </p>
+    <p style="margin-top: 12px;">
+        <strong>Thank you for your patience!</strong>
+    </p>
+</div>
+
+<!-- ========== SECTION: GO TO UPDATER ========== -->
+<div class="section-header">
+    <h2>Where do I go?</h2>
+</div>
+<div class="section">
+    <p>The updater lives on a single web page. You can open it from any computer:</p>
+    <p style="text-align: center; margin: 24px 0;">
+        <a class="updater-link" href="updater/" target="_blank" rel="noopener">
+            Open the Tidesy Updater &rarr;
+        </a>
+    </p>
+    <p style="text-align: center; font-size: 13px; color: var(--fg2);">
+        Or type this address into your browser:<br>
+        <code style="background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border);">
+            bernhardkohlmeier.github.io/tidesy-firmware-releases/updater/
+        </code>
+    </p>
+</div>
+
+<!-- ========== SECTION: WHAT YOU NEED ========== -->
+<div class="section-header">
+    <h2>What you'll need</h2>
+</div>
+<div class="section">
+    <p>Just two things, both of which you probably already have:</p>
+
+    <div class="what-you-need">
+        <div class="need-card">
+            <div class="icon">&#128187;</div>
+            <h4>A computer</h4>
+            <p>Windows, Mac, or Chromebook. Doesn't need to be fancy.</p>
+        </div>
+        <div class="need-card">
+            <div class="icon">&#128268;</div>
+            <h4>A USB cable</h4>
+            <p>The same kind you use to charge most phones and tablets &mdash; USB-C on the Tidesy end.</p>
+        </div>
+    </div>
+
+    <h3>Which web browser?</h3>
+    <p>This is important &mdash; the updater only works in certain browsers. <strong>Use one of these:</strong></p>
+    <div class="browser-list">
+        <span class="browser-pill">&#10003; Google Chrome</span>
+        <span class="browser-pill">&#10003; Microsoft Edge</span>
+    </div>
+    <p>These browsers will <strong>not</strong> work for the updater:</p>
+    <div class="browser-list">
+        <span class="browser-pill bad">&#10007; Safari</span>
+        <span class="browser-pill bad">&#10007; Firefox</span>
+        <span class="browser-pill bad">&#10007; Mobile browsers (phones/tablets)</span>
+    </div>
+    <div class="note-box">
+        <strong>Don't have Chrome or Edge?</strong>
+        Both are free. Chrome is at <code>google.com/chrome</code> and Edge comes with every Windows
+        computer. Either one is fine &mdash; pick whichever you prefer.
+    </div>
+</div>
+
+<!-- ========== SECTION: STEP BY STEP ========== -->
+<div class="section-header">
+    <h2>Step-by-step</h2>
+    <p>Follow these in order. The whole thing takes about three minutes.</p>
+</div>
+<div class="section">
+
+    <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-body">
+            <h3>Plug Tidesy into your computer</h3>
+            <p>
+                Take your USB cable and connect one end to your computer's USB port and the other end
+                to the USB-C port on your Tidesy device. (See the manual if you're not sure where the
+                USB-C port is on your model.)
+            </p>
+            <p>
+                You should see Tidesy power on and start its normal boot screen. That's fine &mdash;
+                leave it plugged in.
+            </p>
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-body">
+            <h3>Open the updater page in Chrome or Edge</h3>
+            <p>
+                Click the big blue button above, or type
+                <code>bernhardkohlmeier.github.io/tidesy-firmware-releases/updater/</code>
+                into your browser's address bar.
+            </p>
+            <p>You should see a page titled <strong>"Tidesy Firmware Updater"</strong>.</p>
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-body">
+            <h3>Choose your Tidesy model</h3>
+            <p>
+                There's a dropdown labeled <strong>"Board model"</strong>. Open it and pick the one
+                that matches the screen size of your Tidesy:
+            </p>
+            <ul>
+                <li><strong>Elecrow CrowPanel 5.0" (CROW5)</strong> &mdash; the 5-inch model</li>
+                <li><strong>Elecrow CrowPanel 7.0" (CROW7)</strong> &mdash; the 7-inch model</li>
+            </ul>
+            <p>
+                If you're not sure, look at the label on the back of the device, or just measure the
+                screen diagonally.
+            </p>
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-body">
+            <h3>Click the "Install Tidesy" button</h3>
+            <p>
+                A small window will pop up asking which serial port to use. This is where it gets
+                slightly technical &mdash; but only slightly. Read the next section for details.
+            </p>
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-num">5</div>
+        <div class="step-body">
+            <h3>Pick your Tidesy from the list</h3>
+            <p>
+                You'll see something like <strong>"USB Serial Device (COM5)"</strong> or
+                <strong>"Silicon Labs CP210x..."</strong>. Click that one, then click <strong>"Connect"</strong>.
+            </p>
+            <p>
+                If you see more than one option, the right one is usually the one that
+                <strong>appeared after you plugged Tidesy in</strong>. Unplug Tidesy briefly and watch
+                which entry disappears &mdash; that's the one.
+            </p>
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-num">6</div>
+        <div class="step-body">
+            <h3>Wait for the update to finish</h3>
+            <p>
+                The browser will show a progress bar. It takes about 1-2 minutes. Don't unplug
+                anything, don't close the browser, and don't let your computer go to sleep.
+            </p>
+            <p>
+                When it's done, your Tidesy will restart on its own and boot up with the new
+                version. That's it &mdash; you're done!
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<!-- ========== SECTION: COM PORTS EXPLAINED ========== -->
+<div class="section-header">
+    <h2>What's a "COM port" anyway?</h2>
+</div>
+<div class="section">
+    <div class="com-port-explanation">
+        <h4>The short answer</h4>
+        <p>
+            A COM port (or "serial port") is just a name your computer gives to a device that's
+            connected over USB and wants to talk back and forth. When you plug Tidesy in, your
+            computer assigns it a name like <strong>COM3</strong>, <strong>COM5</strong>, or on a
+            Mac, something like <strong>/dev/cu.usbserial-1410</strong>.
+        </p>
+        <p>
+            You don't need to know which exact name it has &mdash; the updater will show you a list,
+            and you just pick the one that belongs to Tidesy.
+        </p>
+    </div>
+
+    <h3>How USB and "COM" fit together</h3>
+    <p>
+        USB is the cable. COM is the conversation. When Tidesy is plugged in, a tiny chip inside
+        pretends to be an old-fashioned serial connection so your computer can send the new
+        firmware to it. That "pretend serial connection" is what shows up as a COM port. It's not
+        anything you have to set up &mdash; Windows, Mac, and Chromebook all handle it automatically.
+    </p>
+
+    <div class="note-box">
+        <strong>If nothing shows up in the list:</strong> Try a different USB cable. Some USB
+        cables are "charge only" and don't carry data. A cable that works to transfer files from a
+        phone to a computer will always work for Tidesy too.
+    </div>
+</div>
+
+<!-- ========== SECTION: AFTER THE UPDATE ========== -->
+<div class="section-header">
+    <h2>After the update</h2>
+</div>
+<div class="section">
+    <div class="success-banner">
+        <strong>You're all set!</strong> Once Tidesy is on version 3.0.2, it will check for
+        updates automatically over your home Wi-Fi the next time it restarts. You should never
+        need to use the web updater again.
+    </div>
+    <p>
+        Your Wi-Fi password, station settings, brightness, and everything else are preserved
+        across the update &mdash; nothing is erased.
+    </p>
+</div>
+
+<!-- ========== SECTION: FAQ / TROUBLESHOOTING ========== -->
+<div class="section-header">
+    <h2>Common questions</h2>
+</div>
+<div class="section">
+
+    <div class="faq-item">
+        <strong>Will this delete my settings?</strong>
+        No. Your Wi-Fi credentials, tide stations, alarm levels, and color preferences are all
+        kept. The update only replaces the software, not your saved settings.
+    </div>
+
+    <div class="faq-item">
+        <strong>Is it safe to unplug Tidesy from the wall during the update?</strong>
+        It will get its power from the USB cable while connected to the computer, so you don't
+        need to keep it plugged into the wall. Just don't unplug the USB cable during the update.
+    </div>
+
+    <div class="faq-item">
+        <strong>I clicked Install but no popup appeared.</strong>
+        Make sure you're using <strong>Chrome</strong> or <strong>Edge</strong> on a desktop or
+        laptop &mdash; not a phone, tablet, Safari, or Firefox. The popup is blocked in browsers
+        that don't support direct USB access.
+    </div>
+
+    <div class="faq-item">
+        <strong>The popup is empty or my Tidesy isn't listed.</strong>
+        Try these in order:
+        <br>1. Unplug the USB cable, wait 5 seconds, plug it back in.
+        <br>2. Try a different USB cable (some are charge-only).
+        <br>3. Try a different USB port on your computer.
+        <br>4. Restart your computer and try again.
+    </div>
+
+    <div class="faq-item">
+        <strong>The update failed partway through.</strong>
+        Don't panic &mdash; just unplug, plug back in, and try again. The updater is safe to run
+        as many times as you need to.
+    </div>
+
+    <div class="faq-item">
+        <strong>Can I use my phone instead of a computer?</strong>
+        Unfortunately, no. Phones and tablets don't allow web pages to talk to USB devices the way
+        desktops and laptops do. You need a computer for this one-time step.
+    </div>
+
+    <div class="faq-item">
+        <strong>I don't have a computer at all. What do I do?</strong>
+        Reach out to us through tidesy.com and we'll help you find a solution.
+    </div>
+
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="section" style="text-align: center; padding: 30px 16px; color: var(--fg2);">
+    <p>
+        Need more help? Check the <a href="manual.html">full Tidesy Manual</a>
+        or visit <a href="https://tidesy.com">tidesy.com</a>.
+    </p>
+    <p style="font-size: 13px; margin-top: 16px;">
+        Thank you again for your patience and for being a Tidesy owner.
+    </p>
+</div>
+
+</div>
+
+</body>
+</html>
