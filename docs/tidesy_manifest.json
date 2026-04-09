@@ -41,14 +41,6 @@
       "Notes": "Fallback setup, Defaults, Setup streamline"
     },
     {
-      "Device": "CROW5",
-      "Version": "3.0.3",
-      "Released": "2026-04-09",
-      "URL": "https://github.com/bernhardkohlmeier/tidesy-firmware-releases/releases/download/v3.0.2/TIDESY_firmware_50_302.bin",
-      "Mandatory": false,
-      "Notes": "TEST entry — verifying OTA pickup from GitHub Pages"
-    },
-    {
       "Device": "CROW7",
       "Version": "3.0.0",
       "Released": "2026-03-15",
@@ -63,14 +55,6 @@
       "URL": "https://github.com/bernhardkohlmeier/tidesy-firmware-releases/releases/download/v3.0.2/TIDESY_firmware_70_302.bin",
       "Mandatory": false,
       "Notes": "Fallback setup, Defaults, Setup streamline"
-    },
-    {
-      "Device": "CROW7",
-      "Version": "3.0.3",
-      "Released": "2026-04-09",
-      "URL": "https://github.com/bernhardkohlmeier/tidesy-firmware-releases/releases/download/v3.0.2/TIDESY_firmware_70_302.bin",
-      "Mandatory": false,
-      "Notes": "TEST entry — verifying OTA pickup from GitHub Pages"
     },
     {
       "Device": "CYD",
