@@ -46,7 +46,7 @@
       "Released": "2026-05-25",
       "URL": "https://github.com/bernhardkohlmeier/tidesy-firmware-releases/releases/download/v3.1.0/TIDESY_firmware_50_310.bin",
       "Mandatory": false,
-      "Notes": "v3.1.0 standalone official release. Design-system dashboard (Paper/Tide modes with toggle), CSS extracted to LittleFS, admin \"Web server is off\" recovery page with Turn-on button, WiFi error message SSID fallback (no more empty quotes), data-source attribution footer with CAMS verbatim clause, help.html canonical Data Sources section. Includes Driftwood firmware Build 104-108 changes (alert-page pagination fix, severe-warning takeover state machine, TEST ONLY banner, per-warning confirmation gate) for the Driftwood variant. Built from Build 110, commit b5c5b98."
+      "Notes": "v3.1.0 standalone official release (Build 111). Design-system dashboard (Paper/Tide modes with toggle), CSS extracted to LittleFS, admin \"Web server is off\" recovery page with Turn-on button, WiFi error message SSID fallback, data-source attribution footer with CAMS verbatim clause, Edit Settings overlay no longer re-pops after Cancel (first-boot scoping fix). Built from Build 111, commit 3918ccc."
     },
     {
       "Device": "CROW7",
@@ -70,7 +70,7 @@
       "Released": "2026-05-25",
       "URL": "https://github.com/bernhardkohlmeier/tidesy-firmware-releases/releases/download/v3.1.0/TIDESY_firmware_70_310.bin",
       "Mandatory": false,
-      "Notes": "v3.1.0 standalone official release. Design-system dashboard (Paper/Tide modes with toggle), CSS extracted to LittleFS, admin \"Web server is off\" recovery page with Turn-on button, WiFi error message SSID fallback (no more empty quotes), data-source attribution footer with CAMS verbatim clause, help.html canonical Data Sources section. Includes Driftwood firmware Build 104-108 changes (alert-page pagination fix, severe-warning takeover state machine, TEST ONLY banner, per-warning confirmation gate) for the Driftwood variant. Built from Build 110, commit b5c5b98."
+      "Notes": "v3.1.0 standalone official release (Build 111). Design-system dashboard (Paper/Tide modes with toggle), CSS extracted to LittleFS, admin \"Web server is off\" recovery page with Turn-on button, WiFi error message SSID fallback, data-source attribution footer with CAMS verbatim clause, Edit Settings overlay no longer re-pops after Cancel (first-boot scoping fix). Built from Build 111, commit 3918ccc."
     },
     {
       "Device": "CYD",
