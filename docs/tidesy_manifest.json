@@ -41,6 +41,14 @@
       "Notes": "Fallback setup, Defaults, Setup streamline"
     },
     {
+      "Device": "CROW5",
+      "Version": "3.1.0",
+      "Released": "2026-05-25",
+      "URL": "https://github.com/bernhardkohlmeier/tidesy-firmware-releases/releases/download/v3.1.0/TIDESY_firmware_50_310.bin",
+      "Mandatory": false,
+      "Notes": "v3.1.0 standalone official release. Design-system dashboard (Paper/Tide modes with toggle), CSS extracted to LittleFS, admin \"Web server is off\" recovery page with Turn-on button, WiFi error message SSID fallback (no more empty quotes), data-source attribution footer with CAMS verbatim clause, help.html canonical Data Sources section. Includes Driftwood firmware Build 104-108 changes (alert-page pagination fix, severe-warning takeover state machine, TEST ONLY banner, per-warning confirmation gate) for the Driftwood variant. Built from Build 110, commit b5c5b98."
+    },
+    {
       "Device": "CROW7",
       "Version": "3.0.0",
       "Released": "2026-03-15",
@@ -57,6 +65,14 @@
       "Notes": "Fallback setup, Defaults, Setup streamline"
     },
     {
+      "Device": "CROW7",
+      "Version": "3.1.0",
+      "Released": "2026-05-25",
+      "URL": "https://github.com/bernhardkohlmeier/tidesy-firmware-releases/releases/download/v3.1.0/TIDESY_firmware_70_310.bin",
+      "Mandatory": false,
+      "Notes": "v3.1.0 standalone official release. Design-system dashboard (Paper/Tide modes with toggle), CSS extracted to LittleFS, admin \"Web server is off\" recovery page with Turn-on button, WiFi error message SSID fallback (no more empty quotes), data-source attribution footer with CAMS verbatim clause, help.html canonical Data Sources section. Includes Driftwood firmware Build 104-108 changes (alert-page pagination fix, severe-warning takeover state machine, TEST ONLY banner, per-warning confirmation gate) for the Driftwood variant. Built from Build 110, commit b5c5b98."
+    },
+    {
       "Device": "CYD",
       "Version": "3.0.0",
       "Released": "2026-03-15",
@@ -65,6 +81,19 @@
       "Notes": "Official public release"
     }
   ],
-  "messages": [],
+  "messages": [
+    {
+      "id": "msg_release_310",
+      "type": "update",
+      "start": "2026-05-25",
+      "expiry": "2026-06-24",
+      "devices": [
+        "ALL"
+      ],
+      "priority": 1,
+      "header": "Tidesy 3.1.0 Released",
+      "body": "<b>What&rsquo;s new:</b> v3.1.0 standalone official release. Design-system dashboard (Paper/Tide modes with toggle), CSS extracted to LittleFS, admin &quot;Web server is off&quot; recovery page with Turn-on button, WiFi error message SSID fallback (no more empty quotes), data-source attribution footer with CAMS verbatim clause, help.html canonical Data Sources section. Includes Driftwood firmware Build 104-108 changes (alert-page pagination fix, severe-warning takeover state machine, TEST ONLY banner, per-warning confirmation gate) for the Driftwood variant. Built from Build 110, commit b5c5b98."
+    }
+  ],
   "knownIssues": []
 }
