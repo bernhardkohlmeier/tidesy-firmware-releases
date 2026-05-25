@@ -1,6 +1,6 @@
 {
   "name": "Tidesy L",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "new_install_prompt_erase": true,
   "builds": [
     {
@@ -9,7 +9,8 @@
         { "path": "crow7/bootloader.bin", "offset": 0 },
         { "path": "crow7/partitions.bin", "offset": 32768 },
         { "path": "crow7/boot_app0.bin",  "offset": 57344 },
-        { "path": "crow7/firmware.bin",   "offset": 65536 }
+        { "path": "crow7/firmware.bin",   "offset": 65536 },
+        { "path": "crow7/littlefs.bin",   "offset": 3866624 }
       ]
     }
   ]
