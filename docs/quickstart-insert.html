@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tidesy Quick Start Guide</title>
+<style>
+    @page {
+        size: letter;
+        margin: 0.5in;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        color: #2c3e50;
+        line-height: 1.5;
+        max-width: 8.5in;
+        margin: 0 auto;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .header {
+        background: #1a2332;
+        color: #fff;
+        padding: 18px 28px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 6px 6px 0 0;
+    }
+
+    .header .brand {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 2px;
+    }
+
+    .header .title {
+        font-size: 16px;
+        font-weight: 400;
+        opacity: 0.85;
+    }
+
+    .content {
+        padding: 22px 28px 16px;
+        border: 2px solid #e0e0e0;
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+    }
+
+    .step {
+        margin-bottom: 18px;
+    }
+
+    .step-number {
+        display: inline-block;
+        background: #3d8bfd;
+        color: #fff;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 28px;
+        font-weight: 700;
+        font-size: 15px;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+
+    .step-title {
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #1a2332;
+        vertical-align: middle;
+    }
+
+    .step-body {
+        margin-top: 6px;
+        margin-left: 36px;
+    }
+
+    .placement-box {
+        background: #f8f9fa;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        padding: 12px 16px;
+        margin-top: 6px;
+        margin-left: 36px;
+    }
+
+    .placement-box .item {
+        margin-bottom: 5px;
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+    }
+
+    .placement-box .item:last-child {
+        margin-bottom: 0;
+    }
+
+    .check {
+        color: #2ecc71;
+        font-weight: 700;
+        font-size: 16px;
+        flex-shrink: 0;
+    }
+
+    .cross {
+        color: #e74c3c;
+        font-weight: 700;
+        font-size: 16px;
+        flex-shrink: 0;
+    }
+
+    .credential {
+        background: #eef4ff;
+        border: 1px solid #3d8bfd;
+        border-radius: 4px;
+        padding: 8px 12px;
+        margin-top: 6px;
+        font-size: 14px;
+    }
+
+    .credential strong {
+        color: #1a2332;
+    }
+
+    .help-box {
+        background: #1a2332;
+        color: #fff;
+        border-radius: 6px;
+        padding: 14px 18px;
+        margin-top: 18px;
+    }
+
+    .help-box strong {
+        font-size: 15px;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .help-box ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .help-box ul li {
+        margin-bottom: 4px;
+        font-size: 13px;
+        padding-left: 14px;
+        position: relative;
+    }
+
+    .help-box ul li::before {
+        content: "\2022";
+        position: absolute;
+        left: 0;
+    }
+
+    .help-box a {
+        color: #7db8ff;
+    }
+
+    .footer {
+        text-align: center;
+        margin-top: 14px;
+        font-size: 12px;
+        color: #999;
+    }
+
+    @media print {
+        body {
+            font-size: 14px;
+        }
+
+        .header {
+            border-radius: 0;
+        }
+
+        .content {
+            border-radius: 0;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="header">
+    <span class="brand">TIDESY</span>
+    <span class="title">Quick Start Guide</span>
+</div>
+
+<div class="content">
+
+    <div class="step">
+        <span class="step-number">1</span>
+        <span class="step-title">Choose the Right Spot</span>
+        <div class="placement-box">
+            <div class="item">
+                <span class="check">&#10003;</span>
+                <span>At least <strong>3 feet (1 meter)</strong> from your router (the box with blinking lights from your internet provider)</span>
+            </div>
+            <div class="item">
+                <span class="check">&#10003;</span>
+                <span>Away from microwaves and baby monitors</span>
+            </div>
+            <div class="item">
+                <span class="cross">&#10007;</span>
+                <span><strong>NOT</strong> directly next to your router &mdash; too close causes connection problems!</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="step">
+        <span class="step-number">2</span>
+        <span class="step-title">Plug In</span>
+        <div class="step-body">
+            Connect the USB-C cable to a phone charger or USB port.
+        </div>
+    </div>
+
+    <div class="step">
+        <span class="step-number">3</span>
+        <span class="step-title">Connect to Tidesy</span>
+        <div class="step-body">
+            On your phone, go to WiFi settings and connect to:
+            <div class="credential">
+                <strong>Network:</strong> TidesySetup<br>
+                <strong>Password:</strong> tide1234
+            </div>
+        </div>
+    </div>
+
+    <div class="step">
+        <span class="step-number">4</span>
+        <span class="step-title">Open the Setup Page</span>
+        <div class="step-body">
+            Open your browser and go to: <strong>192.168.4.1</strong><br>
+            <em>Be patient &mdash; may take a moment.</em>
+        </div>
+    </div>
+
+    <div class="step">
+        <span class="step-number">5</span>
+        <span class="step-title">Pick Your WiFi</span>
+        <div class="step-body">
+            Select your home WiFi network, enter the password, tap <strong>Verify</strong>, then <strong>Save</strong>.
+        </div>
+    </div>
+
+    <div class="help-box">
+        <strong>NEED HELP?</strong>
+        <ul>
+            <li>Can&rsquo;t find TidesySetup? Turn WiFi off and on again on your phone.</li>
+            <li>Display says &ldquo;WiFi not connected&rdquo;? Move Tidesy further from your router.</li>
+            <li>More help: <a href="https://tidesy.com/help">tidesy.com/help</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="footer">&copy; 2026 Tidesy &middot; tidesy.com</div>
+
+</body>
+</html>

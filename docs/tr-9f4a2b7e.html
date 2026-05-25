@@ -19,6 +19,7 @@
         <a href="#sec-screenshots">Screenshots</a>
         <a href="#sec-dst">DST Handling</a>
         <a href="#sec-sdsetup">SD Card WiFi Setup</a>
+        <a href="#sec-webupdater">Web Updater</a>
         <a href="manual.html">Back to Manual</a>
         <a href="#" onclick="toggleSearch(); return false;">Search</a>
     </div>
@@ -474,6 +475,10 @@ Password=abc123</code></pre>
     <h3>Step 4: Configure Your Stations</h3>
     <p>After the device connects to WiFi, the <strong>Edit Settings</strong> panel opens automatically on the dashboard. Use it to select your tide stations and adjust display preferences. You can also access settings later from the web dashboard at <code>http://tidesy.local</code>.</p>
 
+    <div class="note-box">
+        <strong>Placement:</strong> Keep Tidesy at least 3 feet (1 meter) from your router and other electronics. Being too close can cause connection problems.
+    </div>
+
     <h3>After Setup</h3>
     <p>Once the device is configured, the SD card file is no longer needed. The device only reads <code>tidesy_setup.txt</code> when no WiFi credentials are stored (first boot or after a factory reset). You can remove the SD card or leave it inserted &mdash; it will not be read again until the next factory reset.</p>
 
@@ -528,6 +533,325 @@ Password=abc123</code></pre>
             </div>
         </div>
     </div>
+</div>
+
+
+<!-- ==================== 6. WEB FIRMWARE UPDATER ==================== -->
+<div class="section-header" id="sec-webupdater">
+    <h2>6. Web Firmware Updater</h2>
+</div>
+<div class="section manual-section">
+    <h3>Overview</h3>
+    <p>The Web Firmware Updater is a browser-based USB flashing tool built on <a href="https://esphome.github.io/esp-web-tools/" target="_blank" rel="noopener">ESP Web Tools</a>. It exists as a fallback for devices on firmware versions <strong>v3.0.0</strong> and <strong>v3.0.1</strong>, whose OTA manifest URL pointed to a Shopify CDN that cached an outdated copy of the manifest and refused to refresh. From <strong>v3.0.2</strong> onward, devices fetch the manifest directly from GitHub Pages and self-update normally over WiFi.</p>
+
+    <div class="note-box">
+        <strong>Audience:</strong> end users with v3.0.0/v3.0.1 devices stuck in the cache loop. Anyone on v3.0.2 or newer should never need this.
+    </div>
+
+    <h3>Public URLs</h3>
+    <table>
+        <tr><th>Resource</th><th>URL</th></tr>
+        <tr>
+            <td>Updater page</td>
+            <td><code>https://bernhardkohlmeier.github.io/tidesy-firmware-releases/updater/</code></td>
+        </tr>
+        <tr>
+            <td>Updater user guide</td>
+            <td><code>https://bernhardkohlmeier.github.io/tidesy-firmware-releases/updater-guide.html</code></td>
+        </tr>
+        <tr>
+            <td>OTA manifest (firmware fetches this)</td>
+            <td><code>https://bernhardkohlmeier.github.io/tidesy-firmware-releases/tidesy_manifest.json</code></td>
+        </tr>
+    </table>
+
+    <h3>Browser Requirements</h3>
+    <p>The updater uses the Web Serial API, which is only implemented in Chromium-based desktop browsers. Supported: <strong>Google Chrome</strong>, <strong>Microsoft Edge</strong>. Not supported: Firefox, Safari, any mobile browser.</p>
+
+    <h3>Repository Layout</h3>
+    <p>All updater assets live in the <code>tidesy-firmware-releases</code> GitHub repository, served via GitHub Pages from the <code>docs/</code> folder:</p>
+    <pre><code>tidesy-firmware-releases/
+  docs/
+    tidesy_manifest.json          ← OTA manifest (CRITICAL: must be in docs/, not repo root)
+    updater-guide.html            ← User-facing guide
+    updater/
+      index.html                  ← Updater page (model selector + install button)
+      firmware/
+        manifest_crow5.json       ← ESP Web Tools manifest for Tidesy M
+        manifest_crow7.json       ← ESP Web Tools manifest for Tidesy L
+        crow5/
+          bootloader.bin          ← flashed at 0x0
+          partitions.bin          ← flashed at 0x8000
+          boot_app0.bin           ← flashed at 0xe000 (otadata)
+          firmware.bin            ← flashed at 0x10000
+        crow7/
+          bootloader.bin
+          partitions.bin
+          boot_app0.bin
+          firmware.bin</code></pre>
+
+    <div class="warning-banner">
+        <div>
+            <strong>Critical:</strong> <code>tidesy_manifest.json</code> must live in <code>docs/</code> &mdash; GitHub Pages serves only the <code>docs/</code> tree. A copy at the repo root returns 404 and OTA pickup silently fails.
+        </div>
+    </div>
+
+    <h3>ESP Web Tools Manifest Format</h3>
+    <p>Each board has its own manifest. Parts are listed individually with their flash offsets &mdash; <strong>do not use a single merged binary</strong> (see Pitfalls below).</p>
+    <pre><code>{
+  "name": "Tidesy M",
+  "version": "3.0.2",
+  "new_install_prompt_erase": true,
+  "builds": [{
+    "chipFamily": "ESP32-S3",
+    "parts": [
+      { "path": "crow5/bootloader.bin", "offset": 0 },
+      { "path": "crow5/partitions.bin", "offset": 32768 },
+      { "path": "crow5/boot_app0.bin",  "offset": 57344 },
+      { "path": "crow5/firmware.bin",   "offset": 65536 }
+    ]
+  }]
+}</code></pre>
+
+    <p>Key fields:</p>
+    <ul>
+        <li><code>name</code> &mdash; shown to the user in the install dialog. Uses the device branding (<strong>Tidesy M</strong>, <strong>Tidesy L</strong>), not the internal board codename.</li>
+        <li><code>new_install_prompt_erase: true</code> &mdash; presents the user with an &ldquo;Erase device&rdquo; checkbox. Leaving it unchecked preserves NVS (WiFi credentials, station selection, brightness, all <code>prefs</code> entries).</li>
+        <li><code>parts</code> &mdash; one entry per flash region. ESP Web Tools writes only these byte ranges, leaving the NVS partition at <code>0x9000</code> completely untouched.</li>
+    </ul>
+
+    <h3>Partition Layout (ESP32-S3, custom <code>partitions.csv</code>)</h3>
+    <table>
+        <tr><th>Name</th><th>Offset</th><th>Size</th><th>Notes</th></tr>
+        <tr><td>bootloader</td><td><code>0x0000</code></td><td>~20 KB</td><td>Written by updater</td></tr>
+        <tr><td>partition table</td><td><code>0x8000</code></td><td>3 KB</td><td>Written by updater</td></tr>
+        <tr><td><strong>nvs</strong></td><td><code>0x9000</code></td><td>20 KB</td><td><strong>Holds all prefs &mdash; updater MUST NOT touch</strong></td></tr>
+        <tr><td>otadata (boot_app0)</td><td><code>0xe000</code></td><td>8 KB</td><td>Written by updater</td></tr>
+        <tr><td>app0 (ota_0)</td><td><code>0x10000</code></td><td>1856 KB</td><td>Written by updater (firmware.bin)</td></tr>
+        <tr><td>app1 (ota_1)</td><td><code>0x1E0000</code></td><td>1856 KB</td><td>Untouched</td></tr>
+        <tr><td>spiffs (LittleFS)</td><td><code>0x3B0000</code></td><td>320 KB</td><td>Untouched (firmware auto-formats if blank)</td></tr>
+    </table>
+
+    <h3>Building the Binaries</h3>
+    <p>For each board, compile with the standard Arduino CLI command and copy four artifacts from the build directory:</p>
+    <ol>
+        <li><code>Tidesy.ino.bootloader.bin</code> &rarr; <code>firmware/&lt;board&gt;/bootloader.bin</code></li>
+        <li><code>Tidesy.ino.partitions.bin</code> &rarr; <code>firmware/&lt;board&gt;/partitions.bin</code></li>
+        <li><code>boot_app0.bin</code> from the ESP32 core (<code>AppData/Local/Arduino15/packages/esp32/hardware/esp32/3.1.1/tools/partitions/boot_app0.bin</code>) &rarr; <code>firmware/&lt;board&gt;/boot_app0.bin</code></li>
+        <li><code>Tidesy.ino.bin</code> &rarr; <code>firmware/&lt;board&gt;/firmware.bin</code></li>
+    </ol>
+
+    <h3>Firmware-Side Safety Net</h3>
+    <p>To make the updater robust against edge cases, the firmware itself includes two critical safeguards:</p>
+    <ul>
+        <li><code>LittleFS.begin(true)</code> in <code>setup()</code> &mdash; auto-formats a blank or corrupt LittleFS partition on first boot. Without this, a device whose LittleFS was wiped (e.g. user picked &ldquo;Erase device&rdquo;) would brick at &ldquo;Loading config&hellip;&rdquo; because <code>LittleFS.begin()</code> returned false and <code>setup()</code> early-returned.</li>
+        <li><code>UPGRADE_PATH</code> in <code>Tidesy.ino</code> &mdash; points to the GitHub Pages manifest URL, not the legacy Shopify CDN URL. From v3.0.2 onward, devices fetch <code>https://bernhardkohlmeier.github.io/tidesy-firmware-releases/tidesy_manifest.json</code> directly.</li>
+    </ul>
+
+    <h3>Pitfalls (lessons learned)</h3>
+    <table>
+        <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+        <tr>
+            <td>Device bricks at &ldquo;Loading config&hellip;&rdquo; after web update</td>
+            <td>Merged binary did not include LittleFS image; <code>LittleFS.begin()</code> returned false on a partition the new partition table created blank</td>
+            <td>Add <code>LittleFS.begin(true)</code> for auto-format on failure</td>
+        </tr>
+        <tr>
+            <td>Web update wipes all user prefs (WiFi creds, stations, etc.)</td>
+            <td><strong>Single merged binary.</strong> <code>esptool merge-bin</code> produces a contiguous image from <code>0x0</code> to the highest written offset, with the gaps (including NVS at <code>0x9000&ndash;0xe000</code>) padded with <code>0xFF</code>. ESP Web Tools then erases and writes <code>0xFF</code> over NVS sectors, wiping prefs every install.</td>
+            <td><strong>Never use a merged binary.</strong> List each part individually in the manifest with its actual flash offset. Esptool erases only the sectors covering each part.</td>
+        </tr>
+        <tr>
+            <td>Web update wipes prefs even with &ldquo;Don&rsquo;t erase&rdquo; selected</td>
+            <td>Same merged-binary bug above. <code>new_install_prompt_erase: true</code> alone is not enough.</td>
+            <td>Multi-part manifest is the actual fix; the prompt is just user-friendliness.</td>
+        </tr>
+        <tr>
+            <td>Devices never pick up new OTA versions from the manifest</td>
+            <td><code>tidesy_manifest.json</code> at the repo root returns 404 from GitHub Pages</td>
+            <td>Move it to <code>docs/tidesy_manifest.json</code></td>
+        </tr>
+    </table>
+
+    <h3>Adding a New Board</h3>
+    <ol>
+        <li>Compile the firmware for the target board with the standard Arduino CLI command.</li>
+        <li>Create <code>docs/updater/firmware/&lt;board&gt;/</code> and copy the four artifacts (<code>bootloader.bin</code>, <code>partitions.bin</code>, <code>boot_app0.bin</code>, <code>firmware.bin</code>).</li>
+        <li>Create <code>docs/updater/firmware/manifest_&lt;board&gt;.json</code> using the template above. Set <code>name</code> to the user-facing branding (e.g. <strong>Tidesy XL</strong>) and <code>chipFamily</code> to match the target chip.</li>
+        <li>Add a new <code>&lt;option&gt;</code> entry to the dropdown in <code>docs/updater/index.html</code> and a matching key in the <code>manifests</code> object in the page&rsquo;s script block.</li>
+        <li>Push to <code>tidesy-firmware-releases</code>; GitHub Pages picks it up automatically.</li>
+    </ol>
+</div>
+
+
+<!-- ==================== 7. PRODUCE SCRIPT ==================== -->
+<div class="section-header" id="sec-produce">
+    <h2>7. Production Script (<code>produce.py</code>)</h2>
+</div>
+<div class="section manual-section">
+    <h3>Purpose</h3>
+    <p><code>produce.py</code> turns a blank ESP32 board into a shipping-ready Tidesy device in one command. It handles the full sequence: erase flash, build and upload LittleFS, compile firmware with the correct board define, upload firmware, verify the chip, and optionally register the board&rsquo;s MAC address with Tidesy Cloud inventory.</p>
+
+    <div class="note-box">
+        <strong>Audience:</strong> production/assembly operator. Not used for normal development flashes &mdash; use <code>arduino-cli</code> directly for dev work.
+    </div>
+
+    <h3>Usage</h3>
+    <pre><code>py -3 produce.py                    # fully interactive
+py -3 produce.py CROW7              # skip board prompt
+py -3 produce.py CROW7 COM5         # skip board + port detection
+echo "n" | py -3 produce.py CROW7 COM5   # skip demo + registration prompts</code></pre>
+
+    <h3>Supported Boards</h3>
+    <table>
+        <tr><th>Board key</th><th>Chip</th><th>Product line</th><th>Bin prefix</th></tr>
+        <tr><td><code>CROW7</code></td><td>ESP32-S3</td><td>Tidesy L &mdash; 7&Prime; Crowpanel</td><td><code>70</code></td></tr>
+        <tr><td><code>CROW5</code></td><td>ESP32-S3</td><td>Tidesy M &mdash; 5&Prime; Crowpanel</td><td><code>50</code></td></tr>
+        <tr><td><code>CROW35</code></td><td>ESP32</td><td>Crowpanel 3.5&Prime;</td><td><code>35</code></td></tr>
+        <tr><td><code>CROW28</code></td><td>ESP32</td><td>Crowpanel 2.8&Prime;</td><td><code>28</code></td></tr>
+        <tr><td><code>CYD</code></td><td>ESP32</td><td>Cheap Yellow Display</td><td><code>CY</code></td></tr>
+        <tr><td><code>CREP42</code></td><td>ESP32-S3</td><td>Crowpanel 4.2&Prime; e-paper</td><td><code>EP</code></td></tr>
+    </table>
+
+    <h3>Interactive Prompts</h3>
+    <ol>
+        <li><strong>Board</strong> &mdash; skipped if passed as first argument. CROW7 is the default.</li>
+        <li><strong>Demo build? [y/N]</strong> &mdash; yes prompts for a customer name; the name is compiled into the firmware via a <code>-DDEMO_BUILD=&quot;...&quot;</code> flag and propagated to the cloud registration.</li>
+        <li><strong>Register with Tidesy Cloud? [y/N]</strong> &mdash; default <strong>No</strong>. See &ldquo;Cloud Registration&rdquo; below.</li>
+    </ol>
+
+    <h3>Production Sequence</h3>
+    <table>
+        <tr><th>Step</th><th>Action</th><th>Tool</th></tr>
+        <tr><td>1</td><td>Erase flash</td><td><code>esptool erase_flash</code></td></tr>
+        <tr><td>2</td><td>Build + upload LittleFS (stations.dat, help.html, logo)</td><td><code>mklittlefs</code> + <code>esptool</code></td></tr>
+        <tr><td>3</td><td>Compile firmware with <code>-D&lt;BOARD&gt;</code> define and board-specific FQBN</td><td><code>arduino-cli compile</code></td></tr>
+        <tr><td>4</td><td>Upload firmware (using the same FQBN so partition table matches)</td><td><code>arduino-cli upload</code></td></tr>
+        <tr><td>5</td><td>Verify: read chip ID, dump boot log for ~10 s</td><td><code>esptool chip_id</code> + <code>arduino-cli monitor</code></td></tr>
+    </table>
+    <p>Any step failure aborts the script immediately. The board is considered unshippable on failure and must be re-run from step 1.</p>
+
+    <h3>Auto-Detection</h3>
+    <p>The script auto-detects platform and tool paths on each run:</p>
+    <ul>
+        <li><strong>arduino-cli</strong> &mdash; checks <code>C:\Program Files\Arduino CLI</code>, <code>F:\Program Files\Arduino CLI</code>, Arduino IDE bundled, Homebrew on Apple Silicon, and <code>$PATH</code>.</li>
+        <li><strong>esptool</strong> &mdash; prefers <code>python3 -m esptool</code> on Mac (for Apple Silicon), Arduino15 binary on Windows, <code>$PATH</code> fallback elsewhere.</li>
+        <li><strong>libraries path</strong> &mdash; Windows: <code>c:/Users/bernh/OneDrive/Arduino/libraries</code>. macOS: OneDrive then <code>~/Documents/Arduino/libraries</code>.</li>
+        <li><strong>Serial port</strong> &mdash; <code>arduino-cli board list</code> picks the first matching ESP32 device.</li>
+    </ul>
+
+    <h3>Cloud Registration</h3>
+    <p>When the operator answers <strong>y</strong> to the registration prompt, after a clean flash the script runs <code>esptool read_mac</code>, parses the MAC address, and <code>POST</code>s a record to <code>https://app.tidesy.com/api/admin/produce</code>.</p>
+
+    <h4>Authentication</h4>
+    <p>The endpoint is gated by a shared secret in the <code>X-Produce-Secret</code> header, compared in constant time against the server&rsquo;s <code>TIDESY_PRODUCE_SECRET</code> environment variable. The script reads the same value from its own environment. <strong>If the variable is unset, the call is skipped with a warning</strong> &mdash; production firmware is already flashed, so a missing secret never aborts a run.</p>
+
+    <table>
+        <tr><th>Platform</th><th>Command</th></tr>
+        <tr><td>Windows</td><td><code>setx TIDESY_PRODUCE_SECRET "...secret..."</code> (new shell required)</td></tr>
+        <tr><td>macOS (zsh)</td><td><code>echo 'export TIDESY_PRODUCE_SECRET="...secret..."' &gt;&gt; ~/.zshrc</code></td></tr>
+        <tr><td>Vercel</td><td>Project Settings &rarr; Environment Variables &rarr; Production</td></tr>
+    </table>
+    <p>All four environments (Seattle, Beach, Laptop, Beach Mac) plus Vercel must share the same value.</p>
+
+    <h4>Payload</h4>
+    <pre><code>{
+  "mac_address": "aa:bb:cc:dd:ee:ff",
+  "board_type": "CROW7",
+  "firmware_version": "3.1.0 UNI",
+  "firmware_build": 57,
+  "demo_customer": null,
+  "produced_by": "&lt;hostname&gt;"
+}</code></pre>
+
+    <h4>Idempotency</h4>
+    <p>The server upserts by <code>mac_address</code>. Re-flashing an already-produced board returns <code>{ already_existed: true }</code> and the script prints a note with the original production date &mdash; it does <strong>not</strong> overwrite <code>produced_at</code>, so the inventory history is preserved.</p>
+
+    <h4>Back-fill</h4>
+    <p>Devices that shipped before the cloud registration feature existed are back-filled automatically. When any device calls <code>POST /api/sync</code> with a MAC that has no <code>produced_devices</code> row, the cloud creates a sparse inventory record (firmware version and build from prefs; <code>produced_at</code>, <code>board_type</code>, <code>produced_by</code>, and <code>demo_customer</code> left blank). The operator fills in the missing fields manually at <code>/admin/produced/&lt;mac&gt;</code>.</p>
+
+    <h3>Output Artifacts</h3>
+    <p>After a successful run, <code>produce.py</code> does not write binaries anywhere the user needs to touch &mdash; binaries end up in the per-board arduino-cli build directory. For archival release binaries, use <a href="#sec-release"><code>release.py</code></a> instead.</p>
+</div>
+
+
+<!-- ==================== 8. RELEASE SCRIPT ==================== -->
+<div class="section-header" id="sec-release">
+    <h2>8. Release Script (<code>release.py</code>)</h2>
+</div>
+<div class="section manual-section">
+    <h3>Purpose</h3>
+    <p><code>release.py</code> compiles production-quality firmware for every board, publishes the binaries as assets on a GitHub Release, updates the OTA manifest with the new download URLs, stamps user-facing docs with the version and release date, and publishes the updated docs to GitHub Pages. It ends with a manual step to upload the refreshed manifest to Shopify.</p>
+
+    <div class="note-box">
+        <strong>Audience:</strong> project maintainer cutting a new firmware version. Not run on assembly machines.
+    </div>
+
+    <h3>Usage</h3>
+    <pre><code>py -3 release.py          # fully interactive
+</code></pre>
+
+    <h3>Pre-flight Checklist</h3>
+    <ol>
+        <li>Bump <code>VERSION_STR</code> and <code>VERSION_INT</code> in <code>Version.h</code> (script aborts if the version string is missing from the file).</li>
+        <li>Reset <code>BUILD_NUMBER</code> to 0 on a version bump.</li>
+        <li>Create <code>.release.env</code> next to <code>release.py</code> with a GitHub personal access token:
+            <pre><code>GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx</code></pre>
+            or export <code>GITHUB_TOKEN</code> in the shell. The token needs the <code>public_repo</code> scope (or <code>repo</code> for private).</li>
+        <li>Make sure <code>requests</code> is installed: <code>py -3 -m pip install requests</code></li>
+    </ol>
+
+    <h3>Interactive Prompts</h3>
+    <ol>
+        <li><strong>Version</strong> &mdash; defaults to the value currently in <code>Version.h</code>.</li>
+        <li><strong>Release date</strong> &mdash; defaults to today.</li>
+        <li><strong>Boards</strong> &mdash; multi-select, defaults to all three user-facing boards (CROW7, CROW5, CYD).</li>
+        <li><strong>Release notes</strong> &mdash; multi-line input; used for both the GitHub Release body and the manifest&rsquo;s <code>releaseNotes</code> field.</li>
+        <li><strong>Mandatory update?</strong> &mdash; yes marks the manifest&rsquo;s <code>mandatory</code> flag so devices OTA-update on next midnight check.</li>
+        <li><strong>Add in-app release message?</strong> &mdash; yes writes a dated message into <code>manifest.messages[]</code>, shown in the device admin panel.</li>
+        <li><strong>Dry run?</strong> &mdash; yes compiles and stops before any GitHub operations, useful for verifying the build produces valid binaries.</li>
+    </ol>
+
+    <h3>Release Sequence</h3>
+    <table>
+        <tr><th>Step</th><th>Action</th></tr>
+        <tr><td>0</td><td>Stamp <code>manual.html</code>, <code>tr-9f4a2b7e.html</code>, and the updater guide with the new version and release date.</td></tr>
+        <tr><td>1</td><td>Compile each selected board with <code>DEBUG_LEVEL=0</code>, screenshot disabled, and the matching <code>-D&lt;BOARD&gt;</code> define. Output <code>.bin</code> files land in <code>release/</code> with the naming scheme <code>tidesy_v&lt;VERSION_INT&gt;_&lt;prefix&gt;_&lt;date&gt;.bin</code>.</td></tr>
+        <tr><td>2</td><td>Create the GitHub Release (tag <code>v&lt;version&gt;</code>) and upload each firmware binary as an asset. If the tag already exists, the script asks for confirmation to delete and recreate.</td></tr>
+        <tr><td>3</td><td>Rewrite <code>tidesy_manifest.json</code> with the new release&rsquo;s GitHub download URLs, version, release date, mandatory flag, and notes. Optionally append an entry to <code>messages[]</code>.</td></tr>
+        <tr><td>4</td><td>Verify every firmware URL in the manifest is downloadable (HEAD request to each asset).</td></tr>
+        <tr><td>5</td><td>Bump the cache-busting timestamp in <code>UPGRADE_PATH</code> in <code>Tidesy.ino</code> so shipped devices fetch the new manifest on their next check.</td></tr>
+        <tr><td>6</td><td>Publish the updated docs (<code>docs/manual/</code>, <code>docs/updater/</code>, <code>tidesy_manifest.json</code>) to GitHub Pages in the <code>tidesy-firmware-releases</code> repository.</td></tr>
+        <tr><td>7</td><td>Open the Shopify Files admin in a browser and prompt for a manual upload of the new manifest (legacy path for v3.0.0/v3.0.1 devices).</td></tr>
+    </table>
+
+    <h3>Build Flags &amp; Artifacts</h3>
+    <p>Release builds differ from developer builds in two ways:</p>
+    <ul>
+        <li><code>DEBUG_LEVEL</code> is temporarily patched to <code>0</code> in <code>Version.h</code> during compile, then restored.</li>
+        <li><code>SCREENSHOT_CAPABLE</code> is forced off so shipped firmware does not write SD captures.</li>
+    </ul>
+    <p>Built binaries are copied both to <code>release/</code> (flat) and to <code>build/&lt;BOARD&gt;/</code> (per-board archive) for the commit.</p>
+
+    <h3>Dry Run</h3>
+    <p>Always dry-run before a real release. A dry run runs steps 0&ndash;1 only: docs stamping and the per-board compile. It prints the output filename and size, then stops before any GitHub operation. Use this to verify the version string, flags, and doc stamps before committing to a tag.</p>
+
+    <h3>Recovery</h3>
+    <table>
+        <tr><th>Symptom</th><th>Fix</th></tr>
+        <tr><td>GitHub release already exists</td><td>Script prompts to delete and recreate. Safe &mdash; the tag is re-pushed.</td></tr>
+        <tr><td>Manifest URL verification fails</td><td>GitHub asset upload probably timed out. Re-run with the &ldquo;delete and recreate&rdquo; prompt answered yes.</td></tr>
+        <tr><td>GitHub Pages not updated</td><td>Check <code>tidesy-firmware-releases</code> repo on the web; Pages can lag 30&ndash;60 s after push.</td></tr>
+        <tr><td>Shopify manifest out of date</td><td>Only affects v3.0.0 / v3.0.1 devices. Upload manually via Shopify admin (URL printed at the end of the run).</td></tr>
+    </table>
+
+    <h3>After a Release</h3>
+    <ol>
+        <li>Recompile the dev CROW7 build with your usual settings so the dev device is back to <code>DEBUG_LEVEL</code>&nbsp;&ne;&nbsp;0.</li>
+        <li><code>git add Tidesy.ino release/ build/</code></li>
+        <li><code>git commit -m "Release v&lt;version&gt;"</code></li>
+        <li><code>git push</code></li>
+    </ol>
 </div>
 
 
