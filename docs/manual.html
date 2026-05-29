@@ -10,7 +10,7 @@
 
 <!-- ========== NAV BAR ========== -->
 <nav class="nav-bar">
-    <div class="nav-brand">Tidesy Manual</div>
+    <div class="nav-brand">Tidesy Manual <span class="version-pill" style="display:inline-block;padding:3px 10px;margin-left:10px;background:#1f6feb;color:#fff;border-radius:11px;font-size:11px;font-weight:600;letter-spacing:0.3px;vertical-align:middle;">v3.1.0 &middot; May 29, 2026</span></div>
     <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu">&#9776;</button>
     <div class="nav-menu">
         <a href="#quick-setup">Quick Setup</a>
@@ -266,9 +266,9 @@
     <p>If you&rsquo;re upgrading from 3.0.x, here&rsquo;s what&rsquo;s new in your device:</p>
     <ul>
         <li><strong><a href="#sec-cloud">Tidesy Cloud</a></strong> &mdash; optional cloud-hosted dashboard at <code>app.tidesy.com</code> so you can check your tides from anywhere, not just your home network. Includes a free 6-month trial.</li>
-        <li><strong>Environment cards</strong> in <a href="#sec-views">Section 5</a> &mdash; rain forecast overlay, UV index, air quality, wave height + water temperature, and sun/moon overlay.</li>
-        <li><strong>Clamming view</strong> in <a href="#sec-views">Section 5</a> &mdash; Pacific Northwest razor clam dig windows + closures, fed live from WDFW.</li>
-        <li><strong>Flooding (inundation) overlay</strong> in <a href="#sec-views">Section 5</a> &mdash; color-coded warning band when a forecast high tide is set to exceed NOAA flood thresholds.</li>
+        <li><strong>Environment cards</strong> (<a href="#sec-views-environment">§5.2</a>) &mdash; rain forecast overlay, UV index, air quality, wave height + water temperature, and sun/moon overlay.</li>
+        <li><strong>Clamming view</strong> (<a href="#sec-views-clamming">§5.3</a>) &mdash; Pacific Northwest razor clam dig windows + closures, fed live from WDFW.</li>
+        <li><strong>Flooding (inundation) overlay</strong> (<a href="#sec-views-flooding">§5.4</a>) &mdash; color-coded warning band when a forecast high tide is set to exceed NOAA flood thresholds.</li>
         <li><strong>Alert area maps</strong> in <a href="#sec-alerts">Section 6</a> &mdash; the NWS-defined affected polygon is now drawn on both the device alert view and the web dashboard.</li>
         <li><strong>USB Web Updater</strong> in <a href="#sec-firmware">Section 11</a> &mdash; browser-based firmware flashing for devices on restrictive networks.</li>
     </ul>
@@ -671,6 +671,11 @@
     <h2>5. Device Views</h2>
 </div>
 <div class="section manual-section">
+
+    <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:8px 0 20px;border-radius:0 8px 8px 0;">
+        <h3 id="sec-views-primary" style="margin:0;font-size:1.15em;color:#1e40af;">5.1 &mdash; Primary Views</h3>
+    </div>
+
     <h3>Detail View (24-Hour Tide Graph)</h3>
     <p>The detail view shows a 24-hour tide curve as a filled graph:</p>
     <ul>
@@ -828,8 +833,10 @@
         </div>
     </div>
 
-    <h3>Environment Cards</h3>
-    <p>Tidesy can show additional environmental data alongside tides &mdash; rain timing, sun exposure (UV), air quality, surf conditions, and sunrise / sunset / moon phases. Each one is independently toggleable in the admin settings under <strong>Environment</strong>, so you can show only what&rsquo;s relevant to where you are.</p>
+    <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
+        <h3 id="sec-views-environment" style="margin:0;font-size:1.15em;color:#1e40af;">5.2 &mdash; Environment Cards</h3>
+    </div>
+    <p>Tidesy can show additional environmental data alongside tides &mdash; rain timing, sun exposure (UV), air quality, surf conditions, and sunrise / sunset / moon phases. Each one is independently toggleable in the device settings under <strong>Environment</strong>, so you can show only what&rsquo;s relevant to where you are.</p>
 
     <h4>Rain Forecast Overlay</h4>
     <p>A thin strip across the bottom of the detail view shows the next several hours of forecast precipitation. Blue blocks indicate rain probability and intensity at each hour, scaled so a fully filled block means heavy rain. The overlay disappears when no rain is forecast in the window.</p>
@@ -872,7 +879,9 @@
         </div>
     </div>
 
-    <h3>Clamming View</h3>
+    <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
+        <h3 id="sec-views-clamming" style="margin:0;font-size:1.15em;color:#1e40af;">5.3 &mdash; Clamming View</h3>
+    </div>
     <p>For Pacific Northwest beaches with active razor clamming, Tidesy shows the upcoming dig windows directly on the tide view. The dig window is the period around evening low tide when the Washington Department of Fish &amp; Wildlife (WDFW) has authorized harvest.</p>
     <ul>
         <li><strong>Green overlay band:</strong> Marks an open dig window on the detail view&rsquo;s tide curve. The width of the band shows the exact start and end times for legal harvest that evening.</li>
@@ -892,7 +901,9 @@
         <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The full clamming schedule page lists every approved dig window for your beach in date order.</p>
     </div>
 
-    <h3>Flooding (Inundation) Overlay</h3>
+    <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
+        <h3 id="sec-views-flooding" style="margin:0;font-size:1.15em;color:#1e40af;">5.4 &mdash; Flooding (Inundation) Overlay</h3>
+    </div>
     <p>For stations where coastal flooding is a concern, Tidesy shows a flood-risk overlay on the detail view. When the day&rsquo;s predicted high tide is forecast to exceed the NOAA minor / moderate / major flood thresholds for your station, a colored band appears across the top portion of the tide curve marking the at-risk hours.</p>
     <ul>
         <li><strong>Yellow band:</strong> Minor flooding likely &mdash; nuisance-level water on low-lying roads and shorelines.</li>
@@ -907,7 +918,9 @@
         <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Flood-risk overlay band on a high tide forecast to exceed the minor flooding threshold.</p>
     </div>
 
-    <h3>TidesyINK-Specific Display</h3>
+    <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
+        <h3 id="sec-views-ink" style="margin:0;font-size:1.15em;color:#1e40af;">5.5 &mdash; TidesyINK-Specific Display</h3>
+    </div>
     <ul>
         <li><strong>Monochrome only:</strong> Black and white rendering &mdash; no color customization available.</li>
         <li><strong>Font:</strong> FreeSans family at various sizes (8pt, 9pt, 12pt, 18pt).</li>
@@ -1191,10 +1204,10 @@
     <p>Everything described above is the <strong>local dashboard</strong> &mdash; it lives on your device and is only reachable from the same WiFi network. Tidesy also offers an optional <strong>cloud-hosted dashboard</strong> at <code>https://app.tidesy.com</code> so you can check your tides and conditions from anywhere &mdash; on your phone away from home, on a laptop at the office, shared with family on a different network. Cloud is fully opt-in. Nothing leaves your device until you turn it on.</p>
 
     <h4>Opting in</h4>
-    <p>To enable Tidesy Cloud, open the admin panel (<code>http://tidesy.local/admin</code>), scroll to the <strong>Tidesy Cloud</strong> card, and tap <strong>Enable</strong>. The first time you do this, a consent dialog appears summarizing what gets sent to the cloud (your station IDs, display preferences, and a randomly-generated device token &mdash; never your WiFi password or any personal information). Accept to continue. The device will sync its configuration to the cloud within a few seconds and the same card will show your dashboard URL.</p>
+    <p>Open the local dashboard at <code>http://tidesy.local</code> (or your device&rsquo;s IP) and click the <strong>&#9729; Cloud</strong> button in the top-right action bar. The first time you click it, a consent dialog titled <strong>&ldquo;Enable Tidesy Cloud?&rdquo;</strong> appears, listing exactly what gets sent to the cloud (a random device token, the MAC address, your NOAA station IDs and coordinates, your display preferences, and the firmware version). Click <strong>I Agree, Enable Cloud</strong> to continue, or <strong>No Thanks</strong> to back out. The device immediately syncs to the cloud and a follow-up dialog appears with your dashboard URL.</p>
 
     <h4>Your dashboard URL</h4>
-    <p>After consent, your dashboard is reachable at <code>https://app.tidesy.com/d/&lt;token&gt;</code>. The token is a random string unique to your device &mdash; bookmark the URL on your phone or share it with anyone in your household. Anyone with the URL can view the dashboard but cannot change your device&rsquo;s configuration. To revoke access (for example, if you ever shared a URL you wish to recall), factory-reset the device; a fresh token is issued on the next consent.</p>
+    <p>After consent, the <strong>Tidesy Cloud Dashboard</strong> dialog shows your URL in the form <code>https://app.tidesy.com/d/&lt;token&gt;</code>. Click <strong>Copy Link</strong> to copy it to your clipboard, then paste it into a phone bookmark, send it to family, or open it in any browser. The token is a random string unique to your device &mdash; anyone with the URL can view the dashboard but cannot change your device&rsquo;s configuration. To revoke access (for example, if you ever shared a URL you wish to recall), factory-reset the device; a fresh token is issued on the next consent. The same <strong>&#9729; Cloud</strong> button on the dashboard re-opens this URL dialog any time after the first opt-in.</p>
 
     <div class="screenshot-placeholder">
         <div class="screenshot-annotated">
@@ -1237,7 +1250,7 @@
     <p>Tidesy Cloud sees only what you&rsquo;ve told the device to display: station IDs, display preferences (theme, brightness hours, warning levels), and a random device token. It does not see your WiFi password, your name, or anything you didn&rsquo;t explicitly configure on the device. See <a href="#sec-privacy">Section 17 (Privacy &amp; Data)</a> for the full data-flow breakdown.</p>
 
     <h4>Turning it off</h4>
-    <p>To stop syncing to the cloud, return to the admin panel&rsquo;s Tidesy Cloud card and tap <strong>Disable</strong>. The device immediately stops pushing config updates, and your cloud-side data is removed within 24 hours. Your local dashboard is unaffected.</p>
+    <p>To stop syncing and remove your cloud-side data, factory-reset the device (see <a href="#sec-reset">Section 16</a>). The consent dialog mentions this explicitly: &ldquo;You can remove your cloud data at any time with a factory reset.&rdquo; After the reset the device boots fresh with no cloud token, your previous dashboard URL stops working immediately, and the cloud-side data is purged within 24 hours. Your local dashboard returns to its pre-consent state automatically.</p>
 </div>
 
 
@@ -1663,7 +1676,7 @@
         <tr><th>Problem</th><th>Solution</th></tr>
         <tr>
             <td>Cloud dashboard URL won&rsquo;t load</td>
-            <td>Make sure you&rsquo;ve opted in via the admin panel&rsquo;s Tidesy Cloud card and that the device has reached the cloud at least once (the card shows a dashboard URL after the first sync). If the URL is blank, force a sync by tapping <strong>Sync Now</strong>. If <code>app.tidesy.com</code> is unreachable in your browser, check that you&rsquo;re online and that no firewall is blocking it.</td>
+            <td>Make sure you&rsquo;ve clicked the <strong>&#9729; Cloud</strong> button on the local dashboard and accepted the consent dialog at least once. If the URL dialog shows &ldquo;Sync failed&rdquo; in red, the device couldn&rsquo;t reach <code>app.tidesy.com</code> &mdash; check that the device has internet access (other live data should be loading). If the URL loads in your browser but shows a blank page, give it a few seconds for the cloud to pick up your config, then hard-refresh (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd>). If <code>app.tidesy.com</code> itself is unreachable, check that you&rsquo;re online and that no firewall is blocking it.</td>
         </tr>
         <tr>
             <td>Trial countdown banner missing</td>
@@ -1675,7 +1688,7 @@
         </tr>
         <tr>
             <td>Dashboard shows old configuration</td>
-            <td>The device pushes config on a change-detection schedule. Open the admin panel, change any setting (and change it back), and tap Save to force a fresh push. The cloud will reflect the change within seconds.</td>
+            <td>Re-click the <strong>&#9729; Cloud</strong> button on the local dashboard. Opening the URL dialog triggers a fresh sync automatically &mdash; the status line at the bottom of the dialog shows <strong>&ldquo;Syncing to cloud&hellip;&rdquo;</strong> then <strong>&ldquo;&check; Synced to cloud&rdquo;</strong> when complete. The cloud dashboard will reflect the new config within seconds.</td>
         </tr>
         <tr>
             <td>Want to revoke a dashboard URL I shared</td>
@@ -1791,7 +1804,7 @@
         <li>Your home location coordinates (only the station coordinates, which are public NOAA data)</li>
         <li>Any browsing data, usage analytics, or telemetry</li>
     </ul>
-    <p>To stop the data flow at any time, disable Tidesy Cloud in the admin panel. Your cloud-side data is purged within 24 hours. To revoke a dashboard URL you&rsquo;ve shared, factory-reset the device &mdash; a fresh token is issued on the next opt-in.</p>
+    <p>To stop the data flow at any time, factory-reset the device (see <a href="#sec-reset">Section 16</a>). Your cloud-side data is purged within 24 hours and any URL you&rsquo;ve shared stops working immediately. A fresh token is issued on the next opt-in if you ever re-enable Tidesy Cloud.</p>
 
     <h3>Local Storage</h3>
     <p>All settings are stored securely on the device. WiFi passwords are encrypted.</p>
