@@ -485,7 +485,7 @@
     <h3>TidesyL (7") <span class="badge badge-l">Flagship</span></h3>
     <p>The largest Tidesy model with a 7-inch 800&times;480 color LCD and touchscreen. Tap the tide graph to see the tide value at any point in time. Tap the large number view to toggle a bar chart overlay. Ideal for a desk, shelf, or wall-mounted display.</p>
 
-    <img src="images/crow7-detail-without-alerts.png" alt="TidesyL detail view showing tide graph" style="max-width:100%; border-radius:8px; margin:16px 0; border:1px solid var(--border);">
+    <img src="images/crow7-detail-features.png" alt="TidesyL detail view showing tide graph with conditions, alerts, and overlays" style="max-width:100%; border-radius:8px; margin:16px 0; border:1px solid var(--border);">
     <div class="callout-list">
         <div class="callout-item"><span class="callout-num">1</span> Station name header with weather info</div>
         <div class="callout-item"><span class="callout-num">2</span> Tide curve with color-coded positive/negative regions</div>
@@ -497,7 +497,7 @@
     <h3>TidesyM (5") <span class="badge badge-m">Mid-size</span></h3>
     <p>Same 800&times;480 resolution and touchscreen as TidesyL, in a more compact 5-inch form factor. Identical software features including graph interaction and bar chart overlay.</p>
 
-    <img src="images/crow7-large-view-falling.png" alt="TidesyM large view showing tide numbers" style="max-width:100%; border-radius:8px; margin:16px 0; border:1px solid var(--border);">
+    <img src="images/crow7-large-view.png" alt="TidesyM large view showing big tide numbers, MLLW value, bar chart, and conditions" style="max-width:100%; border-radius:8px; margin:16px 0; border:1px solid var(--border);">
     <div class="callout-list">
         <div class="callout-item"><span class="callout-num">1</span> Station name header</div>
         <div class="callout-item"><span class="callout-num">2</span> Four tide values (High/Low) with times, color-coded blue (high) and red (low)</div>
@@ -562,7 +562,7 @@
     <p>If you need to override the timezone temporarily (e.g., while traveling), use the <strong>TZ override</strong> option in the Config popup on the web dashboard. This override lasts for the current session only and resets on reboot.</p>
 
     <div class="screenshot-placeholder">
-        <img src="images/config-tz-override.png" alt="Configuration popup with UTC offset timezone override" style="max-width:500px;border-radius:8px;border:1px solid var(--border);">
+        <img src="images/device-configuration.png" alt="Tidesy Configuration popup" style="max-width:500px;border-radius:8px;border:1px solid var(--border);">
         <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The Config popup showing the UTC offset override at the bottom.</p>
     </div>
 
@@ -660,7 +660,7 @@
     </ul>
 
     <div class="screenshot-placeholder">
-        <img src="images/edit-settings-bottom.png" alt="Edit Settings showing color pickers and Vestaboard configuration" style="max-width:400px;border-radius:8px;border:1px solid var(--border);">
+        <img src="images/edit-settings-colors.png" alt="Edit Settings showing color pickers and Vestaboard configuration" style="max-width:400px;border-radius:8px;border:1px solid var(--border);">
         <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Colors and Vestaboard sections in Edit Settings.</p>
     </div>
 </div>
@@ -703,7 +703,34 @@
 
     <div class="screenshot-placeholder">
         <div class="screenshot-annotated">
-            <img src="images/crow7-detail-without-alerts.png" alt="Detail view on TidesyL showing 24-hour tide graph">
+            <img src="images/crow7-detail-features.png" alt="TidesyL detail view showing tide curve, conditions strip, alert overlay, surge, and bottom mini-strips">
+            <span class="callout-pin" style="top:11%;left:48%">1</span>
+            <span class="callout-pin" style="top:7%;left:87%">2</span>
+            <span class="callout-pin" style="top:18%;left:5%">3</span>
+            <span class="callout-pin" style="top:42%;left:5%">4</span>
+            <span class="callout-pin" style="top:30%;left:50%">5</span>
+            <span class="callout-pin" style="top:55%;left:35%">6</span>
+            <span class="callout-pin" style="top:14%;left:60%">7</span>
+            <span class="callout-pin" style="top:90%;left:30%">8</span>
+            <span class="callout-pin" style="top:96%;left:50%">9</span>
+        </div>
+        <div class="callout-list">
+            <div class="callout-item"><span class="callout-num">1</span> Conditions chip strip &mdash; temperature, wind, water temp, waves, UV, and AQI at a glance</div>
+            <div class="callout-item"><span class="callout-num">2</span> NWS alert banner top-right (severity-colored) with current-of-total counter</div>
+            <div class="callout-item"><span class="callout-num">3</span> Station info badge &mdash; station rotation order, NOAA station ID, and tide datum (MLLW)</div>
+            <div class="callout-item"><span class="callout-num">4</span> Moon phase + per-station summary chips (water temp, waves, surge, daylight low)</div>
+            <div class="callout-item"><span class="callout-num">5</span> &ldquo;Now&rdquo; box &mdash; current tide value and rise/sink rate (yellow on black; outline blinks when in a warning or preferred zone)</div>
+            <div class="callout-item"><span class="callout-num">6</span> Surge overlay (orange dashed band) &mdash; visualizes where observed sea level deviates from the tide prediction</div>
+            <div class="callout-item"><span class="callout-num">7</span> Alert overlay ribbon inside the graph &mdash; shows the hours of the day the active alert applies to</div>
+            <div class="callout-item"><span class="callout-num">8</span> Daylight day/night band &mdash; sunrise, daytime, sunset, and night across 24 hours</div>
+            <div class="callout-item"><span class="callout-num">9</span> Per-hour Rain / Waves / UV mini-strips &mdash; colored block per hour</div>
+        </div>
+    </div>
+
+    <p>Here is the same view on a daylight-saving-time transition day, with the <span class="badge-illustration badge-dst">DST</span> badge visible in the top-right corner and a red line / dimmed fill marking the affected hour:</p>
+    <div class="screenshot-placeholder">
+        <div class="screenshot-annotated">
+            <img src="images/crow7-detail-without-alerts.png" alt="Detail view on TidesyL showing 24-hour tide graph with DST badge">
             <span class="callout-pin" style="top:4%;left:25%">1</span>
             <span class="callout-pin" style="top:7%;left:60%">2</span>
             <span class="callout-pin" style="top:30%;left:5%">3</span>
@@ -744,34 +771,33 @@
 
     <div class="screenshot-placeholder">
         <div class="screenshot-annotated">
-            <img src="images/large-view-with-bar-in-preferred.png" alt="Large view on TidesyL showing tide values and bar chart">
+            <img src="images/crow7-large-view.png" alt="TidesyM large view showing big tide numbers, MLLW current value, bar chart, and conditions box">
             <span class="callout-pin" style="top:3%;left:25%">1</span>
-            <span class="callout-pin" style="top:35%;left:20%">2</span>
-            <span class="callout-pin" style="top:28%;left:62%">3</span>
-            <span class="callout-pin" style="top:23%;left:68%">4</span>
-            <span class="callout-pin" style="top:55%;left:50%">5</span>
-            <span class="callout-pin" style="top:40%;left:80%">6</span>
-            <span class="callout-pin" style="top:92%;left:75%">7</span>
-            <span class="callout-pin" style="top:3%;left:95%">8</span>
+            <span class="callout-pin" style="top:5%;left:55%">2</span>
+            <span class="callout-pin" style="top:8%;left:96%">3</span>
+            <span class="callout-pin" style="top:13%;left:85%">4</span>
+            <span class="callout-pin" style="top:40%;left:13%">5</span>
+            <span class="callout-pin" style="top:52%;left:45%">6</span>
+            <span class="callout-pin" style="top:48%;left:60%">7</span>
+            <span class="callout-pin" style="top:32%;left:80%">8</span>
+            <span class="callout-pin" style="top:60%;left:78%">9</span>
+            <span class="callout-pin" style="top:88%;left:88%">10</span>
         </div>
         <div class="callout-list">
             <div class="callout-item"><span class="callout-num">1</span> Station name header</div>
-            <div class="callout-item"><span class="callout-num">2</span> Four tide values with times (blue = high, red = low)</div>
-            <div class="callout-item"><span class="callout-num">3</span> Rising triangle indicator with tide rate (+1.1ft/h)</div>
-            <div class="callout-item"><span class="callout-num">4</span> Tide datum label (MLLW)</div>
-            <div class="callout-item"><span class="callout-num">5</span> Center bar graph with warning (red dashed) and preferred (orange dashed) levels</div>
-            <div class="callout-item"><span class="callout-num">6</span> Current tide value box (orange border = in preferred range)</div>
-            <div class="callout-item"><span class="callout-num">7</span> Temperature and wind conditions</div>
-            <div class="callout-item"><span class="callout-num">8</span> Countdown timer</div>
+            <div class="callout-item"><span class="callout-num">2</span> Clamming indicator &mdash; shows the next dig window of the day (when clamming is enabled and a window exists)</div>
+            <div class="callout-item"><span class="callout-num">3</span> Countdown timer to next 6-minute refresh</div>
+            <div class="callout-item"><span class="callout-num">4</span> NWS alert banner with severity color and current-of-total counter</div>
+            <div class="callout-item"><span class="callout-num">5</span> Four tide values with times (blue = high, red = low)</div>
+            <div class="callout-item"><span class="callout-num">6</span> Center bar chart &mdash; current tide position with warning level (red), preferred range (orange), and full-day min/max markers</div>
+            <div class="callout-item"><span class="callout-num">7</span> Surge indicator on the bar chart &mdash; shows observed offset from prediction (e.g., +0.5ft)</div>
+            <div class="callout-item"><span class="callout-num">8</span> Current MLLW value &mdash; big red number on the right with tide datum label</div>
+            <div class="callout-item"><span class="callout-num">9</span> Rising/falling triangle and rate badge (red down-arrow + negative rate = falling)</div>
+            <div class="callout-item"><span class="callout-num">10</span> Conditions box &mdash; temperature, wind, rain status, water temp, waves, UV, AQI, surge, and moon phase</div>
         </div>
     </div>
 
-    <p>Here is the large view during a falling tide &mdash; note the downward red triangle and negative rate badge:</p>
-    <div class="screenshot-placeholder">
-        <div class="screenshot-annotated">
-            <img src="images/crow7-large-view-falling.png" alt="Large view showing falling tide with downward triangle">
-        </div>
-    </div>
+    <p>The triangle and rate badge change with tide direction: a <strong>blue upward triangle</strong> with a positive rate (e.g., <code>+1.1 ft/h</code>) means the tide is rising, while a <strong>red downward triangle</strong> with a negative rate (e.g., <code>&minus;2.1 ft/h</code>) means it is falling. The triangle fades in and out on a 4-second cycle so the direction is easy to spot from across the room.</p>
 
     <h3>View Cycling</h3>
     <p>When the display format is set to <strong>Both</strong>, Tidesy auto-cycles between the Detail and Large views. The cycle happens each time the data refreshes (every 6 minutes).</p>
@@ -842,7 +868,7 @@
     <p>A thin strip across the bottom of the detail view shows the next several hours of forecast precipitation. Blue blocks indicate rain probability and intensity at each hour, scaled so a fully filled block means heavy rain. The overlay disappears when no rain is forecast in the window.</p>
     <div class="screenshot-placeholder">
         <div class="screenshot-annotated">
-            <img src="images/detail-rain-overlay-clean.png" alt="Detail view with rain forecast overlay strip at the bottom">
+            <img src="images/crow7-rain-card.png" alt="Detail view with rain forecast overlay strip at the bottom">
         </div>
         <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Rain overlay on a clean tide view &mdash; the strip below the tide curve marks each hour with a probability-weighted block.</p>
     </div>
@@ -894,12 +920,7 @@
         </div>
         <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Detail view with the dig-window band drawn over the evening low tide. The band only renders during the authorized hours.</p>
     </div>
-    <div class="screenshot-placeholder">
-        <div class="screenshot-annotated">
-            <img src="images/crow7-clamming-detail.png" alt="Clamming detail page showing upcoming dig windows">
-        </div>
-        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The full clamming schedule page lists every approved dig window for your beach in date order.</p>
-    </div>
+    <p>The full clamming schedule page is laid out as a calendar-style table: one row per upcoming evening, listing the date, the approved dig window start and end times in 12-hour format, and the low tide value during the window. Days outside the season or under a WDFW advisory show as gray rows with the closure reason in place of times. The page rotates into the cycle a few seconds after the tide views so you don&rsquo;t miss your next opportunity.</p>
 
     <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
         <h3 id="sec-views-flooding" style="margin:0;font-size:1.15em;color:#1e40af;">5.4 &mdash; Flooding (Inundation) Overlay</h3>
@@ -1005,18 +1026,12 @@
     </div>
 
     <h3>Alert Area Map</h3>
-    <p>NWS alerts include a polygon defining the affected geographic area. On the device, the full-screen alert view shows this polygon over a small map in the corner so you can see at a glance how much of the surrounding area is affected and whether you&rsquo;re near the edge or in the heart of the warning zone.</p>
+    <p>NWS alerts include a polygon defining the affected geographic area. The device itself doesn&rsquo;t render the polygon &mdash; the on-screen alert view is text-only (event name, severity, area, effective / expires, WHAT / WHERE / WHEN / IMPACTS) so it stays legible at a glance. To see the polygon, open the web dashboard: its alert detail card draws the affected area at full resolution alongside your configured stations, so you can see exactly how much of the surrounding region is covered and where you sit relative to the warning zone.</p>
     <div class="screenshot-placeholder">
         <div class="screenshot-annotated">
-            <img src="images/crow7-alert-area-map.png" alt="Device alert view with NWS polygon area map">
+            <img src="images/cloud-alert-polygon-map.png" alt="Web dashboard alert card with full-resolution NWS polygon map">
         </div>
-        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The polygon is drawn directly from the NWS alert payload. Your configured stations are pinned on the same map so you can see the geographic relationship.</p>
-    </div>
-    <p>The web dashboard renders the same polygon at full resolution on its alert detail card:</p>
-    <div class="screenshot-placeholder">
-        <div class="screenshot-annotated">
-            <img src="images/cloud-alert-polygon-map.png" alt="Web dashboard alert card with full-resolution polygon map">
-        </div>
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The polygon is drawn directly from the NWS alert payload. Your configured stations are pinned on the same map so the geographic relationship is obvious.</p>
     </div>
 
     <h3>Alert Display on Web Dashboard</h3>
@@ -1474,7 +1489,10 @@
         <li>Choosing the firmware version you want to install from a dropdown.</li>
         <li>Clicking <strong>Flash</strong> &mdash; progress is shown in the browser.</li>
     </ol>
-    <p>The whole flash takes about a minute. The device restarts automatically when finished, and all your settings are preserved (the updater never erases your configuration, only the firmware partition). You can also use the Web Updater to downgrade to an older firmware version if needed.</p>
+    <p>The whole flash takes about a minute. The device restarts automatically when finished, and all your settings are preserved (the updater never erases your configuration, only the firmware partition).</p>
+    <div class="warning-banner" style="background:#fff4e5;border-left:4px solid #d97706;color:#7c2d12;">
+        <strong>Web Updater carries only the latest release.</strong> Unlike the device&rsquo;s built-in OTA &mdash; which lets you select any version from the CDN manifest including older ones &mdash; the Web Updater always installs the current published firmware. For a deliberate downgrade or to install an older test build, use the OTA version selector from the device&rsquo;s web dashboard instead.
+    </div>
 
 </div>
 
