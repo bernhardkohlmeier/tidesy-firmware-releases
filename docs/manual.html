@@ -10,7 +10,7 @@
 
 <!-- ========== NAV BAR ========== -->
 <nav class="nav-bar">
-    <div class="nav-brand">Tidesy Manual <span class="version-pill" style="display:inline-block;padding:3px 10px;margin-left:10px;background:#1f6feb;color:#fff;border-radius:11px;font-size:11px;font-weight:600;letter-spacing:0.3px;vertical-align:middle;">v3.1.0 &middot; May 29, 2026</span></div>
+    <div class="nav-brand">Tidesy Manual <span class="version-pill" style="display:inline-block;padding:3px 10px;margin-left:10px;background:#1f6feb;color:#fff;border-radius:11px;font-size:11px;font-weight:600;letter-spacing:0.3px;vertical-align:middle;">v3.1.0 &middot; August 27, 2026</span></div>
     <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu">&#9776;</button>
     <div class="nav-menu">
         <a href="#quick-setup">Quick Setup</a>
@@ -311,7 +311,7 @@
     <p>Tidesy is a dedicated smart display that brings real-time coastal data to your desk, wall, or countertop:</p>
     <ul>
         <li><strong>Tide Predictions</strong> &mdash; 24-hour tide curves and high/low values from NOAA harmonic station data, updated every 6 minutes.</li>
-        <li><strong>Current Weather</strong> &mdash; Temperature and wind conditions from MET Norway&rsquo;s open weather API.</li>
+        <li><strong>Current Weather</strong> &mdash; Temperature and wind conditions from Open-Meteo.</li>
         <li><strong>NWS Weather Alerts</strong> &mdash; Active weather alerts (coastal flood, high surf, storm warnings, etc.) from the National Weather Service.</li>
         <li><strong>Multi-Station Monitoring</strong> &mdash; Track up to 3 tide stations simultaneously, cycling automatically.</li>
         <li><strong>Web Dashboard</strong> &mdash; Full-featured web interface accessible from any device on your local network.</li>
@@ -1451,9 +1451,9 @@
             <td>Weather alerts</td>
         </tr>
         <tr>
-            <td>MET Norway</td>
-            <td>api.met.no</td>
-            <td>Current weather (temperature, wind)</td>
+            <td>Open-Meteo</td>
+            <td>app.tidesy.com/api/driftwood/device/openmeteo (proxy to customer-api.open-meteo.com)</td>
+            <td>Current weather (temperature, wind), hourly forecast, marine, UV, AQI</td>
         </tr>
         <tr>
             <td>IP Location Service</td>
@@ -1518,54 +1518,163 @@
     <h2>12. TidesyINK Special Features</h2>
 </div>
 <div class="section manual-section">
-    <h3>Power Modes</h3>
+    <p><span class="badge badge-ink">TidesyINK</span> is the battery-capable model, and it
+    behaves differently from every other Tidesy in ways that are worth reading before you set
+    one up. Most of the differences come from one property of e-paper: <strong>it holds its
+    picture with no power at all.</strong> That is what makes the display readable for months
+    on a battery, and it is also why a TidesyINK does several things the other models do not.</p>
+
+    <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
+        <h3 id="sec-ink-activation" style="margin:0;font-size:1.15em;color:#1e40af;">12.1 &mdash; First power-on</h3>
+    </div>
+    <p>A brand-new TidesyINK arrives showing an arrow pointing at the <strong>MENU</strong>
+    button, the words <em>&ldquo;Connect to Power and push button for Setup&rdquo;</em>, and the
+    Tidesy INK mark. The device is <strong>asleep</strong>, not running.</p>
+
+    <p>To start it:</p>
+    <ol>
+        <li>Connect USB-C power (or fit a charged battery).</li>
+        <li>Press <strong>MENU</strong>. <strong>OK</strong> appears on screen within a second
+            or so to confirm the press.</li>
+        <li>The device boots into the normal setup wizard &mdash; see
+            <a href="#sec-wizard">Section 4</a>.</li>
+    </ol>
+
+    <div class="note-box">
+        <strong>Why the extra button press?</strong> E-paper keeps its last image with the power
+        off. Without this step a TidesyINK sitting unpowered in its box would sit there showing a
+        perfectly convincing setup screen, and you would have no way to tell whether it was
+        switched on. The sleep screen says plainly that it is not.
+    </div>
+
+    <p>This only happens once, on the first power-on after manufacture. After that the device
+    boots straight through. A factory reset does <em>not</em> bring it back.</p>
+
+    <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
+        <h3 id="sec-ink-controls" style="margin:0;font-size:1.15em;color:#1e40af;">12.2 &mdash; Controls</h3>
+    </div>
+    <p>The buttons on the front of a TidesyINK are <strong>not active</strong> during normal
+    operation. Two things still work:</p>
     <table>
+        <tr><th>Button</th><th>What it does</th></tr>
         <tr>
-            <th>Mode</th>
-            <th>WiFi Behavior</th>
-            <th>Refresh Cycle</th>
-            <th>Best For</th>
+            <td><strong>MENU</strong></td>
+            <td>Wakes the device from the first-power-on sleep screen described above. It does
+                nothing once the device is running.</td>
         </tr>
         <tr>
-            <td><strong>High</strong></td>
-            <td>Always on</td>
-            <td>Continuous (every 6 min)</td>
-            <td>Plugged-in, always-on use</td>
-        </tr>
-        <tr>
-            <td><strong>Balanced</strong></td>
-            <td>On during fetch, off between</td>
-            <td>Every 6 minutes</td>
-            <td>General use (default)</td>
-        </tr>
-        <tr>
-            <td><strong>Low</strong></td>
-            <td>Minimal (only during fetch)</td>
-            <td>Sleeps between refreshes</td>
-            <td>Battery operation, max battery life</td>
+            <td><strong>RESET</strong></td>
+            <td>Restarts the device. Settings are not erased. Also the way to open the recovery
+                window described in 12.3.</td>
         </tr>
     </table>
 
-    <h3>Battery Monitoring</h3>
-    <p>TidesyINK monitors battery level and displays it on screen.</p>
+    <div class="note-box">
+        <strong>Why the buttons are disabled.</strong> A TidesyINK spends most of each refresh
+        cycle either fetching data or redrawing the screen, and it cannot respond to a button
+        during either. Presses landed or were ignored depending on what the device happened to be
+        doing, which felt broken. Rather than leave controls that work unpredictably, they are
+        switched off, and everything they did is available from the web dashboard.
+    </div>
 
-    <h3>E-Paper Characteristics</h3>
+    <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
+        <h3 id="sec-ink-dashboard" style="margin:0;font-size:1.15em;color:#1e40af;">12.3 &mdash; Web dashboard and recovery</h3>
+    </div>
+    <p>On TidesyINK the web dashboard is <strong>switched off by default</strong>. Serving it
+    means keeping the WiFi radio connected every second of the day, and on a battery that is the
+    single largest drain there is.</p>
+
+    <p>The device is still reachable. After <em>every</em> restart it stays on the network for
+    <strong>five minutes</strong>, and while that window is open the screen shows the address
+    along the bottom edge:</p>
+
+    <div class="tip-box">
+        <strong>To reach a TidesyINK:</strong> press <strong>RESET</strong>, then open
+        <strong>http://tidesy.local</strong> in a browser on the same network within five
+        minutes. The screen tells you the window is open. If <code>tidesy.local</code> does not
+        resolve on your network, use the device&rsquo;s IP address from your router instead.
+    </div>
+
+    <p>What you get depends on the setting:</p>
     <ul>
-        <li><strong>No backlight:</strong> Sunlight-readable, works in any lighting condition. Not visible in complete darkness.</li>
-        <li><strong>No color:</strong> All graphics are rendered in black and white.</li>
-        <li><strong>No animations:</strong> E-paper can only do full-screen refreshes. Partial updates may show ghosting.</li>
-        <li><strong>6-minute full refresh:</strong> The screen fully redraws every 6 minutes to clear ghosting artifacts.</li>
-        <li><strong>Slight ghosting:</strong> Faint traces of previous images between refreshes is normal for e-paper technology.</li>
+        <li><strong>Dashboard off (default):</strong> a page headed <em>Web server is off</em>
+            with a <strong>Turn on</strong> button. Pressing it enables the dashboard permanently
+            and restarts the device. The same page links to the admin panel, so firmware updates,
+            diagnostics and factory reset remain available without turning the dashboard on at
+            all.</li>
+        <li><strong>Dashboard on:</strong> the full dashboard, always available, with no
+            five-minute limit. The radio then stays connected continuously &mdash; a deliberate
+            trade of battery life for convenience, and the right choice for a
+            permanently plugged-in TidesyINK.</li>
+    </ul>
+
+    <p>You can switch it off again from <strong>Edit Settings &rarr; Web Server</strong>. Doing so
+    is safe: the five-minute window means it is never a one-way door.</p>
+
+    <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
+        <h3 id="sec-ink-battery" style="margin:0;font-size:1.15em;color:#1e40af;">12.4 &mdash; Battery operation</h3>
+    </div>
+    <p>With the dashboard off, a TidesyINK spends almost all of its time asleep. Between
+    refreshes it disconnects from WiFi, powers down the display controller, and idles the
+    processor, waking roughly every six minutes to fetch tide data and redraw.</p>
+
+    <p>Three things make the largest difference to how long a charge lasts:</p>
+    <ul>
+        <li><strong>Leave the web dashboard off.</strong> Turning it on keeps the radio connected
+            permanently and outweighs everything else combined.</li>
+        <li><strong>Keep the device out of direct sun and cold.</strong> Battery capacity falls
+            sharply below freezing.</li>
+        <li><strong>Fewer stations means less to fetch.</strong> Each configured station adds
+            network time to every refresh.</li>
+    </ul>
+
+    <div class="note-box">
+        <strong>Plugged in?</strong> None of this matters. On USB power, turn the dashboard on and
+        leave it on.
+    </div>
+
+    <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
+        <h3 id="sec-ink-batterymon" style="margin:0;font-size:1.15em;color:#1e40af;">12.5 &mdash; Battery monitoring</h3>
+    </div>
+    <p>TidesyINK can display a battery percentage, but <strong>the hardware for it is not fitted
+    at the factory</strong>. Reading the battery requires a voltage divider (100&nbsp;k&Omega; and
+    220&nbsp;k&Omega;) wired to the board&rsquo;s GPIO&nbsp;3 pin. Without it the device reports
+    the battery as not connected and simply does not show a percentage &mdash; everything else
+    works normally.</p>
+
+    <div class="warning-banner">
+        The on-screen percentage is derived from battery voltage, and lithium cells do not
+        discharge in a straight line. Expect the reading to fall quickly from full, then sit for a
+        long time in the middle of the range. Treat it as a rough gauge, not a fuel level.
+    </div>
+
+    <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
+        <h3 id="sec-ink-epaper" style="margin:0;font-size:1.15em;color:#1e40af;">12.6 &mdash; What to expect from e-paper</h3>
+    </div>
+    <ul>
+        <li><strong>No backlight.</strong> Sunlight-readable and comfortable in any lighting, but
+            invisible in complete darkness.</li>
+        <li><strong>Black and white only.</strong> Colour settings do not apply to this model.</li>
+        <li><strong>The screen updates in steps, not smoothly.</strong> There are no animations
+            and no moving elements. A refresh takes about half a second, and a full clean redraw
+            about two seconds.</li>
+        <li><strong>Faint traces of the previous image are normal.</strong> This is called
+            ghosting. Updates work by changing only what differs from what is already on screen,
+            so a little of the old picture can survive. It clears on the next full redraw.</li>
+        <li><strong>The picture stays when the power stops.</strong> A TidesyINK showing tide data
+            with a flat battery looks exactly like one that is working. If the display has not
+            changed for a long time, check the power before assuming the device has frozen.</li>
     </ul>
 </div>
-
 
 <!-- ==================== 14. LED STATUS INDICATORS ==================== -->
 <div class="section-header" id="sec-led">
     <h2>13. LED Status Indicators</h2>
 </div>
 <div class="section manual-section">
-    <p>Only the <span class="badge badge-s">TidesyS</span> model has a status LED on the back of the device. Other models do not have an LED.</p>
+    <p>Only the <span class="badge badge-s">TidesyS</span> model has a status LED on the back of the device. Other models do not have a status LED.
+    <span class="badge badge-ink">TidesyINK</span> has an indicator LED on its board, but the
+    firmware never lights it &mdash; treat it as having no LED.</p>
 
     <h3>Boot Sequence (TidesyS Only)</h3>
     <p>During startup, the LED indicates progress through the boot sequence. Color changes correspond to WiFi connection attempts and initial data fetches. Once fully booted and connected, the LED settles to a steady state.</p>
@@ -1599,6 +1708,10 @@
 
     <h3>Other Models</h3>
     <p><span class="badge badge-s">TidesyS</span>, <span class="badge badge-sp">TidesyS+</span>, and <span class="badge badge-ink">TidesyINK</span> do not have active touch interaction on the display. Use the web dashboard for interactive features.</p>
+    <p><span class="badge badge-ink">TidesyINK</span> also has physical buttons, but they are not
+    active during normal use, and its web dashboard is switched off by default &mdash; see
+    <a href="#sec-ink-controls">12.2</a> and <a href="#sec-ink-dashboard">12.3</a> for how to
+    reach the device.</p>
 </div>
 
 
@@ -1663,7 +1776,7 @@
         </tr>
         <tr>
             <td>"-x-" in weather area</td>
-            <td>Weather data fetch failed (MET Norway API issue). Will retry on next cycle.</td>
+            <td>Weather data fetch failed (Open-Meteo API issue). Will retry on next cycle.</td>
         </tr>
         <tr>
             <td>No alerts showing</td>
@@ -1797,6 +1910,15 @@
     <h3>After Reset</h3>
     <p>The device restarts and enters setup hotspot mode (<code>TidesySetup</code> / <code>tide1234</code>). You&rsquo;ll need to go through the full setup wizard again.</p>
 
+    <div class="note-box">
+        <span class="badge badge-ink">TidesyINK</span> <strong>&mdash; if the address does not
+        respond.</strong> The web dashboard is off by default on this model, so it is only on the
+        network for five minutes after each restart. Press <strong>RESET</strong>, wait for the
+        address to appear along the bottom of the screen, then load
+        <code>tidesy.local/factory_reset</code> while that window is open. See
+        <a href="#sec-ink-dashboard">12.3</a>.
+    </div>
+
     <h3>Hardware Reset</h3>
     <p>Pressing the physical reset button on the back of the device restarts the firmware but does <strong>not</strong> erase any settings. This is equivalent to unplugging and re-plugging the device. Use this for a frozen or unresponsive display.</p>
 </div>
@@ -1819,7 +1941,7 @@
     <ul>
         <li><strong>NOAA</strong> (tidesandcurrents.noaa.gov) &mdash; Tide predictions</li>
         <li><strong>NWS</strong> (api.weather.gov) &mdash; Weather alerts</li>
-        <li><strong>MET Norway</strong> (api.met.no) &mdash; Current weather</li>
+        <li><strong>Open-Meteo</strong> (via app.tidesy.com proxy) &mdash; Current weather, forecast, marine, UV, air quality</li>
         <li><strong>IP location service</strong> (ip-api.com) &mdash; Location detection (used once during setup, optional)</li>
     </ul>
 
@@ -1962,7 +2084,9 @@
         </div>
         <div class="glossary-term">
             <dt>Power Mode</dt>
-            <dd>TidesyINK-specific setting that controls WiFi and sleep behavior (High / Balanced / Low).</dd>
+            <dd>TidesyINK-specific setting that controls WiFi and sleep behavior (High / Balanced / Low).
+    On current firmware the <strong>Web Server</strong> setting has far more effect on battery
+    life than this does &mdash; see <a href="#sec-ink-dashboard">12.3</a>.</dd>
         </div>
     </dl>
 </div>
@@ -2016,8 +2140,8 @@
 <!-- ==================== FOOTER ==================== -->
 <div class="manual-footer">
     <strong>Tidesy Smart Devices LLC</strong>
-    Tide data: NOAA &nbsp;|&nbsp; Weather: MET Norway &nbsp;|&nbsp; Alerts: NWS
-    <br>Firmware 3.1.0 &nbsp;|&nbsp; Published May 29, 2026
+    Tide data: NOAA &nbsp;|&nbsp; Weather: Open-Meteo &nbsp;|&nbsp; Alerts: NWS
+    <br>Firmware 3.1.0 &nbsp;|&nbsp; Published August 27, 2026
 </div>
 
 </div><!-- /.container -->
