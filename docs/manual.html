@@ -10,7 +10,7 @@
 
 <!-- ========== NAV BAR ========== -->
 <nav class="nav-bar">
-    <div class="nav-brand">Tidesy Manual <span class="version-pill" style="display:inline-block;padding:3px 10px;margin-left:10px;background:#1f6feb;color:#fff;border-radius:11px;font-size:11px;font-weight:600;letter-spacing:0.3px;vertical-align:middle;">v3.1.0 &middot; August 27, 2026</span></div>
+    <div class="nav-brand">Tidesy Manual <span class="version-pill" style="display:inline-block;padding:3px 10px;margin-left:10px;background:#1f6feb;color:#fff;border-radius:11px;font-size:11px;font-weight:600;letter-spacing:0.3px;vertical-align:middle;">v3.1.0 &middot; August 31, 2026</span></div>
     <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu">&#9776;</button>
     <div class="nav-menu">
         <a href="#quick-setup">Quick Setup</a>
@@ -818,6 +818,28 @@
 
     <h3>6-Minute Refresh</h3>
     <p>All tide predictions, weather data, and alert information refresh automatically every 6 minutes. This matches the NOAA tide prediction interval (6-minute data points) and ensures the display stays current.</p>
+
+    <h3>Which Clock Tidesy Uses</h3>
+    <p>Everything about the tide is shown in the <strong>time at the station</strong>, not the
+    time where you are. That covers the tide graph, the high and low times, sunrise and
+    sunset, the moon, and the marker showing where you are in the day.</p>
+    <p>The <strong>clock in the top corner is your own local time</strong>, so you can still
+    tell at a glance what time it is where you are standing.</p>
+
+    <div class="note-box">
+        <strong>Why it works this way.</strong> If you live on the mainland and watch a beach
+        in Hawaii, a high tide at 6:15&nbsp;AM means 6:15 in the morning <em>in Hawaii</em>
+        &mdash; which is what you want to know if you are planning to be there. Showing it in
+        your time instead would put the tide, the sunrise and the daylight shading three hours
+        away from each other and make the graph impossible to read.
+    </div>
+
+    <p>Nothing needs setting up for this. Tidesy works out each station&rsquo;s time on its own
+    and keeps it right through daylight saving changes, including places such as Hawaii and
+    most of Arizona that do not change their clocks at all.</p>
+
+    <p>If all your stations are near home, you will never notice any of this: the station&rsquo;s
+    time and yours are the same, and the display looks exactly as it always has.</p>
 
     <h3>Daylight Saving Time Handling</h3>
     <p>On DST transition days, NOAA returns a different number of predictions (230 in spring, 250 in fall instead of the usual 240). Tidesy automatically detects this by parsing prediction timestamps and adjusts the graph accordingly:</p>
@@ -2157,7 +2179,7 @@
 <div class="manual-footer">
     <strong>Tidesy Smart Devices LLC</strong>
     Tide data: NOAA &nbsp;|&nbsp; Weather: Open-Meteo &nbsp;|&nbsp; Alerts: NWS
-    <br>Firmware 3.1.0 &nbsp;|&nbsp; Published August 27, 2026
+    <br>Firmware 3.1.0 &nbsp;|&nbsp; Published August 31, 2026
 </div>
 
 </div><!-- /.container -->
