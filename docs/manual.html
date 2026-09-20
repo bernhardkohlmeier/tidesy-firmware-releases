@@ -1021,6 +1021,20 @@
         <li><strong>No animations:</strong> E-paper cannot animate. The live data point and rising/falling indicator are static.</li>
         <li><strong>6-minute sleep cycle:</strong> In Low power mode, the device sleeps between refreshes to conserve battery.</li>
     </ul>
+
+    <p>The two primary views carry the same information as the colour models, redrawn for a
+       400&times;300 black-and-white screen &mdash; so a TidesyINK owner sees this rather than the
+       screenshots earlier in this section.</p>
+
+    <div class="screenshot-placeholder">
+        <img src="images/ink-detail-view.png" alt="TidesyINK detail view: tide curve, conditions strip, battery badge and observed marker in black and white" style="max-width:400px;width:100%;border-radius:8px;border:1px solid var(--border);">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The detail view on TidesyINK. Same curve, Now box, station badge and conditions strip as the colour models &mdash; with the battery reading in the top-right corner, which only this model has.</p>
+    </div>
+
+    <div class="screenshot-placeholder">
+        <img src="images/ink-large-view.png" alt="TidesyINK large view with oversized tide numerals, surge figure and MLLW reading" style="max-width:400px;width:100%;border-radius:8px;border:1px solid var(--border);">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The large view. The next four tides down the left, the current height on the right, and the surge figure above it.</p>
+    </div>
 </div>
 
 
@@ -1654,6 +1668,11 @@
     button, the words <em>&ldquo;Connect to Power and push button for Setup&rdquo;</em>, and the
     Tidesy INK mark. The device is <strong>asleep</strong>, not running.</p>
 
+<div class="screenshot-placeholder">
+        <img src="images/ink-boot-complete.png" alt="TidesyINK boot checklist with all seven steps marked OK" style="max-width:400px;width:100%;border-radius:8px;border:1px solid var(--border);">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">Start-up is deliberately visible on TidesyINK: seven steps, each marked OK as it finishes, with a running log underneath. It takes a minute or two.</p>
+    </div>
+
     <p>To start it:</p>
     <ol>
         <li>Connect USB-C power.</li>
@@ -1705,6 +1724,16 @@
     <p>You can still reach the device whenever you need to. For <strong>five minutes</strong>
     after it starts up it joins your WiFi network, and while it is there the web address appears
     along the bottom of the screen.</p>
+
+<div class="screenshot-placeholder">
+        <img src="images/ink-detail-recovery-window.png" alt="TidesyINK detail view with the setup address along the bottom edge" style="max-width:400px;width:100%;border-radius:8px;border:1px solid var(--border);">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">While the five-minute window is open, <strong>Setup: http://tidesy.local</strong> runs along the bottom of the screen. Seeing it means the device is on your WiFi right now.</p>
+    </div>
+
+    <div class="screenshot-placeholder">
+        <img src="images/ink-detail-view.png" alt="The same TidesyINK detail view after the recovery window has closed" style="max-width:400px;width:100%;border-radius:8px;border:1px solid var(--border);">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The same screen once the window closes. The address line is gone, the radio is off, and the tides carry on updating on their own schedule.</p>
+    </div>
 
     <div class="tip-box">
         <strong>To reach a TidesyINK:</strong> press the <strong>reset</strong> button on the
@@ -1773,6 +1802,11 @@
     it is not a fault &mdash; the part that measures the battery is an optional extra that is not
     fitted to every device. Everything else works exactly the same either way.</p>
 
+    <p>Where fitted, the reading sits in the <strong>top-right corner</strong> of the detail view,
+    beside the alert count &mdash; <code>BATT 95%</code> in the screenshots in
+    <a href="#sec-ink-dashboard">12.3</a> above. It reads <code>LOW</code> below 15%,
+    <code>CHRG</code> while charging, and <code>NO BATT</code> where no battery is fitted.</p>
+
     <div class="note-box">
         Where a percentage is shown, treat it as a rough guide rather than an exact figure. Like
         the gauge on a phone, it tends to drop quickly at first and then sit around the middle for
@@ -1782,6 +1816,11 @@
     <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
         <h3 id="sec-ink-epaper" style="margin:0;font-size:1.15em;color:#1e40af;">12.6 &mdash; What to expect from e-paper</h3>
     </div>
+<div class="screenshot-placeholder">
+        <img src="images/ink-large-view.png" alt="TidesyINK large view with oversized tide numerals in black and white" style="max-width:400px;width:100%;border-radius:8px;border:1px solid var(--border);">
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The large view on e-paper. Everything is black and white, with no backlight and no animation &mdash; the same information as the colour models, drawn for a different screen.</p>
+    </div>
+
     <ul>
         <li><strong>No backlight.</strong> Sunlight-readable and comfortable in any lighting, but
             invisible in complete darkness.</li>
