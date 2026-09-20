@@ -289,6 +289,25 @@
   </tr>
 </table>
 
+<h2>Did You Move Tidesy?</h2>
+
+<div class="card">
+  <p>Taking Tidesy to a second home, a rental or a boat is a different situation from setting it up
+     for the first time, and mostly it handles itself.</p>
+  <ul>
+    <li><strong>Somewhere it has been before:</strong> nothing to do. Tidesy remembers up to 30
+        networks and rejoins on its own.</li>
+    <li><strong>Somewhere new:</strong> it keeps showing the tides it last fetched and adds an
+        <strong>OFFLINE &mdash; STALE DATA</strong> badge after half an hour. Unplug it and plug it
+        back in, wait 90 seconds without touching it, and the <strong>TidesySetup</strong> hotspot
+        comes back so you can point it at the new network. Your other networks are not forgotten.</li>
+    <li><strong>Your tide stations do not move with you.</strong> Tidesy will connect happily at the
+        new place and keep showing the stations you chose at the old one. Change them in
+        <strong>Edit Settings</strong> on the dashboard &mdash; the timezone updates by itself, but
+        the stations are yours to pick.</li>
+  </ul>
+</div>
+
 <h2>Still Having Trouble?</h2>
 
 <div class="card">
@@ -300,18 +319,41 @@
     <li>Have you restarted both the router and Tidesy?</li>
     <li>Is &ldquo;Band Steering&rdquo; or &ldquo;Smart Connect&rdquo; causing issues? Try disabling it.</li>
     <li>Does your network name contain unusual characters? Try a simpler name temporarily.</li>
-    <li>Is your router using WPA2 or WPA3 security? Tidesy supports WPA2. If your router is set to WPA3-only, switch it to WPA2/WPA3 mixed mode.</li>
+    <li>Is your router using WPA2 or WPA3 security? <strong>Both work.</strong> The difference only shows up when a password is wrong: WPA2 reports code 15, WPA3 reports 202. If you cannot connect on WPA3 after checking the password, switching the router to WPA2/WPA3 mixed mode is still worth a try.</li>
     <li>Did your phone previously fail to connect to TidesySetup? Go to WiFi Settings, &ldquo;Forget This Network,&rdquo; and try again fresh.</li>
   </ul>
+</div>
+
+<div class="card">
+  <h3>Read the code on the screen</h3>
+  <p>When a connection fails, Tidesy names the reason and puts the router&rsquo;s own code in
+     brackets &mdash; for example <strong>Wrong password for &lsquo;BeachCondo&rsquo; [15]</strong>.
+     The same message appears at the top of the setup page the next time you connect to the
+     TidesySetup hotspot. That number tells us exactly what your router said:</p>
+  <table>
+    <tr><th>Code</th><th>What it means</th></tr>
+    <tr><td>15, 204</td><td>The password was not accepted. Retype it &mdash; tap the eye icon to check &mdash; and make sure it is the WiFi password, not the router&rsquo;s admin password.</td></tr>
+    <tr><td>202</td><td>On a WPA3 network, usually a wrong password too. It can also mean your router is set to approve new devices before they can join.</td></tr>
+    <tr><td>201</td><td>Tidesy could not find that network. Check you picked the 2.4 GHz name, and that Tidesy is in range.</td></tr>
+    <tr><td>200, 212</td><td>The signal was too weak. Set Tidesy up in the same room as the router.</td></tr>
+    <tr><td>5</td><td>Your router has too many devices connected.</td></tr>
+    <tr><td>203, 205</td><td>The router refused the connection. Restart it, wait two minutes, try again.</td></tr>
+  </table>
+  <p style="margin-bottom:0"><strong>Give it 90 seconds.</strong> After a failed attempt Tidesy keeps
+     trying for about 20 seconds, looks for other networks it knows for another 20, and only then
+     brings the setup screen back by itself. Unplugging it before that starts the whole sequence over.</p>
 </div>
 
 <p>If none of the above works, please reply to this email with:</p>
 <ol>
   <li>Your router brand and model (printed on the router label)</li>
   <li>Your internet provider (Xfinity, AT&amp;T, Verizon, etc.)</li>
-  <li>What you see on the Tidesy screen</li>
+  <li>What you see on the Tidesy screen &mdash; a photo is ideal, including the number in brackets</li>
 </ol>
-<p>We&rsquo;ll help you get connected.</p>
+<p>We&rsquo;ll help you get connected. You can also visit
+   <strong>support.tidesy.com</strong> from a phone or computer that has internet access &mdash;
+   note that the TidesySetup hotspot itself has no internet, so open it from a different
+   connection.</p>
 
 <div class="footer">
   <p>Tidesy WiFi Setup Guide &bull; <a href="https://tidesy.com">tidesy.com</a></p>

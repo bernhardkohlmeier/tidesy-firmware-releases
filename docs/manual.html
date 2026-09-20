@@ -10,7 +10,7 @@
 
 <!-- ========== NAV BAR ========== -->
 <nav class="nav-bar">
-    <div class="nav-brand">Tidesy Manual <span class="version-pill" style="display:inline-block;padding:3px 10px;margin-left:10px;background:#1f6feb;color:#fff;border-radius:11px;font-size:11px;font-weight:600;letter-spacing:0.3px;vertical-align:middle;">v3.1.0 &middot; August 31, 2026</span></div>
+    <div class="nav-brand">Tidesy Manual <span class="version-pill" style="display:inline-block;padding:3px 10px;margin-left:10px;background:#1f6feb;color:#fff;border-radius:11px;font-size:11px;font-weight:600;letter-spacing:0.3px;vertical-align:middle;">v3.1.0 &middot; September 20, 2026</span></div>
     <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu">&#9776;</button>
     <div class="nav-menu">
         <a href="#quick-setup">Quick Setup</a>
@@ -271,6 +271,10 @@
         <li><strong>Flooding (inundation) overlay</strong> (<a href="#sec-views-flooding">Section 5.4</a>) &mdash; color-coded warning band when a forecast high tide is set to exceed NOAA flood thresholds.</li>
         <li><strong>Alert area maps</strong> in <a href="#sec-alerts">Section 6</a> &mdash; the NWS-defined affected polygon is now drawn on both the device alert view and the web dashboard.</li>
         <li><strong>USB Web Updater</strong> in <a href="#sec-firmware">Section 11</a> &mdash; browser-based firmware flashing for devices on restrictive networks.</li>
+        <li><strong>Clearer WiFi setup</strong> (<a href="#sec-wizard">Section 4</a>) &mdash; networks listed with signal strength, a warning if you type a name Tidesy cannot see, and a plain-English reason with a code when a connection fails, shown on the device and again on the setup page.</li>
+        <li><strong>OFFLINE &mdash; STALE DATA badge</strong> (<a href="#sec-wifi">Section 10</a>) &mdash; tells you at a glance when the tides on screen have stopped being updated.</li>
+        <li><strong>Rejoins known networks by itself</strong> (<a href="#sec-wifi">Section 10</a>) &mdash; carry a Tidesy to a house it has been set up at before and it reconnects without being unplugged.</li>
+        <li><strong>TidesyINK offline handling</strong> (<a href="#sec-ink-offline">Section 12.7</a>) &mdash; the radio is switched off between retries to protect the battery, and past midnight the device stops showing tides that are no longer for today.</li>
     </ul>
     <p style="margin-bottom:0;font-size:13px;color:#475569;">Nothing in your existing setup changes &mdash; all new features are opt-in or appear only when relevant data is available.</p>
 </div>
@@ -560,10 +564,46 @@
         <strong>WiFi-only setup:</strong> The setup hotspot wizard focuses solely on WiFi configuration. Once WiFi is saved, the device boots with sensible defaults and the <strong>Edit Settings</strong> page opens automatically on the web dashboard, where you can configure stations, display, location, alerts, and all other settings.
     </div>
     <ul>
-        <li><strong>Network dropdown:</strong> Lists all detected 2.4 GHz networks, sorted by signal strength.</li>
-        <li><strong>Password field:</strong> Enter your WiFi password.</li>
-        <li><strong>Verify button:</strong> Tests the WiFi connection and displays the device&rsquo;s IP address on success.</li>
+        <li><strong>Network dropdown:</strong> Lists the 2.4 GHz networks Tidesy can see, each with its signal strength &mdash; <em>excellent</em>, <em>good</em>, <em>fair</em> or <em>weak</em>. Because the list is built from what Tidesy&rsquo;s own radio detects, a 5 GHz network can never appear in it.</li>
+        <li><strong>Type network name:</strong> Use this for a hidden network. If you type a name Tidesy cannot see, it warns you once &mdash; usually that means a 5 GHz network, or one out of range &mdash; and saves anyway if you press Save a second time.</li>
+        <li><strong>Password field:</strong> Enter your WiFi password. Tap the eye icon to check what you typed. Tidesy does not let your browser autofill this field, and trims any spaces pasted at the start or end.</li>
+        <li><strong>Save &amp; Connect:</strong> Saves the network and restarts Tidesy. The page always reports success &mdash; <strong>the device screen is what tells you whether the connection worked.</strong></li>
     </ul>
+
+    <h3>If the connection fails</h3>
+    <p>After a failed attempt Tidesy keeps trying for about 20 seconds, checks for other networks it
+       knows for another 20, and only then returns to the setup screen. <strong>Leave it alone for a
+       full 90 seconds.</strong> Unplugging it before that starts the whole sequence over.</p>
+    <p>The device screen names the reason, with the router&rsquo;s own code in brackets &mdash;
+       for example <code>WiFi FAILED: Wrong password for &lsquo;BeachCondo&rsquo; [15]</code>. When you
+       reconnect to the setup hotspot, the same explanation appears at the top of the setup page,
+       along with what to try next.</p>
+    <table>
+        <tr><th>Message</th><th>What it usually means</th></tr>
+        <tr><td>Wrong password <span style="color:#6b7a8d">[15] [204]</span></td>
+            <td>The password was not accepted. Retype it using the eye icon, and make sure you are using the WiFi password rather than the router&rsquo;s admin password.</td></tr>
+        <tr><td>Password or device rejected <span style="color:#6b7a8d">[202]</span></td>
+            <td>On a WPA3 network this is usually a wrong password too. It can also mean the router is set to approve new devices before they may join.</td></tr>
+        <tr><td>Network not found <span style="color:#6b7a8d">[201]</span></td>
+            <td>Tidesy cannot see that network. Check you picked the 2.4 GHz name, and that Tidesy is in range.</td></tr>
+        <tr><td>Signal too weak <span style="color:#6b7a8d">[200] [212]</span></td>
+            <td>Set Tidesy up in the same room as the router. You can move it afterwards.</td></tr>
+        <tr><td>Too many devices <span style="color:#6b7a8d">[5]</span></td>
+            <td>The router has reached its device limit. Remove an old device or restart the router.</td></tr>
+        <tr><td>Router refused the connection <span style="color:#6b7a8d">[203] [205]</span></td>
+            <td>Restart the router, wait two minutes, and try again.</td></tr>
+    </table>
+    <div class="tip-box">
+        <strong>A longer walkthrough:</strong> the
+        <a href="wifi-guide.html">Tidesy WiFi Setup Guide</a> covers 2.4 GHz versus 5 GHz in detail,
+        has router-by-router instructions for the common providers, and explains what each failure
+        code means.
+    </div>
+    <div class="tip-box">
+        <strong>Still stuck?</strong> Photograph the device screen, including the number in brackets,
+        and visit <strong>support.tidesy.com</strong> from a phone or computer that has internet
+        access. The bracketed code tells us exactly what the router said.
+    </div>
     <div class="note-box">
         <strong>Be patient:</strong> When your phone first connects to the TidesySetup hotspot, the setup page may take a moment to load. Your phone is running through WiFi handshake tasks in the background when connecting to a new network for the first time. Just wait &mdash; the page will appear. If TidesySetup doesn&rsquo;t show up at all, turn off WiFi on your phone, wait a few seconds, and turn it back on. If you&rsquo;re still stuck, unplug Tidesy, wait 15 seconds, and plug it back in.
     </div>
@@ -1446,7 +1486,68 @@
     <p>Tidesy stores up to <strong>30 known WiFi networks</strong>. WiFi passwords are encrypted on the device.</p>
 
     <h3>Auto-Reconnect</h3>
-    <p>If the primary WiFi network becomes unavailable, Tidesy automatically scans for and connects to the strongest known network. Networks are prioritized by signal strength.</p>
+    <p>If the primary WiFi network becomes unavailable, Tidesy scans for and connects to the strongest
+       known network. Networks are prioritized by signal strength. This now happens <strong>while the
+       device is running</strong>, not only at startup, so a Tidesy carried to a house it has been set
+       up at before rejoins on its own &mdash; no unplugging required. Mains-powered models check on
+       the first failed cycle and then every 30 minutes; TidesyINK checks on its battery-saving
+       schedule (see section 12).</p>
+
+    <h3 id="sec-moving">Moving Tidesy between locations</h3>
+    <p>Tidesy is built to be carried &mdash; house to beach house, home to boat, and back again.
+       This is what it remembers, what it does by itself, and when it needs you.</p>
+
+    <h4 style="margin-bottom:4px;">What it remembers</h4>
+    <table>
+        <tr><th>Remembered</th><th>How many</th><th>Notes</th></tr>
+        <tr><td>WiFi networks and passwords</td><td>30</td><td>Passwords are encrypted on the device.</td></tr>
+        <tr><td>Your location, per network</td><td>5</td><td>The map position you set for each network. A sixth network replaces the first one stored.</td></tr>
+        <tr><td>Timezone</td><td>automatic</td><td>Detected from the internet connection and refreshed daily, so it follows you without being told.</td></tr>
+        <tr><td>Tide stations</td><td>&mdash;</td><td><strong>These do not change with location.</strong> See below.</td></tr>
+    </table>
+
+    <h4 style="margin-bottom:4px;">Arriving somewhere Tidesy already knows</h4>
+    <p>Nothing to do. It rejoins that network on its own &mdash; within about 40 seconds if you have
+       just plugged it in, or on its normal checking schedule if it was already running. The location
+       you saved for that network comes back with it.</p>
+
+    <h4 style="margin-bottom:4px;">Arriving somewhere new</h4>
+    <ol>
+        <li>Tidesy keeps showing the tides it last fetched, and after 30 minutes adds the
+            <strong>OFFLINE &mdash; STALE DATA</strong> badge.</li>
+        <li>It looks for any network it already knows, in case one is in range.</li>
+        <li>When none is, it brings back the <strong>TidesySetup</strong> hotspot so you can point it
+            at the new network &mdash; immediately on a mains-powered model if you unplug it and plug
+            it back in (about 90 seconds), or at midnight on a TidesyINK
+            (<a href="#sec-ink-offline">section 12.7</a>).</li>
+        <li>Set it up as you did the first time. The new network is added to its memory; the old ones
+            stay, so going home again needs nothing from you.</li>
+    </ol>
+
+    <div class="note-box">
+        <strong>Your tide stations do not follow you.</strong> A Tidesy set up in Washington and carried
+        to Florida will connect to the new WiFi and show Washington tides, correctly, for a place you
+        are no longer in. Tidesy does not guess where you are &mdash; change the stations yourself in
+        <strong>Edit Settings</strong>, and change them back when you return. Only the timezone and
+        your saved map location follow the network.
+    </div>
+
+    <div class="tip-box">
+        <strong>Going back and forth?</strong> Set the device up once at each place. After that both
+        networks are remembered, and each visit needs nothing but power &mdash; apart from switching
+        the stations if the two places are on different water.
+    </div>
+
+    <h3>OFFLINE &mdash; STALE DATA</h3>
+    <p>When Tidesy has not reached the internet for 30 minutes, a badge reading
+       <strong>OFFLINE &mdash; STALE DATA</strong> appears in the header, beside the date. The tides on
+       screen are the last ones fetched: still drawn, still labelled, but no longer being updated. The
+       badge disappears by itself the moment Tidesy gets back online.</p>
+    <div class="note-box">
+        <strong>Why this matters:</strong> a tide curve looks equally convincing whether it is an hour
+        old or three days old. The badge is the only way to tell at a glance, so it is worth knowing
+        what it looks like before you need it.
+    </div>
 
     <h3>Per-Network Location Memory</h3>
     <p>When you move Tidesy between WiFi networks (e.g., home and beach house), the device remembers the location you set for each network. When you connect to a known network and re-enter setup, your previously saved location is automatically loaded. This means you don&rsquo;t need to re-pick your location on the map every time you switch between familiar networks. Saved locations are cleared on factory reset.</p>
@@ -1638,6 +1739,11 @@
     minutes or so it wakes up, connects to WiFi, collects fresh tide information, updates the
     screen, and goes back to sleep. In between it uses very little power.</p>
 
+    <p>From a full charge, expect <strong>about ten days</strong> of normal use before the
+    device needs charging again. That is for a battery-equipped unit with the dashboard
+    switched off, indoors at room temperature. Treat it as a guide rather than a promise
+    &mdash; the same things that shorten the life of a phone battery apply here.</p>
+
     <p>Three things make the biggest difference to how long a charge lasts:</p>
     <ul>
         <li><strong>Leave the web dashboard switched off.</strong> Turning it on keeps the device
@@ -1648,9 +1754,16 @@
             update.</li>
     </ul>
 
+    <p>On units that show a battery percentage, the small badge in the corner of the screen
+    tells you where you stand. It normally reads <strong>BATT</strong> followed by the
+    percentage. When the charge runs low it changes to <strong>LOW</strong> and turns white on
+    black so it is hard to miss &mdash; time to plug the device in. It also turns white on
+    black while still reading BATT if the dashboard has been left switched on, which is the
+    device's way of telling you the battery is draining much faster than it needs to.</p>
+
     <div class="note-box">
         <strong>Plugged in?</strong> Then none of this matters. Turn the dashboard on and leave it
-        on.
+        on. While charging, the badge reads <strong>CHRG</strong> with the percentage climbing.
     </div>
 
     <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
@@ -1684,6 +1797,37 @@
             with a flat battery looks exactly like one that is working. If the display has not
             changed for a long time, check the power before assuming the device has frozen.</li>
     </ul>
+
+    <div class="section-header" style="margin-top:28px;">
+        <h3 id="sec-ink-offline" style="margin:0;font-size:1.15em;color:#1e40af;">12.7 &mdash; When it cannot reach WiFi</h3>
+    </div>
+    <p>The point above &mdash; that e-paper holds its picture whatever happens &mdash; matters most
+       when the network goes away. A TidesyINK that lost its WiFi days ago looks identical to one
+       updating every six minutes. So it tells you instead.</p>
+    <ul>
+        <li><strong>After 30 minutes offline</strong>, an <strong>OFFLINE &mdash; STALE DATA</strong>
+            badge appears in the header. The tides on screen are the last ones fetched. The clock and
+            date keep running normally.</li>
+        <li><strong>It keeps trying, but gently.</strong> Every cycle for the first half hour, then
+            every 30 minutes, then hourly. Between attempts the radio is switched off completely,
+            which is what protects the battery &mdash; a TidesyINK stuck offline with its radio awake
+            drains several times faster than one that is simply working.</li>
+        <li><strong>It looks for networks it already knows.</strong> If you have carried it to a house
+            it has been set up at before, it rejoins there by itself.</li>
+        <li><strong>At midnight it stops showing tides.</strong> Yesterday&rsquo;s curve under today&rsquo;s
+            marker is not old information, it is wrong information. After three more attempts, the
+            screen is replaced by a plain notice saying how long it has been offline and what to do.</li>
+        <li><strong>The setup hotspot reopens for 30 minutes</strong> so you can point it at a new
+            network. After that it sleeps and keeps retrying once an hour, and
+            <strong>pressing the top button</strong> reopens the hotspot whenever you are ready.
+            Your saved network is not erased &mdash; if it simply came back, Tidesy rejoins without
+            being told anything.</li>
+    </ul>
+    <div class="tip-box">
+        <strong>Battery note:</strong> the setup hotspot is the most power-hungry thing a TidesyINK
+        does. That is why the window closes after 30 minutes rather than staying open &mdash; left
+        running, it would empty a full battery in about a day.
+    </div>
 </div>
 
 <!-- ==================== 14. LED STATUS INDICATORS ==================== -->
@@ -1749,7 +1893,23 @@
         </tr>
         <tr>
             <td>Can&rsquo;t connect to home WiFi</td>
-            <td>Verify the network is 2.4 GHz. Double-check the password. Ensure the device is within WiFi range.</td>
+            <td>Verify the network is 2.4 GHz. Double-check the password &mdash; tap the eye icon on the
+                setup page to see what you typed. Ensure the device is within WiFi range. The device
+                screen names the reason with a code in brackets; see
+                <a href="#sec-wizard">section 4</a> for what each one means.</td>
+        </tr>
+        <tr>
+            <td>Screen shows <strong>OFFLINE &mdash; STALE DATA</strong></td>
+            <td>Tidesy has not reached the internet for at least 30 minutes, so the tides shown are the
+                last ones it fetched. Check your other devices can reach the internet, and restart your
+                router if they cannot. The badge clears by itself once Tidesy reconnects.</td>
+        </tr>
+        <tr>
+            <td>TidesyINK shows a plain notice instead of tides</td>
+            <td>It has been offline past midnight, so the tide data on screen would have been for the
+                wrong day. Press the top button to reopen the setup hotspot for 30 minutes, or fix the
+                network &mdash; it retries on its own every hour and needs no re-entering of your
+                password if the network simply returns.</td>
         </tr>
         <tr>
             <td>Display shows &ldquo;WiFi not connected&rdquo; or data keeps disappearing and coming back</td>
@@ -1764,6 +1924,12 @@
             <td>This means Tidesy briefly lost its connection while fetching data. If it keeps happening, move the device further from your router and other electronics. Tidesy will retry automatically every 6 minutes.</td>
         </tr>
     </table>
+
+    <div class="tip-box">
+        <strong>WiFi problems that need more than a table:</strong> see the
+        <a href="wifi-guide.html">Tidesy WiFi Setup Guide</a> &mdash; band steering, hidden networks,
+        router-specific settings, and what to do after moving the device.
+    </div>
 
     <h3>Power &amp; Cable Issues</h3>
     <table>
@@ -2179,7 +2345,7 @@
 <div class="manual-footer">
     <strong>Tidesy Smart Devices LLC</strong>
     Tide data: NOAA &nbsp;|&nbsp; Weather: Open-Meteo &nbsp;|&nbsp; Alerts: NWS
-    <br>Firmware 3.1.0 &nbsp;|&nbsp; Published August 31, 2026
+    <br>Firmware 3.1.0 &nbsp;|&nbsp; Published September 20, 2026
 </div>
 
 </div><!-- /.container -->
