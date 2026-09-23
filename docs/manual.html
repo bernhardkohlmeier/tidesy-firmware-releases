@@ -10,7 +10,7 @@
 
 <!-- ========== NAV BAR ========== -->
 <nav class="nav-bar">
-    <div class="nav-brand">Tidesy Manual <span class="version-pill" style="display:inline-block;padding:3px 10px;margin-left:10px;background:#1f6feb;color:#fff;border-radius:11px;font-size:11px;font-weight:600;letter-spacing:0.3px;vertical-align:middle;">v3.1.0 &middot; September 20, 2026</span></div>
+    <div class="nav-brand">Tidesy Manual <span class="version-pill" style="display:inline-block;padding:3px 10px;margin-left:10px;background:#1f6feb;color:#fff;border-radius:11px;font-size:11px;font-weight:600;letter-spacing:0.3px;vertical-align:middle;">v3.1.0 &middot; September 23, 2026</span></div>
     <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu">&#9776;</button>
     <div class="nav-menu">
         <a href="#quick-setup">Quick Setup</a>
@@ -335,6 +335,36 @@
     <h3>What Are Tides</h3>
     <p>Tides are the regular rise and fall of sea level caused by the gravitational pull of the Moon and Sun on Earth&rsquo;s oceans. Most coastal locations experience <strong>semidiurnal</strong> tides (two highs and two lows per day), though some areas see <strong>diurnal</strong> (one high, one low) or <strong>mixed</strong> patterns.</p>
 
+    <h3 id="tides-per-day">One, Two, Three or Four Tides a Day</h3>
+    <p>How many high and low tides you get in a day depends on where you are. There are three patterns:</p>
+    <ul>
+        <li><strong>Semidiurnal</strong> (&ldquo;twice daily&rdquo;): two high tides and two low tides a day, of
+            about the same height. The Moon&rsquo;s strongest pull repeats every 12 hours 25 minutes, and on
+            most coasts that twice-a-day rhythm dominates. The U.S. East Coast is the classic example.</li>
+        <li><strong>Mixed</strong>: still two highs and two lows a day, but of clearly different sizes &mdash;
+            a high high and a low high, a high low and a low low. This is the pattern on the Pacific coast,
+            in Alaska and in Hawai&lsquo;i.</li>
+        <li><strong>Diurnal</strong> (&ldquo;daily&rdquo;): <strong>one high and one low a day</strong>. Some
+            ocean basins barely respond to the twice-a-day part of the Moon&rsquo;s pull, but respond strongly
+            to the once-a-day part. The northern Gulf of Mexico &mdash; roughly Pensacola to Panama City and
+            the bays behind them &mdash; is the best-known U.S. example.</li>
+    </ul>
+    <p>The tide doesn&rsquo;t keep calendar time: its cycle runs about 24 hours 50 minutes, so each high and
+    low arrives around 50 minutes later than the day before. Every so often one of them slips past midnight
+    into the next day, which is why the count changes from day to day:</p>
+    <ul>
+        <li>On a <strong>semidiurnal or mixed</strong> coast, most days have <strong>four</strong> tides and
+            some have <strong>three</strong>.</li>
+        <li>On a <strong>diurnal</strong> coast, most days have <strong>two</strong> tides &mdash; and about
+            twice a month a day has only <strong>one</strong>, because the tide before it fell just before
+            midnight and the next one just after.</li>
+    </ul>
+    <p>Diurnal tides are also small &mdash; often a foot or less &mdash; and they change size over the month
+    with the Moon&rsquo;s position north and south of the equator. For a few days about every two weeks, when
+    the Moon crosses the equator, the range can shrink to a few inches and the curve briefly picks up an extra
+    small high or low. That is real, not a fault: Tidesy draws exactly what NOAA predicts for the station.</p>
+    <p>See <a href="#large-view">Large View</a> for how Tidesy shows days with fewer than four tides.</p>
+
     <h3>Tide Datum</h3>
     <p>A <strong>datum</strong> is the reference plane from which tide heights are measured. Tidesy uses <strong>MLLW (Mean Lower Low Water)</strong> by default &mdash; the average height of the lower of the two daily low tides over a 19-year period. This means:</p>
     <ul>
@@ -398,7 +428,7 @@
         </div>
         <div class="glossary-term">
             <dt>Diurnal</dt>
-            <dd>A tidal pattern with one high tide and one low tide per day.</dd>
+            <dd>A tidal pattern with one high tide and one low tide per day, as on the northern Gulf of Mexico. About twice a month a calendar day has only one of them.</dd>
         </div>
         <div class="glossary-term">
             <dt>Mixed Tide</dt>
@@ -671,7 +701,7 @@
     <h3>Tide Level Settings</h3>
     <ul>
         <li><strong>Warning level:</strong> &minus;10 to +30 ft (0 = disabled). When the tide reaches this height, a colored horizontal band appears on the graph. Useful for dock clearance, flooding thresholds, or launching conditions.</li>
-        <li><strong>Preferred range (from/to):</strong> &minus;10 to +30 ft (0 = disabled). A colored band shows your ideal tide range on the graph. Useful for fishing, surfing, or boat ramp access windows.</li>
+        <li><strong>Preferred range (from/to):</strong> &minus;10 to +30 ft (0 = disabled). A colored band shows your ideal tide range on the graph. Useful for fishing, surfing, or boat ramp access windows. A preferred line that lies outside the whole day&rsquo;s tide is not drawn that day.</li>
     </ul>
 
     <h3>Color Settings</h3>
@@ -809,10 +839,10 @@
         </div>
     </div>
 
-    <h3>Large View (Big Numbers)</h3>
-    <p>The large view displays the day&rsquo;s four tide values in large, easy-to-read digits:</p>
+    <h3 id="large-view">Large View (Big Numbers)</h3>
+    <p>The large view displays the day&rsquo;s tide values in large, easy-to-read digits:</p>
     <ul>
-        <li><strong>4 tide values:</strong> High/Low/High/Low in large text with times in 12-hour AM/PM format.</li>
+        <li><strong>Up to 4 tide values:</strong> each high and low in large text with its time in 12-hour AM/PM format. There are four boxes; a day with fewer tides crosses out the boxes it doesn&rsquo;t need (see below).</li>
         <li><strong>Rising/falling indicator:</strong> Animated triangle pointing up (rising) or down (falling) with a 4-second fade cycle.</li>
         <li><strong>Tide rate badge:</strong> Shows the current rate of change (e.g., "+2.3 ft/h").</li>
         <li><strong>Weather area:</strong> Temperature, wind speed, and wind direction at the bottom.</li>
@@ -847,6 +877,23 @@
             <div class="callout-item"><span class="callout-num">10</span> Conditions box &mdash; temperature, wind, rain status, water temp, waves, UV, AQI, surge, and moon phase</div>
         </div>
     </div>
+
+    <h4>Days With Fewer Than Four Tides</h4>
+    <p>The four boxes on the left always stay in place, so the layout never jumps around. Any box that has no
+    tide that day is drawn <strong>crossed out</strong> with an X:</p>
+    <ul>
+        <li><strong>4 tides</strong> &mdash; all four boxes filled (the usual day on most coasts).</li>
+        <li><strong>3 tides</strong> &mdash; the fourth box is crossed out. Happens regularly on every coast.</li>
+        <li><strong>2 tides</strong> &mdash; the third and fourth boxes are crossed out. The normal day at a
+            diurnal station such as Santa Rosa or Panama City Beach, Florida.</li>
+        <li><strong>1 tide</strong> &mdash; only the first box is filled. About twice a month at a diurnal
+            station.</li>
+    </ul>
+    <p>A crossed-out box is not missing data &mdash; it means that tide simply falls on the day before or the
+    day after. See <a href="#tides-per-day">One, Two, Three or Four Tides a Day</a>.</p>
+    <p>On days when the tide is very small, your <strong>preferred range</strong> may sit entirely above (or
+    below) everything the tide does that day. Its lines are then left off the graph rather than squeezed onto
+    the edge, and they come back on the first day the tide reaches them.</p>
 
     <p>The triangle and rate badge change with tide direction: a <strong>blue upward triangle</strong> with a positive rate (e.g., <code>+1.1 ft/h</code>) means the tide is rising, while a <strong>red downward triangle</strong> with a negative rate (e.g., <code>&minus;2.1 ft/h</code>) means it is falling. The triangle fades in and out on a 4-second cycle so the direction is easy to spot from across the room.</p>
 
@@ -1033,7 +1080,7 @@
 
     <div class="screenshot-placeholder">
         <img src="images/ink-large-view.png" alt="TidesyINK large view with oversized tide numerals, surge figure and MLLW reading" style="max-width:400px;width:100%;border-radius:8px;border:1px solid var(--border);">
-        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The large view. The next four tides down the left, the current height on the right, and the surge figure above it.</p>
+        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">The large view. The day&rsquo;s tides down the left (unused boxes crossed out), the current height on the right, and the surge figure above it.</p>
     </div>
 </div>
 
@@ -2267,7 +2314,7 @@
         </div>
         <div class="glossary-term">
             <dt>Diurnal</dt>
-            <dd>A tidal pattern with one high tide and one low tide per day.</dd>
+            <dd>A tidal pattern with one high tide and one low tide per day, as on the northern Gulf of Mexico. About twice a month a calendar day has only one of them.</dd>
         </div>
         <div class="glossary-term">
             <dt>Mixed Tide</dt>
@@ -2307,7 +2354,7 @@
         </div>
         <div class="glossary-term">
             <dt>Large View</dt>
-            <dd>The big-number view showing four tide values (High/Low/High/Low) with times and weather.</dd>
+            <dd>The big-number view showing the day&rsquo;s tide values (up to four) with times and weather. Boxes for tides that don&rsquo;t fall on that day are crossed out.</dd>
         </div>
         <div class="glossary-term">
             <dt>Warning Level</dt>
@@ -2384,7 +2431,7 @@
 <div class="manual-footer">
     <strong>Tidesy Smart Devices LLC</strong>
     Tide data: NOAA &nbsp;|&nbsp; Weather: Open-Meteo &nbsp;|&nbsp; Alerts: NWS
-    <br>Firmware 3.1.0 &nbsp;|&nbsp; Published September 20, 2026
+    <br>Firmware 3.1.0 &nbsp;|&nbsp; Published September 23, 2026
 </div>
 
 </div><!-- /.container -->
