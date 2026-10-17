@@ -10,7 +10,7 @@
 
 <!-- ========== NAV BAR ========== -->
 <nav class="nav-bar">
-    <div class="nav-brand">Tidesy Manual <span class="version-pill" style="display:inline-block;padding:3px 10px;margin-left:10px;background:#1f6feb;color:#fff;border-radius:11px;font-size:11px;font-weight:600;letter-spacing:0.3px;vertical-align:middle;">v3.1.0 &middot; September 23, 2026</span></div>
+    <div class="nav-brand">Tidesy Manual <span class="version-pill" style="display:inline-block;padding:3px 10px;margin-left:10px;background:#1f6feb;color:#fff;border-radius:11px;font-size:11px;font-weight:600;letter-spacing:0.3px;vertical-align:middle;">v3.2.0 &middot; October 17, 2026</span></div>
     <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu">&#9776;</button>
     <div class="nav-menu">
         <a href="#quick-setup">Quick Setup</a>
@@ -177,6 +177,14 @@
         <li>The <strong>Edit Settings</strong> page opens automatically in your browser, where you can choose your tide stations, adjust display preferences, and customize all settings.</li>
         <li>If the device briefly shows &ldquo;No internet&rdquo; while connecting, wait a few seconds &mdash; it will connect and proceed.</li>
     </ul>
+
+    <div class="tip-box">
+        <strong>Your Tidesy arrives pre-configured.</strong> Before it ships, we load the three NOAA tide stations
+        nearest the address on your order, check that each one is reporting good data, and set your
+        <a href="#tide-levels">tide levels</a> to suit your coast. The card in the box (and an email before
+        delivery) lists exactly what we chose. Every board also passes a hardware check of its display, touch
+        screen and WiFi radio before it is configured for you.
+    </div>
 
     <div class="tip-box">
         <strong>Tip:</strong> You don&rsquo;t need to configure everything during initial setup. The defaults work out of the box &mdash; just get WiFi connected and then customize at your leisure through the Edit Settings page at <code>tidesy.local</code>.
@@ -502,6 +510,14 @@
             <td class="no">No</td>
         </tr>
         <tr>
+            <td>Optional Data Layers<br><small>rain, daylight &amp; moon, ocean &amp; air, flood risk, alert overlay, clamming</small></td>
+            <td class="yes">Yes</td>
+            <td class="yes">Yes</td>
+            <td class="no">Web dashboard only</td>
+            <td class="yes">Yes</td>
+            <td class="yes">Yes</td>
+        </tr>
+        <tr>
             <td>Color Customization</td>
             <td class="yes">Yes</td>
             <td class="yes">Yes</td>
@@ -553,10 +569,31 @@
     <h3>TidesyS (2.8") <span class="badge badge-s">Compact</span></h3>
     <p>A compact 2.8-inch 320&times;240 color display. Great for a desktop or nightstand. No touch interaction on the display &mdash; use the web dashboard for full control.</p>
 
-    <p>The display shows the same detail and large views as the 7" and 5" models, scaled to 320&times;240. All tide data, weather, and graph features are available.</p>
+    <p>The display shows the same detail and large views as the 7" and 5" models, scaled to 320&times;240: the tide curve, today&rsquo;s highs and lows, the current level with its rate of change, your warning level and preferred range, air temperature and wind, and weather alerts.</p>
+
+    <img src="images/tidesys-detail-view.png" alt="TidesyS detail view: tide curve for Ocracoke with a rising arrow, the Now box, warning and preferred levels, and an alert banner" style="max-width:100%; width:480px; border-radius:8px; margin:16px 8px 16px 0; border:1px solid var(--border); image-rendering:pixelated;">
+    <img src="images/tidesys-large-view.png" alt="TidesyS large view: today's highs and lows, the current level with its datum, the date, and a conditions box" style="max-width:100%; width:480px; border-radius:8px; margin:16px 0; border:1px solid var(--border); image-rendering:pixelated;">
+
+    <h4>TidesyS: on the screen and in the web dashboard</h4>
+    <p>To keep the small screen readable, TidesyS leaves the optional data layers off its screen. They are not lost: its web dashboard shows them in full, and Edit Settings lists their switches as <em>&ldquo;web dashboard only&rdquo;</em> &mdash; turning one off also stops Tidesy fetching that data.</p>
+    <table>
+        <tr><th>Information</th><th>On the 2.8&Prime; screen</th><th>In the web dashboard</th></tr>
+        <tr><td>Tide curve, today&rsquo;s highs and lows, current level and its rate of change</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Warning level and preferred range</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Air temperature and wind</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+        <tr><td>Weather alerts</td><td class="yes">Banner and alert pages</td><td class="yes">Full alert cards</td></tr>
+        <tr><td>Rain forecast</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td>Daylight and moon</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td>Ocean and air conditions (water temperature, waves, UV, air quality)</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td>Flood risk (observed level, storm surge, flood line)</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td>Alert graph overlay</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td>Clamming overlay (WA, OR and CA stations)</td><td class="no">No</td><td class="yes">Yes</td></tr>
+    </table>
+    <p>On TidesyS and TidesyS+ a long alert description is shortened in the web dashboard &mdash; the What, Where and When stay whole &mdash; with a link to the full text on weather.gov. These models have less memory than the larger ones, and a storm can bring a dozen long alerts at once.</p>
+    <p>Times on the screen and in the web dashboard are the station&rsquo;s own: a Tidesy in Seattle watching Guam shows Guam&rsquo;s time of day for Guam.</p>
 
     <h3>TidesyS+ (3.5") <span class="badge badge-sp">Enhanced Compact</span></h3>
-    <p>An enhanced compact model with a 3.5-inch 480&times;320 display. Wider screen provides more room for tide data. Same features as TidesyS with a larger viewing area.</p>
+    <p>An enhanced compact model with a 3.5-inch 480&times;320 display. Wider screen provides more room for tide data. Unlike TidesyS, it shows the optional data layers on its screen too: rain forecast, daylight and moon, ocean and air conditions, flood risk, the alert graph overlay and the clamming overlay.</p>
 
     <h3>TidesyINK (4.2" E-Paper) <span class="badge badge-ink">Battery-Capable</span></h3>
     <p>A 4.2-inch 400&times;300 monochrome e-paper display. Sunlight-readable with no backlight. Can run on battery power, sleeping between 6-minute refresh cycles.</p>
@@ -698,10 +735,22 @@
         <li><strong>Alert display duration:</strong> 10&ndash;60 second slider. How long each alert is shown before cycling to the next.</li>
     </ul>
 
-    <h3>Tide Level Settings</h3>
+    <h3 id="tide-levels">Tide Level Settings</h3>
+    <p>Tides differ hugely from place to place &mdash; a few inches on the Gulf, a foot or two in Hawaii or on
+       Long Island, ten feet on the Pacific Northwest coast &mdash; so one fixed setting cannot suit everyone.
+       When we configure your Tidesy we set both levels from the <strong>last three months of tides at your
+       first station</strong>:</p>
+    <ul>
+        <li><strong>Preferred range</strong> runs from that station&rsquo;s average low tide up by a third of its
+            average tidal range &mdash; the lower part of each tide, and usually the best beach time.</li>
+        <li><strong>Warning level</strong> is set where the day&rsquo;s highest tide reaches on about one day in
+            seven, so it highlights the noticeably high tides rather than every high tide.</li>
+    </ul>
+    <p>The card in the box shows the values we chose. Change them any time; both move in 0.1&nbsp;ft steps.
+       If you switch your first station to a very different piece of water, adjust the levels to match.</p>
     <ul>
         <li><strong>Warning level:</strong> &minus;10 to +30 ft (0 = disabled). When the tide reaches this height, a colored horizontal band appears on the graph. Useful for dock clearance, flooding thresholds, or launching conditions.</li>
-        <li><strong>Preferred range (from/to):</strong> &minus;10 to +30 ft (0 = disabled). A colored band shows your ideal tide range on the graph. Useful for fishing, surfing, or boat ramp access windows. A preferred line that lies outside the whole day&rsquo;s tide is not drawn that day.</li>
+        <li><strong>Preferred range (from/to):</strong> &minus;10 to +30 ft (from and to both at 0 = disabled). A colored band shows your ideal tide range on the graph. Useful for fishing, surfing, or boat ramp access windows. A preferred line that lies outside the whole day&rsquo;s tide is not drawn that day.</li>
     </ul>
 
     <h3>Color Settings</h3>
@@ -982,7 +1031,7 @@
     <div style="background:#f0f7ff;border-left:4px solid #2563eb;padding:14px 22px;margin:40px 0 20px;border-radius:0 8px 8px 0;">
         <h3 id="sec-views-environment" style="margin:0;font-size:1.15em;color:#1e40af;">5.2 &mdash; Environment Cards</h3>
     </div>
-    <p>Tidesy can show additional environmental data alongside tides &mdash; rain timing, sun exposure (UV), air quality, surf conditions, and sunrise / sunset / moon phases. Each one is independently toggleable in the device settings under <strong>Environment</strong>, so you can show only what&rsquo;s relevant to where you are.</p>
+    <p>Tidesy can show additional environmental data alongside tides &mdash; rain timing, sun exposure (UV), air quality, surf conditions, and sunrise / sunset / moon phases. Each one is independently toggleable in the device settings under <strong>Environment</strong>, so you can show only what&rsquo;s relevant to where you are. On TidesyS (2.8") these settings apply to the web dashboard only; its small screen leaves the cards out.</p>
 
     <h4>Rain Forecast Overlay</h4>
     <p>A thin strip across the bottom of the detail view shows the next several hours of forecast precipitation. Blue blocks indicate rain probability and intensity at each hour, scaled so a fully filled block means heavy rain. The overlay disappears when no rain is forecast in the window.</p>
@@ -2138,7 +2187,7 @@
         <tr><th>Problem</th><th>Solution</th></tr>
         <tr>
             <td>Clamming dig window not showing</td>
-            <td>Verify clamming is enabled in the admin panel (<strong>Environment &gt; Clamming</strong>) and that you&rsquo;ve picked a WDFW beach. Dig windows only appear within the authorized evening hours &mdash; if you check during the day, expect the band to be empty.</td>
+            <td>Verify clamming is enabled in the admin panel (<strong>Environment &gt; Clamming</strong>) and that you&rsquo;ve picked a WDFW beach. TidesyS (2.8") shows clamming in its web dashboard only. Dig windows only appear within the authorized evening hours &mdash; if you check during the day, expect the band to be empty.</td>
         </tr>
         <tr>
             <td>Clamming shows &ldquo;Closed&rdquo;</td>
@@ -2146,7 +2195,7 @@
         </tr>
         <tr>
             <td>Flooding overlay missing on a high tide</td>
-            <td>The overlay only appears when a forecast high will exceed the NOAA minor / moderate / major thresholds for your station. For stations without published flood thresholds, the feature is unavailable. Check that the <strong>Flooding</strong> toggle is enabled under Environment.</td>
+            <td>The overlay only appears when a forecast high will exceed the NOAA minor / moderate / major thresholds for your station. For stations without published flood thresholds, the feature is unavailable. Check that the <strong>Flooding</strong> toggle is enabled under Environment. TidesyS (2.8") shows flood risk in its web dashboard only.</td>
         </tr>
         <tr>
             <td>UV or AQI card not displayed</td>
@@ -2431,7 +2480,7 @@
 <div class="manual-footer">
     <strong>Tidesy Smart Devices LLC</strong>
     Tide data: NOAA &nbsp;|&nbsp; Weather: Open-Meteo &nbsp;|&nbsp; Alerts: NWS
-    <br>Firmware 3.1.0 &nbsp;|&nbsp; Published September 23, 2026
+    <br>Firmware 3.2.0 &nbsp;|&nbsp; Published October 17, 2026
 </div>
 
 </div><!-- /.container -->

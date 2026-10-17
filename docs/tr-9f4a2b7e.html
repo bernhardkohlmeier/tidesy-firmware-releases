@@ -734,7 +734,7 @@ echo "n" | py -3 produce.py CROW7 COM5   # skip demo + registration prompts</cod
     <h3>Auto-Detection</h3>
     <p>The script auto-detects platform and tool paths on each run:</p>
     <ul>
-        <li><strong>arduino-cli</strong> &mdash; checks <code>C:\Program Files\Arduino CLI</code>, <code>F:\Program Files\Arduino CLI</code>, Arduino IDE bundled, Homebrew on Apple Silicon, and <code>$PATH</code>.</li>
+        <li><strong>arduino-cli</strong> &mdash; checks <code>C:\Program Files\Arduino CLI</code>, <code>D:\dev\tools\Arduino CLI</code>, Arduino IDE bundled, Homebrew on Apple Silicon, and <code>$PATH</code>.</li>
         <li><strong>esptool</strong> &mdash; prefers <code>python3 -m esptool</code> on Mac (for Apple Silicon), Arduino15 binary on Windows, <code>$PATH</code> fallback elsewhere.</li>
         <li><strong>libraries path</strong> &mdash; Windows: <code>c:/Users/bernh/OneDrive/Arduino/libraries</code>. macOS: OneDrive then <code>~/Documents/Arduino/libraries</code>.</li>
         <li><strong>Serial port</strong> &mdash; <code>arduino-cli board list</code> picks the first matching ESP32 device.</li>
